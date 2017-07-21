@@ -589,6 +589,61 @@ SignificantItemsetSearchFacs <- setRefClass("SignificantItemsetSearchFacs",
     )
 )
 
+
+#' A method to check value is numeric and in open interval
+#' 
+#' Checks if a value is numeric and strictly between two other values.
+#' 
+#' @param x Value to be checked. Needs to be numeric.
+#' 
+#' @param lower Lower bound. Default value is \code{0}.
+#' 
+#' @param upper Upper bound. Default value is \code{1}.
+#' 
+#' @return If numeric, and  strictly greater than \code{lower} and 
+#'         strictly smaller than \code{upper}, then return \code{TRUE}. 
+#'         Else return \code{FALSE}.
+isInOpenInterval <- function(x, lower=0, upper=1){
+    inInterval <- TRUE
+    if (is.finite(x)){
+        if ( (x <= lower) || (x >= upper) )
+            inInterval <- FALSE
+    } else {
+        inInterval <- FALSE
+    }
+    return (inInterval)
+}
+
+
+#' Check if a variable is boolean or not
+#'
+#' Checks if a variable is boolean, if not throws an error, otherwise
+#' returns boolean.
+#'
+#' @param var The variable to be checked (if boolean).
+#'
+#' @param name The name of the variable to appear in any error message.
+#'
+#' @return If not boolean (or \code{NA}), throws error.
+#'         If \code{NA}, return \code{FALSE}. Otherwise return 
+#'         boolean value of \code{var}.
+checkIsBoolean <- function(var, name){
+    if (is.logical(var)) {
+        # if NA, return FALSE
+        if (is.na(var))
+            return(FALSE)
+
+        # otherwise, just return its value (it must be TRUE/FALSE
+        # from above check
+        return(var)
+    } else {
+        message <- paste0("Error: ", name, " is not a boolean.")
+        stop(message)
+    }
+}
+
+
+
 #' A constructor for a significant pattern search object
 #'
 #' Initialises an object for the \code{FAIS}, \code{FastCMH} or \code{FACS}
@@ -601,26 +656,35 @@ SignificantItemsetSearchFacs <- setRefClass("SignificantItemsetSearchFacs",
 #'               \code{use_covariate} boolean flags (see below).
 #'
 #' @param use_intervals Boolean flag to set whether to use intervals
-#'                      or combinations. Default is \code{NA}.
+#'                      or combinations. Default is \code{NA}. 
+#'                      At least one of 'use_intervals' or 
+#'                      'use_combinations' needs to be set to \code{TRUE}
+#'                      or \code{FALSE}.
 #'
 #' @param use_combinations Boolean flag to set whether to use combinations 
 #'                         or intervals Default is \code{NA}.
+#'                         At least one of 'use_intervals' or 
+#'                         'use_combinations' needs to be set to \code{TRUE}
+#'                         or \code{FALSE}.
 #'
 #' @param use_covariate Boolean flag to set whether or not to use a covariate.
-#'                      Default is \code{NA}.
+#'                      Default is \code{NA}, which is interpreted as 
+#'                      \code{FALSE}.
 #'
 #' @param alpha Value in range \eqn{(0, 1)} (excluding 0 and 1) which sets
-#'              significance threshold. Default value is \code{0.05}.
+#'              significance threshold. If outside range, error is thrown.
+#'              Default value is \code{0.05}.
 #'
 #' @param max_length A value which, for the interval-based methods \code{FAIS} 
 #'                   \code{FastCMH}, if the user so desired, 
 #'                   sets the maximum interval length. For 
 #'                   example, if \code{max_length=5}, only intervals up to
-#'                   length 5 will be considered. Default value is \code{0},
+#'                   length 5 will be considered. Negative values will be 
+#'                   interpreted as \code{0},
 #'                   which means that there is no restriction on the interval 
 #'                   length (all possible intervals will be considered).
-#'  
-#'  
+#'                   Non-integer values will be rounded down to nearest 
+#'                   integer. Default value is \code{0}
 #'
 #' @export
 sigpatsearch <- function(method='',
@@ -631,15 +695,29 @@ sigpatsearch <- function(method='',
                          max_length=0
                          ){
 
-    #TODO: Check alpha and max_length values:
+    #check max_length
+    if (is.finite(max_length)){
+        max_length <- floor(max_length)
+        if (max_length < 0)
+            max_length <- 0
+    } else { 
+        message <- "'max_length' needs to be either 0 or a positive integer."
+        stop(message)
+    }
+
+    #check alpha
+    if (!isInOpenInterval(alpha)){
+        message <- "'alpha' needs to be a value strictly in interval (0, 1)."
+        stop(message)
+    }
+
 
     #TODO: add support for LAMP (use_combinations==TRUE and use_covariate=FALSE)
     #TODO: Add examples
     #TODO: check default case
-    if ( (method='') & (is.na(use_intervals)) & (is.na(use_combinations)) ){
-        #TODO: print error message
-        message("Need to set at least one of 'method', 'use_intervals' or 
-                 'use_combinations'.")
+    if ( (method=='') & (is.na(use_intervals)) & (is.na(use_combinations)) ){
+        message <- paste0("Need to set at least one of 'method',",
+                          " 'use_intervals' or 'use_combinations'.")
         stop(message)
     }
 
@@ -651,46 +729,117 @@ sigpatsearch <- function(method='',
         correctName <- FALSE
 
         #fais
-        if (method='fais'){
+        if (method=='fais'){
             correctName <- TRUE
             use_intervals <- TRUE
             use_combinations <- FALSE
             use_covariate <- FALSE
-            return( SignificantIntervalSearchFais(alpha=alpha, lmax=max_length) )
+            sig <- SignificantIntervalSearchExact()
+            sig$set_alpha(alpha) 
+            sig$set_lmax(max_length)
+            return(sig)
         }
 
         #fastcmh
-        if (method='fastcmh'){
+        if (method=='fastcmh'){
             correctName <- TRUE
             use_intervals <- TRUE
             use_combinations <- FALSE
             use_covariate <- TRUE
-            return( SignificantIntervalSearchFastCm(alpha=alpha, lmax=max_length) )
+            sig <- SignificantIntervalSearchFastCmh()
+            sig$set_alpha(alpha) 
+            sig$set_lmax(max_length)
+            return(sig)
         }
     
         #facs
-        if (method='facs'){
+        if (method=='facs'){
             correctName <- TRUE
             use_intervals <- FALSE
             use_combinations <- TRUE
             use_covariate <- TRUE
-            return( SignificantItemsetSearchFacs(alpha=alpha, lmax=max_length) )
+            sig <- SignificantItemsetSearchFacs()
+            sig$set_alpha(alpha) 
+            sig$set_lmax(max_length)
+            return(sig)
         }
+
+        if (correctName==FALSE){
+            message <- paste0("'method' parameter needs to be one of ", 
+                              "'fais', 'fastcmh' or 'facs'. Otherwise, ",
+                              "set the 'use_intervals' or 'use_combinations' ",
+                              "flags.")
+            stop(message)
+        }
+
+
     }
 
-    #do we use NA for use_combinations?
-#    if (use_combinations==TRUE){
-#        use_intervals <- FALSE
-#    } else {
-#    
-#    }
+    #now we look at the case that the name as NOT been set, but the flags
+    #use_intervals or use_combinations have been set.
 
-    #use_combinations overrides use_intervals
-#    if (use_combinations==use_intervals){
-#    }
+    #FIRST: check how many NAs
+    na_intervals <- is.na(use_intervals)
+    na_combinations <- is.na(use_combinations)
+    trueCount <- na_intervals + na_combinations
+    if(trueCount==2){
+        message <- paste0("Need to set 'method', or at least one of the ",
+                          "boolean flags 'use_intervals' and ",
+                          "'use_combinations'.")
 
-    #TODO: check alpha is numeric and in (0, 1)
-    #TODO: check max_length is integer >= 0
+        stop(message)
+    }
+
+    #NOW check flags are all booleans
+    #and convert NAs to FALSE 
+    use_intervals <- checkIsBoolean(use_intervals, "use_intervals")
+    use_combinations <- checkIsBoolean(use_combinations, "use_combinations")
+    use_covariate <- checkIsBoolean(use_covariate, "use_covariate")
+
+    #At this point, either use_intervals or use_combinations must be NOT NA
+    #NA values receive lower priority
+    if (na_intervals){
+        use_intervals <- !(use_combinations)
+    }
+    
+    if (na_combinations){
+        use_combinations <- !(use_intervals)
+    }
+
+    #FALSE==0
+    #TRUE==1
+    #If all are FALSE, throw error
+    #Don't need use_covariate to be set; NA is interpreted as FALSE
+
+    #do fais
+    if ( (use_intervals || !use_combinations) & (!use_covariate)){
+        sig <- SignificantIntervalSearchExact()
+        sig$set_alpha(alpha) 
+        sig$set_lmax(max_length)
+        return(sig)
+    }
+
+    #do facs/lamp
+    if ( (use_intervals || !use_combinations) & (use_covariate)){
+        sig <- SignificantIntervalSearchFastCmh()
+        sig$set_alpha(alpha) 
+        sig$set_lmax(max_length)
+        return(sig)
+    }
+
+    #do facs/lamp
+    if ( (use_combinations || !use_intervals) ){
+        sig <- SignificantItemsetSearchFacs()
+        sig$set_alpha(alpha) 
+        sig$set_lmax(max_length)
+        return(sig)
+    }
+
+    #should never reach this point
+    #if here, return error
+    message <- paste0("Error: no correct flags were used.")
+    stop(message)
+    #alternative: could return FAIS object with warning? 
 }
 
 
