@@ -9,3 +9,5 @@ Available to:
  * Laetitia Papaxanthos
  * Damian Roqueiro
  * Dean Bodenham
+
+ **Note:** The large data files have been excluded here - please do not add large data files to the repo, at least for the moment.
