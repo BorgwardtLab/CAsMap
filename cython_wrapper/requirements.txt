@@ -1,0 +1,6 @@
+cython>=0.25
+psutil
+pytest
+pytest-regtest
+pytest-runner
+sphinx

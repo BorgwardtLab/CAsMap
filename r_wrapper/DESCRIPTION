@@ -1,0 +1,21 @@
+Package: sigpatsearch
+Type: Package
+Title: Significant Pattern Search for Genome Analysis
+Version: 0.3
+Date: 2017-05-08
+Author: Matthew Baker, Dean Bodenham, Felipe Llinares Lopez, Mikolaj Rybinski, Uwe Schmitt
+Maintainer: Mikolaj Rybinski <mikolaj.rybinski@id.ethz.ch>
+Description: A method based on significant pattern mining that is used to detect intervals in binary genotype data which are significantly associated with a particular phenotype.
+Depends:
+    R (>= 3.0.2)
+Imports:
+    methods,
+    Rcpp
+LinkingTo:
+    Rcpp
+License: GPL (>= 2)
+URL: https://sissource.ethz.ch/sispub/significant_interval_search_rewrite
+NeedsCompilation: yes
+RoxygenNote: 6.0.1
+Suggests: testthat
+SystemRequirements: C++11

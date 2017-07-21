@@ -1,0 +1,2 @@
+include sigpatsearch/*.cpp
+include sigpatsearch/*.h

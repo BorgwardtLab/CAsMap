@@ -1,0 +1,1 @@
+../../libsigpatsearch/SignificantIntervalSearchFastCmh.h

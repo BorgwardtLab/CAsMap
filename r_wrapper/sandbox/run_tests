@@ -1,0 +1,3 @@
+#!/usr/bin/env RScript
+library(devtools)
+test()

@@ -1,0 +1,119 @@
+Summary(int_processed=28417, int_testable=0, testability_threshold=5.128731671082789e-06, significance_level=0.05, corrected_signficance_level=4.264549002153981e-06, testability_region=Region(start=(19, 200), end=(200, 381)))
+not clustered:
+ 178
+Result(summary=Summary(int_processed=28417, int_testable=0, testability_threshold=5.128731671082789e-06, significance_level=0.05, corrected_signficance_level=4.264549002153981e-06, testability_region=Region(start=(19, 200), end=(200, 381))), sig_int='<178 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  168:  97 108 4.75550e-07
+row  169:  98 109 2.40148e-06
+row  170:  99 110 2.40148e-06
+row  171: 192 203 3.14788e-06
+row  172:  97 109 2.53574e-06
+row  173:  98 110 2.53574e-06
+row  174: 192 204 3.97372e-06
+row  175:  97 110 2.21072e-06
+row  176:  98 111 2.28751e-06
+row  177:  97 111 1.63198e-06
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+
+files:
+['output_summary.txt', 'output_timing.txt', 'p_vals_significant_intervals.txt', 'p_vals_testable_intervals.txt']
+
+output_summary.txt
+--------------------------------------------------------------------------------
+
+hexdigest: f4fcec6ddf16bf984f04053fdc1ffa378cf48bfe
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 28417 (5.6834% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 5.128732e-06
+Number of testable intervals: 0
+Corrected significance threshold at level 5.000000e-02: 4.264549e-06
+Number of significantly associated intervals found: 178
+Maximum testable interval length: 36
+Resultant testability region: L [19,200] U [200,381]
+FWER at testability threshold: 4.000000e-02
+FWER at corrected significance threshold: 4.000000e-02
+------
+
+p_vals_significant_intervals.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 86eec682725c72d2985c764b05b3cc48a3a411cb
+number of lines: 179
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+2.923043e-06,182,301,93,103
+4.099882e-08,187,304,97,107
+2.564513e-07,184,301,98,108
+3.755625e-06,180,297,99,109
+2.401484e-06,186,309,100,110
+1.523373e-06,183,302,192,202
+1.000219e-06,185,305,193,203
+6.897334e-07,187,309,194,204
+2.276917e-07,187,307,198,208
+3.274322e-07,188,310,199,209
+4.755501e-07,189,313,97,108
+2.401484e-06,186,309,98,109
+2.401484e-06,186,309,99,110
+3.147880e-06,190,318,192,203
+2.535739e-06,191,320,97,109
+2.535739e-06,191,320,98,110
+3.973720e-06,194,328,192,204
+2.210717e-06,196,331,97,110
+2.287507e-06,194,327,98,111
+1.631985e-06,199,338,97,111
+------
+
+p_vals_testable_intervals.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------

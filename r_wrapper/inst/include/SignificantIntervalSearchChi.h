@@ -1,0 +1,1 @@
+../../../libsigpatsearch/SignificantIntervalSearchChi.h

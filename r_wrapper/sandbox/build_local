@@ -1,0 +1,11 @@
+#!/bin/bash
+
+Rscript - <<EOL
+    cat('BUILD::  load devtools\n')
+    library(devtools)
+    cat('BUILD::  update stub code\n')
+    Rcpp::compileAttributes()
+    cat('BUILD::  start building library\n')
+    load_all()
+    cat('BUILD::  done\n')
+EOL

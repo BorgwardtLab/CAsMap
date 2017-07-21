@@ -1,0 +1,1897 @@
+Summary(int_processed=28417, int_testable=27823, testability_threshold=5.128731671082789e-06, significance_level=0.2, corrected_signficance_level=7.188297451748554e-06, testability_region=Region(start=(19, 200), end=(200, 381)))
+not clustered:
+ 181
+Result(summary=Summary(int_processed=28417, int_testable=27823, testability_threshold=5.128731671082789e-06, significance_level=0.2, corrected_signficance_level=7.188297451748554e-06, testability_region=Region(start=(19, 200), end=(200, 381))), sig_int='<181 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  171:  98 109 2.40148e-06
+row  172:  99 110 2.40148e-06
+row  173: 192 203 3.14788e-06
+row  174: 193 204 6.49024e-06
+row  175:  97 109 2.53574e-06
+row  176:  98 110 2.53574e-06
+row  177: 192 204 3.97372e-06
+row  178:  97 110 2.21072e-06
+row  179:  98 111 2.28751e-06
+row  180:  97 111 1.63198e-06
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+Summary(int_processed=27947, int_testable=27337, testability_threshold=2.63840264444154e-06, significance_level=0.1, corrected_signficance_level=3.658045871895234e-06, testability_region=Region(start=(20, 200), end=(200, 380)))
+not clustered:
+ 168
+Result(summary=Summary(int_processed=27947, int_testable=27337, testability_threshold=2.63840264444154e-06, significance_level=0.1, corrected_signficance_level=3.658045871895234e-06, testability_region=Region(start=(20, 200), end=(200, 380))), sig_int='<168 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  158: 199 209 3.27432e-07
+row  159:  97 108 4.75550e-07
+row  160:  98 109 2.40148e-06
+row  161:  99 110 2.40148e-06
+row  162: 192 203 3.14788e-06
+row  163:  97 109 2.53574e-06
+row  164:  98 110 2.53574e-06
+row  165:  97 110 2.21072e-06
+row  166:  98 111 2.28751e-06
+row  167:  97 111 1.63198e-06
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+Summary(int_processed=27515, int_testable=26905, testability_threshold=1.3539171464897377e-06, significance_level=0.05, corrected_signficance_level=1.8583906337112062e-06, testability_region=Region(start=(21, 200), end=(200, 379)))
+not clustered:
+ 157
+Result(summary=Summary(int_processed=27515, int_testable=26905, testability_threshold=1.3539171464897377e-06, significance_level=0.05, corrected_signficance_level=1.8583906337112062e-06, testability_region=Region(start=(21, 200), end=(200, 379))), sig_int='<157 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  147: 200 209 3.27432e-07
+row  148:  97 107 4.09988e-08
+row  149:  98 108 2.56451e-07
+row  150: 192 202 1.52337e-06
+row  151: 193 203 1.00022e-06
+row  152: 194 204 6.89733e-07
+row  153: 198 208 2.27692e-07
+row  154: 199 209 3.27432e-07
+row  155:  97 108 4.75550e-07
+row  156:  97 111 1.63198e-06
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+Summary(int_processed=27009, int_testable=26051, testability_threshold=4.597420173502714e-06, significance_level=0.2, corrected_signficance_level=7.677248474146866e-06, testability_region=Region(start=(23, 200), end=(200, 377)))
+not clustered:
+ 191
+Result(summary=Summary(int_processed=27009, int_testable=26051, testability_threshold=4.597420173502714e-06, significance_level=0.2, corrected_signficance_level=7.677248474146866e-06, testability_region=Region(start=(23, 200), end=(200, 377))), sig_int='<191 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 5.75416e-16
+row    1: 100 100 5.75416e-16
+row    2: 101 101 5.75416e-16
+row    3: 102 102 5.75416e-16
+row    4: 199 199 2.45831e-19
+row    5: 200 200 2.45831e-19
+row    6: 201 201 2.45831e-19
+row    7: 202 202 2.45831e-19
+row    8:  98  99 6.28189e-15
+row    9:  99 100 5.75416e-16
+...
+row  181: 100 111 7.12357e-06
+row  182: 192 203 2.15444e-06
+row  183: 193 204 4.16873e-06
+row  184:  97 109 1.90343e-06
+row  185:  98 110 1.90343e-06
+row  186:  99 111 7.12357e-06
+row  187: 192 204 3.83484e-06
+row  188:  97 110 1.57935e-06
+row  189:  98 111 2.19115e-06
+row  190:  97 111 1.58117e-06
+
+sig ints clusterd:
+row    0:  99 102 5.75416e-16
+row    1: 199 202 2.45831e-19
+Summary(int_processed=26290, int_testable=25649, testability_threshold=2.7704357213755105e-06, significance_level=0.1, corrected_signficance_level=3.898787477094624e-06, testability_region=Region(start=(24, 200), end=(200, 376)))
+not clustered:
+ 179
+Result(summary=Summary(int_processed=26290, int_testable=25649, testability_threshold=2.7704357213755105e-06, significance_level=0.1, corrected_signficance_level=3.898787477094624e-06, testability_region=Region(start=(24, 200), end=(200, 376))), sig_int='<179 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 5.75416e-16
+row    1: 100 100 5.75416e-16
+row    2: 101 101 5.75416e-16
+row    3: 102 102 5.75416e-16
+row    4: 199 199 2.45831e-19
+row    5: 200 200 2.45831e-19
+row    6: 201 201 2.45831e-19
+row    7: 202 202 2.45831e-19
+row    8:  98  99 6.28189e-15
+row    9:  99 100 5.75416e-16
+...
+row  169:  97 108 4.48817e-07
+row  170:  98 109 1.90423e-06
+row  171:  99 110 1.90423e-06
+row  172: 192 203 2.15444e-06
+row  173:  97 109 1.90343e-06
+row  174:  98 110 1.90343e-06
+row  175: 192 204 3.83484e-06
+row  176:  97 110 1.57935e-06
+row  177:  98 111 2.19115e-06
+row  178:  97 111 1.58117e-06
+
+sig ints clusterd:
+row    0:  99 102 5.75416e-16
+row    1: 199 202 2.45831e-19
+Summary(int_processed=25935, int_testable=25277, testability_threshold=1.666393944737083e-06, significance_level=0.05, corrected_signficance_level=1.9780828421094277e-06, testability_region=Region(start=(25, 200), end=(200, 375)))
+not clustered:
+ 165
+Result(summary=Summary(int_processed=25935, int_testable=25277, testability_threshold=1.666393944737083e-06, significance_level=0.05, corrected_signficance_level=1.9780828421094277e-06, testability_region=Region(start=(25, 200), end=(200, 375))), sig_int='<165 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 5.75416e-16
+row    1: 100 100 5.75416e-16
+row    2: 101 101 5.75416e-16
+row    3: 102 102 5.75416e-16
+row    4: 199 199 2.45831e-19
+row    5: 200 200 2.45831e-19
+row    6: 201 201 2.45831e-19
+row    7: 202 202 2.45831e-19
+row    8:  98  99 6.28189e-15
+row    9:  99 100 5.75416e-16
+...
+row  155: 194 204 5.65787e-07
+row  156: 198 208 1.79160e-07
+row  157: 199 209 2.84844e-07
+row  158:  97 108 4.48817e-07
+row  159:  98 109 1.90423e-06
+row  160:  99 110 1.90423e-06
+row  161:  97 109 1.90343e-06
+row  162:  98 110 1.90343e-06
+row  163:  97 110 1.57935e-06
+row  164:  97 111 1.58117e-06
+
+sig ints clusterd:
+row    0:  99 102 5.75416e-16
+row    1: 199 202 2.45831e-19
+Summary(int_processed=30005, int_testable=0, testability_threshold=3.712092984198339e-05, significance_level=0.2, corrected_signficance_level=4.6198855550831e-05, testability_region=Region(start=(16, 200), end=(200, 384)))
+not clustered:
+ 213
+Result(summary=Summary(int_processed=30005, int_testable=0, testability_threshold=3.712092984198339e-05, significance_level=0.2, corrected_signficance_level=4.6198855550831e-05, testability_region=Region(start=(16, 200), end=(200, 384))), sig_int='<213 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  203:  98 110 2.53574e-06
+row  204:  99 111 1.07300e-05
+row  205: 191 203 2.80359e-05
+row  206: 192 204 3.97372e-06
+row  207:  97 110 2.21072e-06
+row  208:  98 111 2.28751e-06
+row  209:  96 110 3.17436e-05
+row  210:  97 111 1.63198e-06
+row  211:  96 111 4.32765e-05
+row  212:  97 112 4.32765e-05
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+Summary(int_processed=28919, int_testable=0, testability_threshold=9.945053291135155e-06, significance_level=0.1, corrected_signficance_level=1.1776789381350911e-05, testability_region=Region(start=(18, 200), end=(200, 382)))
+not clustered:
+ 195
+Result(summary=Summary(int_processed=28919, int_testable=0, testability_threshold=9.945053291135155e-06, significance_level=0.1, corrected_signficance_level=1.1776789381350911e-05, testability_region=Region(start=(18, 200), end=(200, 382))), sig_int='<195 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  185: 192 203 3.14788e-06
+row  186: 193 204 6.49024e-06
+row  187: 198 209 8.33578e-06
+row  188:  97 109 2.53574e-06
+row  189:  98 110 2.53574e-06
+row  190:  99 111 1.07300e-05
+row  191: 192 204 3.97372e-06
+row  192:  97 110 2.21072e-06
+row  193:  98 111 2.28751e-06
+row  194:  97 111 1.63198e-06
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+Summary(int_processed=28417, int_testable=0, testability_threshold=5.128731671082789e-06, significance_level=0.05, corrected_signficance_level=4.264549002153981e-06, testability_region=Region(start=(19, 200), end=(200, 381)))
+not clustered:
+ 178
+Result(summary=Summary(int_processed=28417, int_testable=0, testability_threshold=5.128731671082789e-06, significance_level=0.05, corrected_signficance_level=4.264549002153981e-06, testability_region=Region(start=(19, 200), end=(200, 381))), sig_int='<178 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 4.11932e-16
+row    1: 100 100 4.11932e-16
+row    2: 101 101 4.11932e-16
+row    3: 102 102 4.11932e-16
+row    4: 199 199 1.07170e-19
+row    5: 200 200 1.07170e-19
+row    6: 201 201 1.07170e-19
+row    7: 202 202 1.07170e-19
+row    8:  98  99 4.15572e-15
+row    9:  99 100 4.11932e-16
+...
+row  168:  97 108 4.75550e-07
+row  169:  98 109 2.40148e-06
+row  170:  99 110 2.40148e-06
+row  171: 192 203 3.14788e-06
+row  172:  97 109 2.53574e-06
+row  173:  98 110 2.53574e-06
+row  174: 192 204 3.97372e-06
+row  175:  97 110 2.21072e-06
+row  176:  98 111 2.28751e-06
+row  177:  97 111 1.63198e-06
+
+sig ints clusterd:
+row    0:  99 102 4.11932e-16
+row    1: 199 202 1.07170e-19
+Summary(int_processed=28417, int_testable=0, testability_threshold=3.428488758235612e-05, significance_level=0.2, corrected_signficance_level=3.677932138858302e-05, testability_region=Region(start=(19, 200), end=(200, 381)))
+not clustered:
+ 215
+Result(summary=Summary(int_processed=28417, int_testable=0, testability_threshold=3.428488758235612e-05, significance_level=0.2, corrected_signficance_level=3.677932138858302e-05, testability_region=Region(start=(19, 200), end=(200, 381))), sig_int='<215 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 5.75416e-16
+row    1: 100 100 5.75416e-16
+row    2: 101 101 5.75416e-16
+row    3: 102 102 5.75416e-16
+row    4: 199 199 2.45831e-19
+row    5: 200 200 2.45831e-19
+row    6: 201 201 2.45831e-19
+row    7: 202 202 2.45831e-19
+row    8:  98  99 6.28189e-15
+row    9:  99 100 5.75416e-16
+...
+row  205: 191 203 2.49015e-05
+row  206: 192 204 3.83484e-06
+row  207: 196 208 3.30486e-05
+row  208:  97 110 1.57935e-06
+row  209:  98 111 2.19115e-06
+row  210:  96 110 2.52494e-05
+row  211:  97 111 1.58117e-06
+row  212:  98 112 3.30486e-05
+row  213:  96 111 2.67851e-05
+row  214:  97 112 2.67851e-05
+
+sig ints clusterd:
+row    0:  99 102 5.75416e-16
+row    1: 199 202 2.45831e-19
+Summary(int_processed=27111, int_testable=0, testability_threshold=7.615731747810152e-06, significance_level=0.1, corrected_signficance_level=1.1138404025860869e-05, testability_region=Region(start=(22, 200), end=(200, 378)))
+not clustered:
+ 195
+Result(summary=Summary(int_processed=27111, int_testable=0, testability_threshold=7.615731747810152e-06, significance_level=0.1, corrected_signficance_level=1.1138404025860869e-05, testability_region=Region(start=(22, 200), end=(200, 378))), sig_int='<195 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 5.75416e-16
+row    1: 100 100 5.75416e-16
+row    2: 101 101 5.75416e-16
+row    3: 102 102 5.75416e-16
+row    4: 199 199 2.45831e-19
+row    5: 200 200 2.45831e-19
+row    6: 201 201 2.45831e-19
+row    7: 202 202 2.45831e-19
+row    8:  98  99 6.28189e-15
+row    9:  99 100 5.75416e-16
+...
+row  185: 192 203 2.15444e-06
+row  186: 193 204 4.16873e-06
+row  187: 198 209 7.87072e-06
+row  188:  97 109 1.90343e-06
+row  189:  98 110 1.90343e-06
+row  190:  99 111 7.12357e-06
+row  191: 192 204 3.83484e-06
+row  192:  97 110 1.57935e-06
+row  193:  98 111 2.19115e-06
+row  194:  97 111 1.58117e-06
+
+sig ints clusterd:
+row    0:  99 102 5.75416e-16
+row    1: 199 202 2.45831e-19
+Summary(int_processed=26683, int_testable=0, testability_threshold=4.597420173502714e-06, significance_level=0.05, corrected_signficance_level=4.401047545912853e-06, testability_region=Region(start=(23, 200), end=(200, 377)))
+not clustered:
+ 180
+Result(summary=Summary(int_processed=26683, int_testable=0, testability_threshold=4.597420173502714e-06, significance_level=0.05, corrected_signficance_level=4.401047545912853e-06, testability_region=Region(start=(23, 200), end=(200, 377))), sig_int='<180 significant intervals>', sig_int_clustered='<2 clustered intervals>')
+
+sig ints:
+row    0:  99  99 5.75416e-16
+row    1: 100 100 5.75416e-16
+row    2: 101 101 5.75416e-16
+row    3: 102 102 5.75416e-16
+row    4: 199 199 2.45831e-19
+row    5: 200 200 2.45831e-19
+row    6: 201 201 2.45831e-19
+row    7: 202 202 2.45831e-19
+row    8:  98  99 6.28189e-15
+row    9:  99 100 5.75416e-16
+...
+row  170:  98 109 1.90423e-06
+row  171:  99 110 1.90423e-06
+row  172: 192 203 2.15444e-06
+row  173: 193 204 4.16873e-06
+row  174:  97 109 1.90343e-06
+row  175:  98 110 1.90343e-06
+row  176: 192 204 3.83484e-06
+row  177:  97 110 1.57935e-06
+row  178:  98 111 2.19115e-06
+row  179:  97 111 1.58117e-06
+
+sig ints clusterd:
+row    0:  99 102 5.75416e-16
+row    1: 199 202 2.45831e-19
+Summary(int_processed=8066, int_testable=7352, testability_threshold=2.3988329190194948e-05, significance_level=0.2, corrected_signficance_level=2.720348204570185e-05)
+not clustered:
+ 7
+Result(summary=Summary(int_processed=8066, int_testable=7352, testability_threshold=2.3988329190194948e-05, significance_level=0.2, corrected_signficance_level=2.720348204570185e-05), sig_int='<7 significant intervals>', sig_int_clustered='<1 clustered intervals>')
+
+sig ints:
+row    0: 960 960 2.03755e-05
+row    1: 101 102 2.41086e-05
+row    2:  99 101 6.51548e-08
+row    3: 100 102 6.11477e-09
+row    4:  99 102 4.83476e-13
+row    5:  98 102 5.60956e-06
+row    6:  99 103 5.69804e-06
+
+sig ints clusterd:
+row    0:  99 102 4.83476e-13
+Summary(int_processed=7897, int_testable=7193, testability_threshold=1.3803842646028923e-05, significance_level=0.1, corrected_signficance_level=1.3902405116085084e-05)
+not clustered:
+ 5
+Result(summary=Summary(int_processed=7897, int_testable=7193, testability_threshold=1.3803842646028923e-05, significance_level=0.1, corrected_signficance_level=1.3902405116085084e-05), sig_int='<5 significant intervals>', sig_int_clustered='<1 clustered intervals>')
+
+sig ints:
+row    0:  99 101 6.51548e-08
+row    1: 100 102 6.11477e-09
+row    2:  99 102 4.83476e-13
+row    3:  98 102 5.60956e-06
+row    4:  99 103 5.69804e-06
+
+sig ints clusterd:
+row    0:  99 102 4.83476e-13
+Summary(int_processed=7762, int_testable=7030, testability_threshold=6.918309709189434e-06, significance_level=0.05, corrected_signficance_level=7.112375533428166e-06)
+not clustered:
+ 5
+Result(summary=Summary(int_processed=7762, int_testable=7030, testability_threshold=6.918309709189434e-06, significance_level=0.05, corrected_signficance_level=7.112375533428166e-06), sig_int='<5 significant intervals>', sig_int_clustered='<1 clustered intervals>')
+
+sig ints:
+row    0:  99 101 6.51548e-08
+row    1: 100 102 6.11477e-09
+row    2:  99 102 4.83476e-13
+row    3:  98 102 5.60956e-06
+row    4:  99 103 5.69804e-06
+
+sig ints clusterd:
+row    0:  99 102 4.83476e-13
+Summary(iset_processed=4518, iset_closed_processed=4517, iset_testable=4370, testability_threshold=4.1686938347033464e-05, significance_level=0.2, corrected_signficance_level=4.576659038901602e-05)
+not clustered:
+ 461
+Result(summary=Summary(iset_processed=4518, iset_closed_processed=4517, iset_testable=4370, testability_threshold=4.1686938347033464e-05, significance_level=0.2, corrected_signficance_level=4.576659038901602e-05), sig_iset='<461 significant itemsets>')
+
+sig isets:
+row    0: 1.13167e-19 228,230,  9
+row    1: 2.11234e-08  82, 90,  1,  9
+row    2: 2.11234e-08  82, 90,  5,  9
+row    3: 2.25193e-08  87, 85, 13,  9
+row    4: 3.99002e-13  47, 43, 13,  5,  9
+row    5: 2.20136e-08  85, 87, 17,  9
+row    6: 3.54829e-13  41, 49, 17,  1,  9
+row    7: 2.00379e-11  43, 35,  3,  5,  1
+row    8: 1.70842e-11  34, 44,  7, 13,  1
+row    9: 1.81857e-06  53, 58,  7,  3
+...
+row  451: 2.77657e-05   8,  1, 14,  2,  8,  7, 13
+row  452: 1.51108e-06   8,  4, 14,  2,  8,  7, 17
+row  453: 1.71392e-10  13,  8, 14,  2,  8,  7
+row  454: 1.77514e-06   5,  7, 14,  2,  8, 11,  1
+row  455: 3.20892e-05   6,  3, 14,  2,  8, 11,  5
+row  456: 1.40714e-06   9,  3, 14,  2,  8, 11, 13
+row  457: 3.20892e-05   6,  3, 14,  2,  8, 11, 17
+row  458: 1.51108e-06   8,  4, 14,  2,  8, 11,  7
+row  459: 1.71392e-10  13,  8, 14,  2,  8, 11
+row  460: 4.06506e-17  20, 16, 14,  2,  8
+Summary(iset_processed=4092, iset_closed_processed=4091, iset_testable=3798, testability_threshold=2.3988329190194948e-05, significance_level=0.1, corrected_signficance_level=2.6329647182727753e-05)
+not clustered:
+ 373
+Result(summary=Summary(iset_processed=4092, iset_closed_processed=4091, iset_testable=3798, testability_threshold=2.3988329190194948e-05, significance_level=0.1, corrected_signficance_level=2.6329647182727753e-05), sig_iset='<373 significant itemsets>')
+
+sig isets:
+row    0: 1.13167e-19 228,230,  9
+row    1: 2.11234e-08  82, 90,  1,  9
+row    2: 2.11234e-08  82, 90,  5,  9
+row    3: 2.25193e-08  87, 85, 13,  9
+row    4: 3.99002e-13  47, 43, 13,  5,  9
+row    5: 2.20136e-08  85, 87, 17,  9
+row    6: 3.54829e-13  41, 49, 17,  1,  9
+row    7: 2.00379e-11  43, 35,  3,  5,  1
+row    8: 1.70842e-11  34, 44,  7, 13,  1
+row    9: 1.81857e-06  53, 58,  7,  3
+...
+row  363: 1.60830e-06   7,  5, 14,  2,  8, 17, 13
+row  364: 1.83024e-10  12,  9, 14,  2,  8, 17
+row  365: 1.60830e-06   7,  5, 14,  2,  8,  7,  5
+row  366: 1.51108e-06   8,  4, 14,  2,  8,  7, 17
+row  367: 1.71392e-10  13,  8, 14,  2,  8,  7
+row  368: 1.77514e-06   5,  7, 14,  2,  8, 11,  1
+row  369: 1.40714e-06   9,  3, 14,  2,  8, 11, 13
+row  370: 1.51108e-06   8,  4, 14,  2,  8, 11,  7
+row  371: 1.71392e-10  13,  8, 14,  2,  8, 11
+row  372: 4.06506e-17  20, 16, 14,  2,  8
+Summary(iset_processed=3855, iset_closed_processed=3855, iset_testable=3525, testability_threshold=1.2022644346174205e-05, significance_level=0.05, corrected_signficance_level=1.4184397163120568e-05)
+not clustered:
+ 365
+Result(summary=Summary(iset_processed=3855, iset_closed_processed=3855, iset_testable=3525, testability_threshold=1.2022644346174205e-05, significance_level=0.05, corrected_signficance_level=1.4184397163120568e-05), sig_iset='<365 significant itemsets>')
+
+sig isets:
+row    0: 1.13167e-19 228,230,  9
+row    1: 2.11234e-08  82, 90,  1,  9
+row    2: 2.11234e-08  82, 90,  5,  9
+row    3: 2.25193e-08  87, 85, 13,  9
+row    4: 3.99002e-13  47, 43, 13,  5,  9
+row    5: 2.20136e-08  85, 87, 17,  9
+row    6: 3.54829e-13  41, 49, 17,  1,  9
+row    7: 2.00379e-11  43, 35,  3,  5,  1
+row    8: 1.70842e-11  34, 44,  7, 13,  1
+row    9: 1.81857e-06  53, 58,  7,  3
+...
+row  355: 1.60830e-06   7,  5, 14,  2,  8, 17, 13
+row  356: 1.83024e-10  12,  9, 14,  2,  8, 17
+row  357: 1.60830e-06   7,  5, 14,  2,  8,  7,  5
+row  358: 1.51108e-06   8,  4, 14,  2,  8,  7, 17
+row  359: 1.71392e-10  13,  8, 14,  2,  8,  7
+row  360: 1.77514e-06   5,  7, 14,  2,  8, 11,  1
+row  361: 1.40714e-06   9,  3, 14,  2,  8, 11, 13
+row  362: 1.51108e-06   8,  4, 14,  2,  8, 11,  7
+row  363: 1.71392e-10  13,  8, 14,  2,  8, 11
+row  364: 4.06506e-17  20, 16, 14,  2,  8
+
+files:
+['output_summary_SignificantIntervalSearchChi-alpha_0.050.txt', 'output_summary_SignificantIntervalSearchChi-alpha_0.100.txt', 'output_summary_SignificantIntervalSearchChi-alpha_0.200.txt', 'output_summary_SignificantIntervalSearchExact-alpha_0.050.txt', 'output_summary_SignificantIntervalSearchExact-alpha_0.100.txt', 'output_summary_SignificantIntervalSearchExact-alpha_0.200.txt', 'output_summary_SignificantIntervalSearchFastCmh-alpha_0.050.txt', 'output_summary_SignificantIntervalSearchFastCmh-alpha_0.100.txt', 'output_summary_SignificantIntervalSearchFastCmh-alpha_0.200.txt', 'output_summary_SignificantIntervalSearchWyChi-alpha_0.050.txt', 'output_summary_SignificantIntervalSearchWyChi-alpha_0.100.txt', 'output_summary_SignificantIntervalSearchWyChi-alpha_0.200.txt', 'output_summary_SignificantIntervalSearchWyExact-alpha_0.050.txt', 'output_summary_SignificantIntervalSearchWyExact-alpha_0.100.txt', 'output_summary_SignificantIntervalSearchWyExact-alpha_0.200.txt', 'output_summary_SignificantItemsetSearchFacs-alpha_0.050.txt', 'output_summary_SignificantItemsetSearchFacs-alpha_0.100.txt', 'output_summary_SignificantItemsetSearchFacs-alpha_0.200.txt', 'output_timing_SignificantIntervalSearchChi-alpha_0.050.txt', 'output_timing_SignificantIntervalSearchChi-alpha_0.100.txt', 'output_timing_SignificantIntervalSearchChi-alpha_0.200.txt', 'output_timing_SignificantIntervalSearchExact-alpha_0.050.txt', 'output_timing_SignificantIntervalSearchExact-alpha_0.100.txt', 'output_timing_SignificantIntervalSearchExact-alpha_0.200.txt', 'output_timing_SignificantIntervalSearchFastCmh-alpha_0.050.txt', 'output_timing_SignificantIntervalSearchFastCmh-alpha_0.100.txt', 'output_timing_SignificantIntervalSearchFastCmh-alpha_0.200.txt', 'output_timing_SignificantIntervalSearchWyChi-alpha_0.050.txt', 'output_timing_SignificantIntervalSearchWyChi-alpha_0.100.txt', 'output_timing_SignificantIntervalSearchWyChi-alpha_0.200.txt', 'output_timing_SignificantIntervalSearchWyExact-alpha_0.050.txt', 'output_timing_SignificantIntervalSearchWyExact-alpha_0.100.txt', 'output_timing_SignificantIntervalSearchWyExact-alpha_0.200.txt', 'output_timing_SignificantItemsetSearchFacs-alpha_0.050.txt', 'output_timing_SignificantItemsetSearchFacs-alpha_0.100.txt', 'output_timing_SignificantItemsetSearchFacs-alpha_0.200.txt', 'p_vals_significant_intervals_SignificantIntervalSearchChi-alpha_0.050.txt', 'p_vals_significant_intervals_SignificantIntervalSearchChi-alpha_0.100.txt', 'p_vals_significant_intervals_SignificantIntervalSearchChi-alpha_0.200.txt', 'p_vals_significant_intervals_SignificantIntervalSearchExact-alpha_0.050.txt', 'p_vals_significant_intervals_SignificantIntervalSearchExact-alpha_0.100.txt', 'p_vals_significant_intervals_SignificantIntervalSearchExact-alpha_0.200.txt', 'p_vals_significant_intervals_SignificantIntervalSearchFastCmh-alpha_0.050.txt', 'p_vals_significant_intervals_SignificantIntervalSearchFastCmh-alpha_0.100.txt', 'p_vals_significant_intervals_SignificantIntervalSearchFastCmh-alpha_0.200.txt', 'p_vals_significant_intervals_SignificantIntervalSearchWyChi-alpha_0.050.txt', 'p_vals_significant_intervals_SignificantIntervalSearchWyChi-alpha_0.100.txt', 'p_vals_significant_intervals_SignificantIntervalSearchWyChi-alpha_0.200.txt', 'p_vals_significant_intervals_SignificantIntervalSearchWyExact-alpha_0.050.txt', 'p_vals_significant_intervals_SignificantIntervalSearchWyExact-alpha_0.100.txt', 'p_vals_significant_intervals_SignificantIntervalSearchWyExact-alpha_0.200.txt', 'p_vals_significant_itemsets_SignificantItemsetSearchFacs-alpha_0.050.txt', 'p_vals_significant_itemsets_SignificantItemsetSearchFacs-alpha_0.100.txt', 'p_vals_significant_itemsets_SignificantItemsetSearchFacs-alpha_0.200.txt', 'p_vals_testable_intervals_SignificantIntervalSearchChi-alpha_0.050.txt', 'p_vals_testable_intervals_SignificantIntervalSearchChi-alpha_0.100.txt', 'p_vals_testable_intervals_SignificantIntervalSearchChi-alpha_0.200.txt', 'p_vals_testable_intervals_SignificantIntervalSearchExact-alpha_0.050.txt', 'p_vals_testable_intervals_SignificantIntervalSearchExact-alpha_0.100.txt', 'p_vals_testable_intervals_SignificantIntervalSearchExact-alpha_0.200.txt', 'p_vals_testable_intervals_SignificantIntervalSearchFastCmh-alpha_0.050.txt', 'p_vals_testable_intervals_SignificantIntervalSearchFastCmh-alpha_0.100.txt', 'p_vals_testable_intervals_SignificantIntervalSearchFastCmh-alpha_0.200.txt', 'p_vals_testable_intervals_SignificantIntervalSearchWyChi-alpha_0.050.txt', 'p_vals_testable_intervals_SignificantIntervalSearchWyChi-alpha_0.100.txt', 'p_vals_testable_intervals_SignificantIntervalSearchWyChi-alpha_0.200.txt', 'p_vals_testable_intervals_SignificantIntervalSearchWyExact-alpha_0.050.txt', 'p_vals_testable_intervals_SignificantIntervalSearchWyExact-alpha_0.100.txt', 'p_vals_testable_intervals_SignificantIntervalSearchWyExact-alpha_0.200.txt', 'p_vals_testable_itemsets_SignificantItemsetSearchFacs-alpha_0.050.txt', 'p_vals_testable_itemsets_SignificantItemsetSearchFacs-alpha_0.100.txt', 'p_vals_testable_itemsets_SignificantItemsetSearchFacs-alpha_0.200.txt']
+
+output_summary_SignificantIntervalSearchChi-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 00f2f635a350e2c02a22e8c638c45b2363673d18
+number of lines: 11
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 25935 (5.187% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 1.666394e-06
+Number of testable intervals: 25277
+Corrected significance threshold at level 5.000000e-02: 1.978083e-06
+Number of significantly associated intervals found: 165
+Maximum testable interval length: 33
+Resultant testability region: L [25,200] U [200,375]
+------
+
+output_summary_SignificantIntervalSearchChi-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 507c9f633daad9d2af3eb10e6f9335d8737ad4b0
+number of lines: 11
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 26290 (5.258% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 2.770436e-06
+Number of testable intervals: 25649
+Corrected significance threshold at level 1.000000e-01: 3.898787e-06
+Number of significantly associated intervals found: 179
+Maximum testable interval length: 33
+Resultant testability region: L [24,200] U [200,376]
+------
+
+output_summary_SignificantIntervalSearchChi-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 854931712a78ba5d86bdb1f269de84fe84543af7
+number of lines: 11
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 27009 (5.4018% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 4.597420e-06
+Number of testable intervals: 26051
+Corrected significance threshold at level 2.000000e-01: 7.677248e-06
+Number of significantly associated intervals found: 191
+Maximum testable interval length: 34
+Resultant testability region: L [23,200] U [200,377]
+------
+
+output_summary_SignificantIntervalSearchExact-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: bb0a1d36545016c0ae837319660f551845cbd4e2
+number of lines: 11
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 27515 (5.503% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 1.353917e-06
+Number of testable intervals: 26905
+Corrected significance threshold at level 5.000000e-02: 1.858391e-06
+Number of significantly associated intervals found: 157
+Maximum testable interval length: 35
+Resultant testability region: L [21,200] U [200,379]
+------
+
+output_summary_SignificantIntervalSearchExact-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: fe602810ca626b826f73af8a422bb939eae45ac9
+number of lines: 11
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 27947 (5.5894% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 2.638403e-06
+Number of testable intervals: 27337
+Corrected significance threshold at level 1.000000e-01: 3.658046e-06
+Number of significantly associated intervals found: 168
+Maximum testable interval length: 36
+Resultant testability region: L [20,200] U [200,380]
+------
+
+output_summary_SignificantIntervalSearchExact-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 4da9d911079297da3df01cda233486721ba2df49
+number of lines: 11
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 28417 (5.6834% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 5.128732e-06
+Number of testable intervals: 27823
+Corrected significance threshold at level 2.000000e-01: 7.188297e-06
+Number of significantly associated intervals found: 181
+Maximum testable interval length: 36
+Resultant testability region: L [19,200] U [200,381]
+------
+
+output_summary_SignificantIntervalSearchFastCmh-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 60fd71ade26a3c956bc3d6cbfb45a27d78cf0e3c
+number of lines: 10
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 200, n = 111, L = 1000
+RESULTS:
+Number of intervals processed: 7762 (1.5524% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 6.918310e-06
+Number of testable intervals: 7030
+Corrected significance threshold at level 5.000000e-02: 7.112376e-06
+Number of significantly associated intervals found: 5
+Maximum testable interval length: 10
+------
+
+output_summary_SignificantIntervalSearchFastCmh-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 167c0fac2a99f9c57ace158a951d777dfae6b0db
+number of lines: 10
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 200, n = 111, L = 1000
+RESULTS:
+Number of intervals processed: 7897 (1.5794% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 1.380384e-05
+Number of testable intervals: 7193
+Corrected significance threshold at level 1.000000e-01: 1.390241e-05
+Number of significantly associated intervals found: 5
+Maximum testable interval length: 11
+------
+
+output_summary_SignificantIntervalSearchFastCmh-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 65d8dee479b5e2ec31b1a2345168642037d8f0eb
+number of lines: 10
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 200, n = 111, L = 1000
+RESULTS:
+Number of intervals processed: 8066 (1.6132% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 2.398833e-05
+Number of testable intervals: 7352
+Corrected significance threshold at level 2.000000e-01: 2.720348e-05
+Number of significantly associated intervals found: 7
+Maximum testable interval length: 11
+------
+
+output_summary_SignificantIntervalSearchWyChi-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: b143ac636ca02edc181832946e2a7a6f532a90cb
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 26683 (5.3366% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 4.597420e-06
+Number of testable intervals: 0
+Corrected significance threshold at level 5.000000e-02: 4.401048e-06
+Number of significantly associated intervals found: 180
+Maximum testable interval length: 34
+Resultant testability region: L [23,200] U [200,377]
+FWER at testability threshold: 4.000000e-02
+FWER at corrected significance threshold: 4.000000e-02
+------
+
+output_summary_SignificantIntervalSearchWyChi-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 76555d6153ab49572b12f9f157e9d59eb27d5c04
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 27111 (5.4222% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 7.615732e-06
+Number of testable intervals: 0
+Corrected significance threshold at level 1.000000e-01: 1.113840e-05
+Number of significantly associated intervals found: 195
+Maximum testable interval length: 35
+Resultant testability region: L [22,200] U [200,378]
+FWER at testability threshold: 6.000000e-02
+FWER at corrected significance threshold: 1.000000e-01
+------
+
+output_summary_SignificantIntervalSearchWyChi-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 9e86ef63c8fe1ce52adf2110fbbdcf44138a02be
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 28417 (5.6834% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 3.428489e-05
+Number of testable intervals: 0
+Corrected significance threshold at level 2.000000e-01: 3.677932e-05
+Number of significantly associated intervals found: 215
+Maximum testable interval length: 36
+Resultant testability region: L [19,200] U [200,381]
+FWER at testability threshold: 1.800000e-01
+FWER at corrected significance threshold: 2.000000e-01
+------
+
+output_summary_SignificantIntervalSearchWyExact-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: f4fcec6ddf16bf984f04053fdc1ffa378cf48bfe
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 28417 (5.6834% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 5.128732e-06
+Number of testable intervals: 0
+Corrected significance threshold at level 5.000000e-02: 4.264549e-06
+Number of significantly associated intervals found: 178
+Maximum testable interval length: 36
+Resultant testability region: L [19,200] U [200,381]
+FWER at testability threshold: 4.000000e-02
+FWER at corrected significance threshold: 4.000000e-02
+------
+
+output_summary_SignificantIntervalSearchWyExact-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 35b51721374b7737a833dd120c51d729957b3c98
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 28919 (5.7838% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 9.945053e-06
+Number of testable intervals: 0
+Corrected significance threshold at level 1.000000e-01: 1.177679e-05
+Number of significantly associated intervals found: 195
+Maximum testable interval length: 37
+Resultant testability region: L [18,200] U [200,382]
+FWER at testability threshold: 6.000000e-02
+FWER at corrected significance threshold: 1.000000e-01
+------
+
+output_summary_SignificantIntervalSearchWyExact-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 658410a02666747212cb2db4461258b7992cc3e3
+number of lines: 13
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 400, n = 215, L = 1000
+RESULTS:
+Number of intervals processed: 30005 (6.001% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 3.712093e-05
+Number of testable intervals: 0
+Corrected significance threshold at level 2.000000e-01: 4.619886e-05
+Number of significantly associated intervals found: 213
+Maximum testable interval length: 38
+Resultant testability region: L [16,200] U [200,384]
+FWER at testability threshold: 1.800000e-01
+FWER at corrected significance threshold: 2.000000e-01
+------
+
+output_summary_SignificantItemsetSearchFacs-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 6fe7dfb6790f3654ac9d7027bdbd8afcb83dd964
+number of lines: 10
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 958, n = 332, L = 18
+RESULTS:
+Number of itemsets processed: 3855 (1.47057% of total).
+Maximum itemset length to be processed: unlimited
+Associated testability threshold: 1.202264e-05
+Number of testable itemsets: 3525
+Corrected significance threshold at level 5.000000e-02: 1.418440e-05
+Number of significantly associated itemsets found: 365
+Number of closed itemsets processed: 3855
+------
+
+output_summary_SignificantItemsetSearchFacs-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: a08aa869ca35e1995bf872f2729f0a8d5e934314
+number of lines: 10
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 958, n = 332, L = 18
+RESULTS:
+Number of itemsets processed: 4092 (1.56097% of total).
+Maximum itemset length to be processed: unlimited
+Associated testability threshold: 2.398833e-05
+Number of testable itemsets: 3798
+Corrected significance threshold at level 1.000000e-01: 2.632965e-05
+Number of significantly associated itemsets found: 373
+Number of closed itemsets processed: 4091
+------
+
+output_summary_SignificantItemsetSearchFacs-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 70b7effccec22e70b8607e2470c584708bfd8cdd
+number of lines: 10
+
+content:
+------
+DATASET CHARACTERISTICS:
+	N = 958, n = 332, L = 18
+RESULTS:
+Number of itemsets processed: 4518 (1.72348% of total).
+Maximum itemset length to be processed: unlimited
+Associated testability threshold: 4.168694e-05
+Number of testable itemsets: 4370
+Corrected significance threshold at level 2.000000e-01: 4.576659e-05
+Number of significantly associated itemsets found: 461
+Number of closed itemsets processed: 4517
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchChi-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 113195094d1de3f7d5b97a4d13d26677e75d647e
+number of lines: 166
+
+content:
+------
+p-value,a,x,start,end
+5.754157e-16,150,204,99,99
+5.754157e-16,150,204,100,100
+5.754157e-16,150,204,101,101
+5.754157e-16,150,204,102,102
+2.458310e-19,155,205,199,199
+2.458310e-19,155,205,200,200
+2.458310e-19,155,205,201,201
+2.458310e-19,155,205,202,202
+6.281890e-15,159,224,98,99
+5.754157e-16,150,204,99,100
+5.754157e-16,150,204,100,101
+5.754157e-16,150,204,101,102
+1.419900e-12,157,227,102,103
+4.484561e-16,157,217,198,199
+2.458310e-19,155,205,199,200
+2.458310e-19,155,205,200,201
+2.458310e-19,155,205,201,202
+7.832618e-18,164,226,202,203
+7.765300e-13,166,244,97,99
+...
+8.412147e-08,183,297,194,203
+7.640922e-08,184,299,195,204
+5.101192e-08,182,294,198,207
+5.312847e-09,186,299,199,208
+2.848439e-07,188,310,200,209
+2.999539e-08,187,304,97,107
+2.448925e-07,184,301,98,108
+1.904233e-06,186,309,100,110
+1.430251e-06,183,302,192,202
+6.925417e-07,185,305,193,203
+5.657868e-07,187,309,194,204
+1.791604e-07,187,307,198,208
+2.848439e-07,188,310,199,209
+4.488167e-07,189,313,97,108
+1.904233e-06,186,309,98,109
+1.904233e-06,186,309,99,110
+1.903429e-06,191,320,97,109
+1.903429e-06,191,320,98,110
+1.579346e-06,196,331,97,110
+1.581174e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchChi-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: c6307405efa160bacd65b5c891113027e71654d4
+number of lines: 180
+
+content:
+------
+p-value,a,x,start,end
+5.754157e-16,150,204,99,99
+5.754157e-16,150,204,100,100
+5.754157e-16,150,204,101,101
+5.754157e-16,150,204,102,102
+2.458310e-19,155,205,199,199
+2.458310e-19,155,205,200,200
+2.458310e-19,155,205,201,201
+2.458310e-19,155,205,202,202
+6.281890e-15,159,224,98,99
+5.754157e-16,150,204,99,100
+5.754157e-16,150,204,100,101
+5.754157e-16,150,204,101,102
+1.419900e-12,157,227,102,103
+4.484561e-16,157,217,198,199
+2.458310e-19,155,205,199,200
+2.458310e-19,155,205,200,201
+2.458310e-19,155,205,201,202
+7.832618e-18,164,226,202,203
+7.765300e-13,166,244,97,99
+...
+2.642408e-06,182,301,93,103
+2.999539e-08,187,304,97,107
+2.448925e-07,184,301,98,108
+3.011639e-06,180,297,99,109
+1.904233e-06,186,309,100,110
+1.430251e-06,183,302,192,202
+6.925417e-07,185,305,193,203
+5.657868e-07,187,309,194,204
+1.791604e-07,187,307,198,208
+2.848439e-07,188,310,199,209
+4.488167e-07,189,313,97,108
+1.904233e-06,186,309,98,109
+1.904233e-06,186,309,99,110
+2.154444e-06,190,318,192,203
+1.903429e-06,191,320,97,109
+1.903429e-06,191,320,98,110
+3.834841e-06,194,328,192,204
+1.579346e-06,196,331,97,110
+2.191151e-06,194,327,98,111
+1.581174e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchChi-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 8e111b046e175c8741e12a0d978d561dcb987bd3
+number of lines: 192
+
+content:
+------
+p-value,a,x,start,end
+5.754157e-16,150,204,99,99
+5.754157e-16,150,204,100,100
+5.754157e-16,150,204,101,101
+5.754157e-16,150,204,102,102
+2.458310e-19,155,205,199,199
+2.458310e-19,155,205,200,200
+2.458310e-19,155,205,201,201
+2.458310e-19,155,205,202,202
+6.281890e-15,159,224,98,99
+5.754157e-16,150,204,99,100
+5.754157e-16,150,204,100,101
+5.754157e-16,150,204,101,102
+1.419900e-12,157,227,102,103
+4.484561e-16,157,217,198,199
+2.458310e-19,155,205,199,200
+2.458310e-19,155,205,200,201
+2.458310e-19,155,205,201,202
+7.832618e-18,164,226,202,203
+7.765300e-13,166,244,97,99
+...
+6.925417e-07,185,305,193,203
+5.657868e-07,187,309,194,204
+1.791604e-07,187,307,198,208
+2.848439e-07,188,310,199,209
+7.542267e-06,182,303,91,102
+7.051192e-06,183,305,93,104
+5.095203e-06,187,313,96,107
+4.488167e-07,189,313,97,108
+1.904233e-06,186,309,98,109
+1.904233e-06,186,309,99,110
+7.123572e-06,189,318,100,111
+2.154444e-06,190,318,192,203
+4.168735e-06,189,317,193,204
+1.903429e-06,191,320,97,109
+1.903429e-06,191,320,98,110
+7.123572e-06,189,318,99,111
+3.834841e-06,194,328,192,204
+1.579346e-06,196,331,97,110
+2.191151e-06,194,327,98,111
+1.581174e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchExact-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 04932ce12e2cbaee455a91a71510ed16bea4bb0f
+number of lines: 158
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+1.789494e-06,178,291,96,105
+1.701033e-07,183,298,97,106
+2.029780e-08,182,292,98,107
+2.351650e-07,178,288,99,108
+1.523373e-06,183,302,192,201
+4.076431e-07,178,289,193,202
+9.642013e-08,183,297,194,203
+8.186177e-08,184,299,195,204
+6.448677e-08,182,294,198,207
+5.178393e-09,186,299,199,208
+3.274322e-07,188,310,200,209
+4.099882e-08,187,304,97,107
+2.564513e-07,184,301,98,108
+1.523373e-06,183,302,192,202
+1.000219e-06,185,305,193,203
+6.897334e-07,187,309,194,204
+2.276917e-07,187,307,198,208
+3.274322e-07,188,310,199,209
+4.755501e-07,189,313,97,108
+1.631985e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchExact-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: b867cdf9e189157c14c13590873995b1e115d2c4
+number of lines: 169
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+5.178393e-09,186,299,199,208
+3.274322e-07,188,310,200,209
+2.923043e-06,182,301,93,103
+4.099882e-08,187,304,97,107
+2.564513e-07,184,301,98,108
+2.401484e-06,186,309,100,110
+1.523373e-06,183,302,192,202
+1.000219e-06,185,305,193,203
+6.897334e-07,187,309,194,204
+2.276917e-07,187,307,198,208
+3.274322e-07,188,310,199,209
+4.755501e-07,189,313,97,108
+2.401484e-06,186,309,98,109
+2.401484e-06,186,309,99,110
+3.147880e-06,190,318,192,203
+2.535739e-06,191,320,97,109
+2.535739e-06,191,320,98,110
+2.210717e-06,196,331,97,110
+2.287507e-06,194,327,98,111
+1.631985e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchExact-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 9ed1aa88f9b1d6c849ca4b4f65c495cfe2ee23d2
+number of lines: 182
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+2.564513e-07,184,301,98,108
+3.755625e-06,180,297,99,109
+2.401484e-06,186,309,100,110
+1.523373e-06,183,302,192,202
+1.000219e-06,185,305,193,203
+6.897334e-07,187,309,194,204
+2.276917e-07,187,307,198,208
+3.274322e-07,188,310,199,209
+5.782073e-06,187,313,96,107
+4.755501e-07,189,313,97,108
+2.401484e-06,186,309,98,109
+2.401484e-06,186,309,99,110
+3.147880e-06,190,318,192,203
+6.490239e-06,189,317,193,204
+2.535739e-06,191,320,97,109
+2.535739e-06,191,320,98,110
+3.973720e-06,194,328,192,204
+2.210717e-06,196,331,97,110
+2.287507e-06,194,327,98,111
+1.631985e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchFastCmh-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: f4130d99a6d547e3c1bffac2d6e88c40c25f502b
+number of lines: 6
+
+content:
+------
+p-value,a,start,end
+6.515484e-08,64,99,101
+6.114765e-09,66,100,102
+4.834760e-13,83,99,102
+5.609558e-06,89,98,102
+5.698041e-06,93,99,103
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchFastCmh-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: f4130d99a6d547e3c1bffac2d6e88c40c25f502b
+number of lines: 6
+
+content:
+------
+p-value,a,start,end
+6.515484e-08,64,99,101
+6.114765e-09,66,100,102
+4.834760e-13,83,99,102
+5.609558e-06,89,98,102
+5.698041e-06,93,99,103
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchFastCmh-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 906eec0b95e4aea7db270883edaec34b518ecfe3
+number of lines: 8
+
+content:
+------
+p-value,a,start,end
+2.037551e-05,22,960,960
+2.410864e-05,39,101,102
+6.515484e-08,64,99,101
+6.114765e-09,66,100,102
+4.834760e-13,83,99,102
+5.609558e-06,89,98,102
+5.698041e-06,93,99,103
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchWyChi-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 599ef2d4c666d48682bd76ef5f0bf9e08d84452c
+number of lines: 181
+
+content:
+------
+p-value,a,x,start,end
+5.754157e-16,150,204,99,99
+5.754157e-16,150,204,100,100
+5.754157e-16,150,204,101,101
+5.754157e-16,150,204,102,102
+2.458310e-19,155,205,199,199
+2.458310e-19,155,205,200,200
+2.458310e-19,155,205,201,201
+2.458310e-19,155,205,202,202
+6.281890e-15,159,224,98,99
+5.754157e-16,150,204,99,100
+5.754157e-16,150,204,100,101
+5.754157e-16,150,204,101,102
+1.419900e-12,157,227,102,103
+4.484561e-16,157,217,198,199
+2.458310e-19,155,205,199,200
+2.458310e-19,155,205,200,201
+2.458310e-19,155,205,201,202
+7.832618e-18,164,226,202,203
+7.765300e-13,166,244,97,99
+...
+2.999539e-08,187,304,97,107
+2.448925e-07,184,301,98,108
+3.011639e-06,180,297,99,109
+1.904233e-06,186,309,100,110
+1.430251e-06,183,302,192,202
+6.925417e-07,185,305,193,203
+5.657868e-07,187,309,194,204
+1.791604e-07,187,307,198,208
+2.848439e-07,188,310,199,209
+4.488167e-07,189,313,97,108
+1.904233e-06,186,309,98,109
+1.904233e-06,186,309,99,110
+2.154444e-06,190,318,192,203
+4.168735e-06,189,317,193,204
+1.903429e-06,191,320,97,109
+1.903429e-06,191,320,98,110
+3.834841e-06,194,328,192,204
+1.579346e-06,196,331,97,110
+2.191151e-06,194,327,98,111
+1.581174e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchWyChi-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 912664c0dec2e7e1629ca2e43ba9981bc16b5279
+number of lines: 196
+
+content:
+------
+p-value,a,x,start,end
+5.754157e-16,150,204,99,99
+5.754157e-16,150,204,100,100
+5.754157e-16,150,204,101,101
+5.754157e-16,150,204,102,102
+2.458310e-19,155,205,199,199
+2.458310e-19,155,205,200,200
+2.458310e-19,155,205,201,201
+2.458310e-19,155,205,202,202
+6.281890e-15,159,224,98,99
+5.754157e-16,150,204,99,100
+5.754157e-16,150,204,100,101
+5.754157e-16,150,204,101,102
+1.419900e-12,157,227,102,103
+4.484561e-16,157,217,198,199
+2.458310e-19,155,205,199,200
+2.458310e-19,155,205,200,201
+2.458310e-19,155,205,201,202
+7.832618e-18,164,226,202,203
+7.765300e-13,166,244,97,99
+...
+9.417238e-06,186,312,197,207
+1.791604e-07,187,307,198,208
+2.848439e-07,188,310,199,209
+7.542267e-06,182,303,91,102
+7.051192e-06,183,305,93,104
+5.095203e-06,187,313,96,107
+4.488167e-07,189,313,97,108
+1.904233e-06,186,309,98,109
+1.904233e-06,186,309,99,110
+7.123572e-06,189,318,100,111
+2.154444e-06,190,318,192,203
+4.168735e-06,189,317,193,204
+7.870724e-06,188,316,198,209
+1.903429e-06,191,320,97,109
+1.903429e-06,191,320,98,110
+7.123572e-06,189,318,99,111
+3.834841e-06,194,328,192,204
+1.579346e-06,196,331,97,110
+2.191151e-06,194,327,98,111
+1.581174e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchWyChi-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 6cb48926027aff04b31b69da9e4b607dd8510562
+number of lines: 216
+
+content:
+------
+p-value,a,x,start,end
+5.754157e-16,150,204,99,99
+5.754157e-16,150,204,100,100
+5.754157e-16,150,204,101,101
+5.754157e-16,150,204,102,102
+2.458310e-19,155,205,199,199
+2.458310e-19,155,205,200,200
+2.458310e-19,155,205,201,201
+2.458310e-19,155,205,202,202
+6.281890e-15,159,224,98,99
+5.754157e-16,150,204,99,100
+5.754157e-16,150,204,100,101
+5.754157e-16,150,204,101,102
+1.419900e-12,157,227,102,103
+4.484561e-16,157,217,198,199
+2.458310e-19,155,205,199,200
+2.458310e-19,155,205,200,201
+2.458310e-19,155,205,201,202
+7.832618e-18,164,226,202,203
+7.765300e-13,166,244,97,99
+...
+4.168735e-06,189,317,193,204
+2.026020e-05,189,320,196,207
+1.652566e-05,191,324,197,208
+7.870724e-06,188,316,198,209
+3.011326e-05,184,310,93,105
+2.026020e-05,189,320,95,107
+2.026020e-05,189,320,96,108
+1.903429e-06,191,320,97,109
+1.903429e-06,191,320,98,110
+7.123572e-06,189,318,99,111
+2.490147e-05,192,327,191,203
+3.834841e-06,194,328,192,204
+3.304862e-05,194,332,196,208
+1.579346e-06,196,331,97,110
+2.191151e-06,194,327,98,111
+2.524938e-05,196,336,96,110
+1.581174e-06,199,338,97,111
+3.304862e-05,194,332,98,112
+2.678510e-05,199,343,96,111
+2.678510e-05,199,343,97,112
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchWyExact-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 86eec682725c72d2985c764b05b3cc48a3a411cb
+number of lines: 179
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+2.923043e-06,182,301,93,103
+4.099882e-08,187,304,97,107
+2.564513e-07,184,301,98,108
+3.755625e-06,180,297,99,109
+2.401484e-06,186,309,100,110
+1.523373e-06,183,302,192,202
+1.000219e-06,185,305,193,203
+6.897334e-07,187,309,194,204
+2.276917e-07,187,307,198,208
+3.274322e-07,188,310,199,209
+4.755501e-07,189,313,97,108
+2.401484e-06,186,309,98,109
+2.401484e-06,186,309,99,110
+3.147880e-06,190,318,192,203
+2.535739e-06,191,320,97,109
+2.535739e-06,191,320,98,110
+3.973720e-06,194,328,192,204
+2.210717e-06,196,331,97,110
+2.287507e-06,194,327,98,111
+1.631985e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchWyExact-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: fead8ef426e5ab7ef0033d577c90e288a0506c03
+number of lines: 196
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+1.115202e-05,186,312,197,207
+2.276917e-07,187,307,198,208
+3.274322e-07,188,310,199,209
+8.088533e-06,182,303,91,102
+1.065171e-05,183,305,93,104
+5.782073e-06,187,313,96,107
+4.755501e-07,189,313,97,108
+2.401484e-06,186,309,98,109
+2.401484e-06,186,309,99,110
+1.073000e-05,189,318,100,111
+3.147880e-06,190,318,192,203
+6.490239e-06,189,317,193,204
+8.335784e-06,188,316,198,209
+2.535739e-06,191,320,97,109
+2.535739e-06,191,320,98,110
+1.073000e-05,189,318,99,111
+3.973720e-06,194,328,192,204
+2.210717e-06,196,331,97,110
+2.287507e-06,194,327,98,111
+1.631985e-06,199,338,97,111
+------
+
+p_vals_significant_intervals_SignificantIntervalSearchWyExact-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 5487a1d58661f9e3e53d0a95298b14af586a848f
+number of lines: 214
+
+content:
+------
+p-value,a,x,start,end
+4.119315e-16,150,204,99,99
+4.119315e-16,150,204,100,100
+4.119315e-16,150,204,101,101
+4.119315e-16,150,204,102,102
+1.071699e-19,155,205,199,199
+1.071699e-19,155,205,200,200
+1.071699e-19,155,205,201,201
+1.071699e-19,155,205,202,202
+4.155723e-15,159,224,98,99
+4.119315e-16,150,204,99,100
+4.119315e-16,150,204,100,101
+4.119315e-16,150,204,101,102
+1.635469e-12,157,227,102,103
+3.233725e-16,157,217,198,199
+1.071699e-19,155,205,199,200
+1.071699e-19,155,205,200,201
+1.071699e-19,155,205,201,202
+5.474024e-18,164,226,202,203
+7.226092e-13,166,244,97,99
+...
+3.396294e-05,185,312,191,202
+3.147880e-06,190,318,192,203
+6.490239e-06,189,317,193,204
+2.869606e-05,189,320,196,207
+2.017970e-05,191,324,197,208
+8.335784e-06,188,316,198,209
+3.868290e-05,184,310,93,105
+2.869606e-05,189,320,95,107
+2.869606e-05,189,320,96,108
+2.535739e-06,191,320,97,109
+2.535739e-06,191,320,98,110
+1.073000e-05,189,318,99,111
+2.803589e-05,192,327,191,203
+3.973720e-06,194,328,192,204
+2.210717e-06,196,331,97,110
+2.287507e-06,194,327,98,111
+3.174362e-05,196,336,96,110
+1.631985e-06,199,338,97,111
+4.327648e-05,199,343,96,111
+4.327648e-05,199,343,97,112
+------
+
+p_vals_significant_itemsets_SignificantItemsetSearchFacs-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 8a5abfbc48882ee3374bd2f1b0c4626d3b6bc7ec
+number of lines: 366
+
+content:
+------
+p-value,a,itemset
+1.131673e-19,92,228 230 9
+2.112343e-08,28,82 90 1 9
+2.112343e-08,28,82 90 5 9
+2.251932e-08,28,87 85 13 9
+3.990022e-13,0,47 43 13 5 9
+2.201356e-08,28,85 87 17 9
+3.548290e-13,0,41 49 17 1 9
+2.003793e-11,0,43 35 3 5 1
+1.708417e-11,0,34 44 7 13 1
+1.818571e-06,61,53 58 7 3
+1.946598e-11,0,40 38 11 17 5
+1.818571e-06,61,53 58 11 3
+1.989870e-11,0,42 36 11 7 9
+1.917587e-11,0,39 39 15 17 13
+2.003793e-11,0,43 35 15 3 9
+1.649756e-06,61,60 51 15 7
+1.777699e-06,61,55 56 15 11
+7.911443e-07,42,46 22 8 13 5
+1.012621e-06,42,38 30 8 17 1
+...
+1.696916e-06,12,6 6 14 16 12 11 3
+1.937614e-10,21,11 10 14 16 12 11
+4.065062e-17,36,20 16 14 16 12
+1.388039e-06,4,31 31 14 2 9
+2.184560e-10,21,8 13 14 2 8 1
+1.841340e-06,12,4 8 14 2 8 5 1
+1.830242e-10,21,12 9 14 2 8 5
+1.298438e-06,12,10 2 14 2 8 13 5
+1.590981e-10,21,14 7 14 2 8 13
+1.696916e-06,12,6 6 14 2 8 17 1
+1.608298e-06,12,7 5 14 2 8 17 13
+1.830242e-10,21,12 9 14 2 8 17
+1.608298e-06,12,7 5 14 2 8 7 5
+1.511075e-06,12,8 4 14 2 8 7 17
+1.713924e-10,21,13 8 14 2 8 7
+1.775142e-06,12,5 7 14 2 8 11 1
+1.407140e-06,12,9 3 14 2 8 11 13
+1.511075e-06,12,8 4 14 2 8 11 7
+1.713924e-10,21,13 8 14 2 8 11
+4.065062e-17,36,20 16 14 2 8
+------
+
+p_vals_significant_itemsets_SignificantItemsetSearchFacs-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 978e419f6d473f4c55e4ed981b44fc6f86e448eb
+number of lines: 374
+
+content:
+------
+p-value,a,itemset
+1.131673e-19,92,228 230 9
+2.112343e-08,28,82 90 1 9
+2.112343e-08,28,82 90 5 9
+2.251932e-08,28,87 85 13 9
+3.990022e-13,0,47 43 13 5 9
+2.201356e-08,28,85 87 17 9
+3.548290e-13,0,41 49 17 1 9
+2.003793e-11,0,43 35 3 5 1
+1.708417e-11,0,34 44 7 13 1
+1.818571e-06,61,53 58 7 3
+1.946598e-11,0,40 38 11 17 5
+1.818571e-06,61,53 58 11 3
+1.989870e-11,0,42 36 11 7 9
+1.917587e-11,0,39 39 15 17 13
+2.003793e-11,0,43 35 15 3 9
+1.649756e-06,61,60 51 15 7
+1.777699e-06,61,55 56 15 11
+7.911443e-07,42,46 22 8 13 5
+1.012621e-06,42,38 30 8 17 1
+...
+1.696916e-06,12,6 6 14 16 12 11 3
+1.937614e-10,21,11 10 14 16 12 11
+4.065062e-17,36,20 16 14 16 12
+1.388039e-06,4,31 31 14 2 9
+2.184560e-10,21,8 13 14 2 8 1
+1.841340e-06,12,4 8 14 2 8 5 1
+1.830242e-10,21,12 9 14 2 8 5
+1.298438e-06,12,10 2 14 2 8 13 5
+1.590981e-10,21,14 7 14 2 8 13
+1.696916e-06,12,6 6 14 2 8 17 1
+1.608298e-06,12,7 5 14 2 8 17 13
+1.830242e-10,21,12 9 14 2 8 17
+1.608298e-06,12,7 5 14 2 8 7 5
+1.511075e-06,12,8 4 14 2 8 7 17
+1.713924e-10,21,13 8 14 2 8 7
+1.775142e-06,12,5 7 14 2 8 11 1
+1.407140e-06,12,9 3 14 2 8 11 13
+1.511075e-06,12,8 4 14 2 8 11 7
+1.713924e-10,21,13 8 14 2 8 11
+4.065062e-17,36,20 16 14 2 8
+------
+
+p_vals_significant_itemsets_SignificantItemsetSearchFacs-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: c846ef5b395552a8d257dd4a95626395f9340b9b
+number of lines: 462
+
+content:
+------
+p-value,a,itemset
+1.131673e-19,92,228 230 9
+2.112343e-08,28,82 90 1 9
+2.112343e-08,28,82 90 5 9
+2.251932e-08,28,87 85 13 9
+3.990022e-13,0,47 43 13 5 9
+2.201356e-08,28,85 87 17 9
+3.548290e-13,0,41 49 17 1 9
+2.003793e-11,0,43 35 3 5 1
+1.708417e-11,0,34 44 7 13 1
+1.818571e-06,61,53 58 7 3
+1.946598e-11,0,40 38 11 17 5
+1.818571e-06,61,53 58 11 3
+1.989870e-11,0,42 36 11 7 9
+1.917587e-11,0,39 39 15 17 13
+2.003793e-11,0,43 35 15 3 9
+1.649756e-06,61,60 51 15 7
+1.777699e-06,61,55 56 15 11
+3.882243e-05,81,100 68 8 5
+7.911443e-07,42,46 22 8 13 5
+...
+1.830242e-10,21,12 9 14 2 8 5
+3.577318e-05,9,4 5 14 2 8 13 1
+1.298438e-06,12,10 2 14 2 8 13 5
+1.590981e-10,21,14 7 14 2 8 13
+1.696916e-06,12,6 6 14 2 8 17 1
+3.403000e-05,9,5 4 14 2 8 17 5
+1.608298e-06,12,7 5 14 2 8 17 13
+1.830242e-10,21,12 9 14 2 8 17
+3.728398e-05,9,3 6 14 2 8 7 1
+1.608298e-06,12,7 5 14 2 8 7 5
+2.776575e-05,9,8 1 14 2 8 7 13
+1.511075e-06,12,8 4 14 2 8 7 17
+1.713924e-10,21,13 8 14 2 8 7
+1.775142e-06,12,5 7 14 2 8 11 1
+3.208916e-05,9,6 3 14 2 8 11 5
+1.407140e-06,12,9 3 14 2 8 11 13
+3.208916e-05,9,6 3 14 2 8 11 17
+1.511075e-06,12,8 4 14 2 8 11 7
+1.713924e-10,21,13 8 14 2 8 11
+4.065062e-17,36,20 16 14 2 8
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchChi-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchChi-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchChi-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchExact-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchExact-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchExact-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchFastCmh-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: b536705b5ee7e145ed87ee1f6c8343be794d3131
+number of lines: 1
+
+content:
+------
+p-value,a,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchFastCmh-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: b536705b5ee7e145ed87ee1f6c8343be794d3131
+number of lines: 1
+
+content:
+------
+p-value,a,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchFastCmh-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: b536705b5ee7e145ed87ee1f6c8343be794d3131
+number of lines: 1
+
+content:
+------
+p-value,a,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchWyChi-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchWyChi-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchWyChi-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchWyExact-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchWyExact-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_intervals_SignificantIntervalSearchWyExact-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 82f28b16c51df3470763630e248ec4a3e292216a
+number of lines: 1
+
+content:
+------
+p-value,a,x,start,end
+------
+
+p_vals_testable_itemsets_SignificantItemsetSearchFacs-alpha_0.050.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 76301bfdbdec1c5fcca961299a29c72ec662c83d
+number of lines: 1
+
+content:
+------
+p-value,a,itemset
+------
+
+p_vals_testable_itemsets_SignificantItemsetSearchFacs-alpha_0.100.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 76301bfdbdec1c5fcca961299a29c72ec662c83d
+number of lines: 1
+
+content:
+------
+p-value,a,itemset
+------
+
+p_vals_testable_itemsets_SignificantItemsetSearchFacs-alpha_0.200.txt
+--------------------------------------------------------------------------------
+
+hexdigest: 76301bfdbdec1c5fcca961299a29c72ec662c83d
+number of lines: 1
+
+content:
+------
+p-value,a,itemset
+------

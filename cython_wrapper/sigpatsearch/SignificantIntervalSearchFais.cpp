@@ -1,0 +1,1 @@
+../../libsigpatsearch/SignificantIntervalSearchFais.cpp

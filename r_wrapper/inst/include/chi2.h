@@ -1,0 +1,1 @@
+../../../libsigpatsearch/chi2.h

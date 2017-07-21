@@ -1,0 +1,1 @@
+../../../libsigpatsearch/double_comp.h

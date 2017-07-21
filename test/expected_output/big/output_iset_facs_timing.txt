@@ -1,0 +1,8 @@
+CODE PROFILING
+Total Execution time: 114.874 (s).
+	Initialisation time: 43.2722 (s).
+	Time to compute corrected significance threshold: 0 (s).
+	Time to find significant intervals: 71.6012 (s).
+	Post-processing and cleanup time: 0.000334 (s).
+File I/O time: 0.030137 (s).
+Peak memory usage: 17600 (KB)

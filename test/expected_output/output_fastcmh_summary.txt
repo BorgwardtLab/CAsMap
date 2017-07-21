@@ -1,0 +1,10 @@
+DATASET CHARACTERISTICS:
+	N = 100, n = 52, L = 1000
+RESULTS:
+Number of intervals processed: 5709 (1.1418% of total).
+Maximum interval length to be processed: unlimited
+Associated testability threshold: 9.120108e-06
+Number of testable intervals: 4945
+Corrected significance threshold at level 5.000000e-02: 1.011122e-05
+Number of significantly associated intervals found: 2
+Maximum testable interval length: 9
