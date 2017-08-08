@@ -2,40 +2,6 @@ context("Testing new wrapper for sigpatsearch")
 
 library(sigpatsearch)
 
-test_that("Wrapper has 'method=fais'", {
-    sig <- sigpatsearch(method='fais')
-    sigclass <- class(sig)[[1]]
-    solution <- "SignificantIntervalSearchExact"
-    expect_equal(sigclass, solution)
-})
-
-
-test_that("Wrapper has 'method=fastcmh'", {
-    sig <- sigpatsearch(method='fastcmh')
-    sigclass <- class(sig)[[1]]
-    solution <- "SignificantIntervalSearchFastCmh"
-    expect_equal(sigclass, solution)
-})
-
-
-test_that("Wrapper has 'method=facs'", {
-    sig <- sigpatsearch(method='facs')
-    sigclass <- class(sig)[[1]]
-    solution <- "SignificantItemsetSearchFacs"
-    expect_equal(sigclass, solution)
-})
-
-
-test_that("Error when wrong name: 'method=xyz'", {
-    expect_error(sig <- sigpatsearch(method='xyz'), "needs to be one")
-})
-
-
-test_that("Error when no parameters set", {
-    expect_error(sig <- sigpatsearch(), "Need to set at least one of ")
-})
-
-
 #----------------------------------------------------------------------#
 # max_length checks
 
@@ -152,6 +118,48 @@ test_that("checkIsBoolean returns TRUE for TRUE", {
     expect_equal(checkIsBoolean(x, "x"), TRUE)
 })
 
+
+
+
+#----------------------------------------------------------------------#
+# initialising using method
+
+
+test_that("Wrapper has 'method=fais'", {
+    sig <- sigpatsearch(method='fais')
+    sigclass <- class(sig)[[1]]
+    solution <- "SignificantIntervalSearchExact"
+    expect_equal(sigclass, solution)
+})
+
+
+test_that("Wrapper has 'method=fastcmh'", {
+    sig <- sigpatsearch(method='fastcmh')
+    sigclass <- class(sig)[[1]]
+    solution <- "SignificantIntervalSearchFastCmh"
+    expect_equal(sigclass, solution)
+})
+
+
+test_that("Wrapper has 'method=facs'", {
+    sig <- sigpatsearch(method='facs')
+    sigclass <- class(sig)[[1]]
+    solution <- "SignificantItemsetSearchFacs"
+    expect_equal(sigclass, solution)
+})
+
+
+test_that("Error when wrong name: 'method=xyz'", {
+    expect_error(sig <- sigpatsearch(method='xyz'), "needs to be one")
+})
+
+
+test_that("Error when no parameters set", {
+    expect_error(sig <- sigpatsearch(), "Need to set at least one of ")
+})
+
+
+
 #----------------------------------------------------------------------#
 #now using flags
 
@@ -215,6 +223,8 @@ test_that("Wrapper has flags that should give fais2:
 
 
 #----------------------------------------------------------------------#
+# Now for FastCMH
+
 test_that("Wrapper has flags for fastcmh1: 
            use_intervals=TRUE, use_covariate=TRUE", {
     sig <- sigpatsearch(use_intervals=TRUE, use_covariate=TRUE)
@@ -238,7 +248,7 @@ test_that("Wrapper has flags for fastcmh2:
 #FACS
 
 test_that("Wrapper has flags for facs1: 
-           use_intervals=FALSE, use_covariate=NA", {
+           use_intervals=FALSE, use_covariate=NA/FALSE", {
     sig <- sigpatsearch(use_intervals=FALSE)
     sigclass <- class(sig)[[1]]
     solution <- "SignificantItemsetSearchFacs"
@@ -273,7 +283,7 @@ test_that("Wrapper has flags for facs4:
 })
 
 
-test_that("Wrapper has flags for facs4: 
+test_that("Wrapper has flags for facs5: 
            use_combinations=TRUE, use_covariate=FALSE", {
     sig <- sigpatsearch(use_combinations=TRUE, use_covariate=FALSE)
     sigclass <- class(sig)[[1]]
@@ -282,7 +292,7 @@ test_that("Wrapper has flags for facs4:
 })
 
 
-test_that("Wrapper has flags for facs5: 
+test_that("Wrapper has flags for facs6: 
            use_intervals=FALSE, use_covariate=TRUE", {
     sig <- sigpatsearch(use_combinations=TRUE, use_covariate=TRUE)
     sigclass <- class(sig)[[1]]
@@ -326,8 +336,8 @@ test_that("Wrapper has no correct flags 4:", {
 
 
 test_that("Wrapper has no correct flags 5:", {
-    error_message <- "is not a boolean"
-    expect_error(sig <- sigpatsearch(use_combinations="x", use_covariate=TRUE),
+    error_message <- "Need to set"
+    expect_error(sig <- sigpatsearch(use_combinations=NA, use_covariate=TRUE),
                  error_message)
 })
 
@@ -337,3 +347,39 @@ test_that("Wrapper has no correct flags 6:", {
     expect_error(sig <- sigpatsearch(use_combinations=6, use_covariate=TRUE),
                  error_message)
 })
+
+
+
+#----------------------------------------------------------------------#
+# check alpha and lmax values
+
+
+test_that("Check default alpha value", {
+    sig <- sigpatsearch(use_intervals=TRUE, use_covariate=FALSE)
+    default_alpha <- 0.05
+    expect_equal(sig$get_alpha(), default_alpha)
+})
+
+
+test_that("Check default lmax values", {
+    sig <- sigpatsearch(use_intervals=TRUE, use_covariate=FALSE)
+    default_lmax <- 0
+    expect_equal(sig$get_lmax(), default_lmax)
+})
+
+
+test_that("Setting alpha value", {
+    sig <- sigpatsearch(use_intervals=TRUE, use_covariate=FALSE)
+    new_alpha <- 0.001
+    sig$set_alpha(new_alpha)
+    expect_equal(sig$get_alpha(), new_alpha)
+})
+
+
+test_that("Setting lmax value", {
+    sig <- sigpatsearch(use_intervals=TRUE, use_covariate=FALSE)
+    new_lmax <- 10
+    sig$set_lmax(new_lmax)
+    expect_equal(sig$get_lmax(), new_lmax)
+})
+

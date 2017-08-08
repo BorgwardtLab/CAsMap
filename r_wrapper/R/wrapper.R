@@ -170,6 +170,30 @@ library(methods)
             .check_if_files_are_loaded()
         },
 
+        #NOTE NEW: print method
+        show = function(){
+            mytype <- "unknown"
+            myclasstype = toString(class(.self)[[1]])
+            if (myclasstype=="SignificantIntervalSearchExact")
+                mytype = "FAIS"
+            if (myclasstype=="SignificantIntervalSearchFastCmh")
+                mytype = "FastCMH"
+            if (myclasstype=="SignificantItemsetSearchFacs")
+                mytype = "FACS"
+
+            #extract alpha and lmxax
+            myalpha <- toString(.self$.alpha)
+            mylmax <- toString(.self$.lmax)
+
+            #output message to be returned
+            message1 <- paste0(mytype, " object with:")
+            message2 <- paste0(" * alpha = ", myalpha)
+            message3 <- paste0(" * lmax = ", mylmax)
+            cat(message1, "\n")
+            cat(message2, "\n")
+            cat(message3, "\n")
+        },
+
         write_profile = function(file_path)
         {
             .self$.check_if_result_available()
@@ -819,7 +843,7 @@ sigpatsearch <- function(method='',
         return(sig)
     }
 
-    #do facs/lamp
+    #do fastcmh
     if ( (use_intervals || !use_combinations) & (use_covariate)){
         sig <- SignificantIntervalSearchFastCmh()
         sig$set_alpha(alpha) 
