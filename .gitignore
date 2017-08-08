@@ -18,15 +18,4 @@ temp/
 **/.eggs
 **/sigpatsearch.Rcheck/
 **/sigpatsearch*.tar.gz
-./data
-r_wrapper/tests/testthat/cov.txt
-r_wrapper/tests/testthat/cov_data.txt
-r_wrapper/tests/testthat/cov_label.txt
-r_wrapper/tests/testthat/data.txt
-r_wrapper/tests/testthat/label.txt
-r_wrapper/tests/testthat/sample_data.bim
-r_wrapper/tests/testthat/sample_data.fam
-r_wrapper/tests/testthat/sample_data.raw
-r_wrapper/tests/testthat/tictactoe_covariates.txt
-r_wrapper/tests/testthat/tictactoe_data.txt
-r_wrapper/tests/testthat/tictactoe_labels.txt
+**/data
