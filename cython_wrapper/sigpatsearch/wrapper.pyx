@@ -1014,9 +1014,35 @@ def createSigPatSearch(*args,
        Args:
         * 'method': one of 'fais', 'fastcmh' or 'facs' (upper/lower case 
           does not matter). Default is empty string ''.
-        * 'use_intervals': boolean...
 
-       More docs to follow...
+        * 'use_intervals': boolean for setting whether intervals are used 
+                            (i.e. True for FAIS and FastCMH), 
+                            or not (i.e. False for FACS)
+
+        * 'use_combinations': boolean for setting whether combinations are 
+                              used (i.e. True for FACS) or not  
+                              (i.e. False for FAIS and FACS). This is the 
+                              opposite of use_intervals, but note that if
+                              there is a conflict, in that both use_intervals
+                              and use_combinations are set to the same value,
+                              a method with intervals will be used
+                              (FAIS or FastCMH).
+
+        * 'use_covariate': boolean for setting whether a covariate is used
+                            (i.e. True for FastCMH or FACS) or not 
+                            (i.e. False for FAIS). Default value is False.
+
+        * 'alpha': A numerical value strictly between 0 and 1 which specifies
+                   the significance threshold. Default value is 0.05.
+
+        * 'max_length': The length of the largest interval/combination that
+                        is searched for, i.e. if max_length=5, then only
+                        intervals/combinations of length 1, 2, 3, 4 and 5 will
+                        be considered. Setting this value to 0 means ALL
+                        possible lengths are considered. Default value is 0.
+
+        Examples to follow...
+
     '''
 
     #check maxlength
@@ -1050,6 +1076,8 @@ def createSigPatSearch(*args,
     #TODO: add support for LAMP (use_combinations==True and use_covariate=False)
     #TODO: Add examples
     #TODO: check default case
+    #TODO: Add check for unrecognized arguments; for example if "blah=False" is
+    #      passed to the function
     if (method=='') & (use_intervals is None) & (use_combinations is None):
         message = "Need to set at least one of 'method',"
         message += " 'use_intervals' or 'use_combinations'."
@@ -1069,7 +1097,7 @@ def createSigPatSearch(*args,
             use_intervals = True
             use_combinations = False
             use_covariate = False
-            sig = _SignificantIntervalSearchExact(*args, **kwargs)
+            sig = _SignificantIntervalSearchExact()
             sig.set_alpha(alpha) 
             sig.set_lmax(max_length)
             return(sig)
@@ -1081,7 +1109,7 @@ def createSigPatSearch(*args,
             use_intervals = True
             use_combinations = False
             use_covariate = True
-            sig = _SignificantIntervalSearchFastCmh(*args, **kwargs)
+            sig = _SignificantIntervalSearchFastCmh()
             sig.set_alpha(alpha) 
             sig.set_lmax(max_length)
             return(sig)
@@ -1093,7 +1121,7 @@ def createSigPatSearch(*args,
             use_intervals = False
             use_combinations = True
             use_covariate = True
-            sig = _SignificantItemsetSearchFacs(*args, **kwargs)
+            sig = _SignificantItemsetSearchFacs()
             sig.set_alpha(alpha) 
             sig.set_lmax(max_length)
             return(sig)
@@ -1138,21 +1166,21 @@ def createSigPatSearch(*args,
 
     #do fais
     if (use_intervals | (not use_combinations)) & (not use_covariate):
-        sig = _SignificantIntervalSearchExact(*args, **kwargs)
+        sig = _SignificantIntervalSearchExact()
         sig.set_alpha(alpha) 
         sig.set_lmax(max_length)
         return(sig)
     
     #do fastcmh
     if (use_intervals | (not use_combinations)) & use_covariate:
-        sig = _SignificantIntervalSearchFastCmh(*args, **kwargs)
+        sig = _SignificantIntervalSearchFastCmh()
         sig.set_alpha(alpha) 
         sig.set_lmax(max_length)
         return(sig)
     
     #do facs/lamp
     if use_combinations | (not use_intervals):
-        sig = _SignificantItemsetSearchFacs(*args, **kwargs)
+        sig = _SignificantItemsetSearchFacs()
         sig.set_alpha(alpha) 
         sig.set_lmax(max_length)
         return(sig)

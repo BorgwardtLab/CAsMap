@@ -1,9 +1,15 @@
 import unittest
+
+import sys
+sys.path.insert(0, '../')
+import sigpatsearch
+
 from sigpatsearch import createSigPatSearch
 
-#checkIsBoolean and isInOpenInterval are private with __
-from sigpatsearch import __checkIsBoolean as checkIsBoolean
-from sigpatsearch import __isInOpenInterval as isInOpenInterval
+# checkIsBoolean and isInOpenInterval are not imported in
+# the __init__.py file, so need to be imported manually here
+from sigpatsearch.wrapper import checkIsBoolean
+from sigpatsearch.wrapper import isInOpenInterval
 
 TYPE_STRING_FASTCMH = '_SignificantIntervalSearchFastCmh'
 TYPE_STRING_FACS = '_SignificantItemsetSearchFacs'

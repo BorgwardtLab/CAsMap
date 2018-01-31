@@ -8,6 +8,8 @@ from .wrapper import _SignificantIntervalSearchWyChi as SignificantIntervalSearc
 from .wrapper import _SignificantIntervalSearchFastCmh as SignificantIntervalSearchFastCmh
 from .wrapper import _SignificantItemsetSearchFacs as SignificantItemsetSearchFacs
 
+from .wrapper import createSigPatSearch
+
 __all__ = ['SignificantIntervalSearchExact', 'SignificantIntervalSearchChi',
            'SignificantIntervalSearchWyExact', 'SignificantIntervalSearchWyChi',
            'SignificantIntervalSearchFastCmh', 'SignificantItemsetSearchFacs',]
