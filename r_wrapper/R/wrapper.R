@@ -867,3 +867,4 @@ sigpatsearch <- function(method='',
 }
 
 
+

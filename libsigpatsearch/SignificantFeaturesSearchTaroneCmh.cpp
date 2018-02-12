@@ -100,7 +100,9 @@ void SignificantFeaturesSearchTaroneCmh::freq_destructor(){
         #ifdef DEBUG
         fprintf(stderr, "\tfreq_par_cov[0]=%p\n", (void *) freq_par_cov[0]);
         #endif
-        if (freq_par_cov[0]) delete [] freq_par_cov[0]; freq_par_cov[0] = 0;
+        if (freq_par_cov[0]) 
+            delete [] freq_par_cov[0]; 
+        freq_par_cov[0] = 0;
         delete [] freq_par_cov;
     };
     #ifdef DEBUG

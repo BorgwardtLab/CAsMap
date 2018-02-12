@@ -76,8 +76,12 @@ void SignificantIntervalSearchWy::execute_destructor_wy() {
     #ifdef DEBUG
     fprintf(stderr, "SignificantIntervalSearchWy::execute_destructor_wy()\n");
     #endif
-    if (min_pval) delete [] min_pval; min_pval = 0;
-    if (a_cnt) delete [] a_cnt; a_cnt = 0;
+    if (min_pval) 
+        delete [] min_pval; 
+    min_pval = 0;
+    if (a_cnt) 
+        delete [] a_cnt; 
+    a_cnt = 0;
 
     perm_destructor();
 }
@@ -182,7 +186,9 @@ void SignificantIntervalSearchWy::perm_array_destructor() {
     #ifdef DEBUG
     fprintf(stderr, "SignificantIntervalSearchWy::perm_array_destructor()\n\tperm_array = %p\n", (void *) perm_array);
     #endif
-    if (perm_array) delete [] perm_array; perm_array = 0;
+    if (perm_array) 
+        delete [] perm_array; 
+    perm_array = 0;
 }
 
 int SignificantIntervalSearchWy::rand_int(int x){
