@@ -100,9 +100,7 @@ void SignificantFeaturesSearchTaroneCmh::freq_destructor(){
         #ifdef DEBUG
         fprintf(stderr, "\tfreq_par_cov[0]=%p\n", (void *) freq_par_cov[0]);
         #endif
-        if (freq_par_cov[0]) 
-            delete [] freq_par_cov[0]; 
-        freq_par_cov[0] = 0;
+        if (freq_par_cov[0]) delete [] freq_par_cov[0]; freq_par_cov[0] = 0;
         delete [] freq_par_cov;
     };
     #ifdef DEBUG
@@ -191,10 +189,10 @@ unsigned short SignificantFeaturesSearchTaroneCmh::bucket_idx(double pval){
 //    if ( betas[*((longint*)x)] < betas[*((longint*)y)] ) return (-1);
 //    else return 1;
 //}
-void SignificantFeaturesSearchTaroneCmh::idx_betas_sort()
+void SignificantFeaturesSearchTaroneCmh::idx_betas_sort(unsigned short j)
 {
     //qsort(idx_betas_sorted.data(),j,sizeof(unsigned short),&qsort_cmp_betas); //Equivalent to argsort(betas[0:j])
-    std::sort(idx_betas_sorted.begin(), idx_betas_sorted.end(),
+    std::sort(idx_betas_sorted.begin(), idx_betas_sorted.begin()+j,
         [&](unsigned short x, unsigned short y) { return  betas[x] < betas[y]; }
     );
 }
@@ -220,9 +218,10 @@ double SignificantFeaturesSearchTaroneCmh::compute_envelope_minpval(longint* x) 
             idx_betas_sorted[j] = j;
             j++;
         }
-    }
+    } // betas[0...j-1] > 0 and betas[j...K] == 0, with #{k: dim_margin <= 0} == K-j
 
-    idx_betas_sort();
+
+    idx_betas_sort(j);
     f_sum = 0; g_sum = 0; Tcmh_max_corner_l = 0;
     for(k=0; k<j; k++){
         f_sum += f_vals[idx_betas_sorted[k]];
@@ -243,9 +242,9 @@ double SignificantFeaturesSearchTaroneCmh::compute_envelope_minpval(longint* x) 
             idx_betas_sorted[j] = j;
             j++;
         }
-    }
+    } // betas[0...j-1] > 0 and betas[j...K] == 0, with #{k: dim_margin <= 0} == K-j
 
-    idx_betas_sort();
+    idx_betas_sort(j);
     f_sum = 0; g_sum = 0; Tcmh_max_corner_r = 0;
     for(k=0; k<j; k++){
         f_sum += f_vals[idx_betas_sorted[k]];

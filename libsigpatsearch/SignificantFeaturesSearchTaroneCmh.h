@@ -111,7 +111,7 @@ protected:
 
     double compute_minpval(longint *x);
 
-    void idx_betas_sort();
+    void idx_betas_sort(unsigned short j);
     /*
      * Given the margins of the K tables and the minimum attainable CMH p-value,
      * checks whether the interval and all other intervals containing it can be
