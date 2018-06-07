@@ -16,7 +16,7 @@ Alternatively, download the repository as a ZIP file and decompress in your loca
 
 ## Installation and compilation
 
-If all of the dependencies are installed (R, Python, various packages - see below), then installation is simple. 
+*Firstly, all dependencies must be installed (R, Python, various packages - see detailed instructions below).* After that, installing CASMAP is simple.
 
 ### Step 1: Obtaining the C++ compiler
 
@@ -49,7 +49,7 @@ make
 
 #### Compilation of the R wrapper
 
-From the *root folder* change directory to the subdirectory r_wrapper:
+From the *root folder* change directory to the subdirectory `r_wrapper`:
 
 ```
 cd r_wrapper
@@ -72,7 +72,7 @@ which will then create the R package .tar.gz file.
 
 #### Compilation of the Python wrapper
 
-From the *root folder* change directory to the subdirectory cython_wrapper:
+From the *root folder* change directory to the subdirectory `cython_wrapper`:
 
 ```
 cd cython_wrapper
@@ -99,7 +99,7 @@ in the respective folders.
 
 #### Uninstall
 
-To remove the compiled files (perhaps before recompiling), in the root directory run:
+To remove the compiled files (perhaps before recompiling), in the *root folder* run:
 
 ```
 make clean
