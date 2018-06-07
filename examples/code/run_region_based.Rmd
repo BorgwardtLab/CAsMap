@@ -1,136 +1,80 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Import libraries\n",
-    "import os\n",
-    "\n",
-    "# Import CAsMap package\n",
-    "import sigpatsearch as sg"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Path to input files (genotype, phenotype and categorical covariate)\n",
-    "data_path = '/home/lfelipe/sigpatsearch_devel/cython_wrapper/example_data/region_gwas'\n",
-    "dataset = 'avrB'\n",
-    "\n",
-    "genotype_file = os.path.join(data_path, dataset, 'X.dat')\n",
-    "phenotype_file = os.path.join(data_path, dataset, 'Y.dat')\n",
-    "covariate_file = os.path.join(data_path, dataset, 'C.dat')\n",
-    "\n",
-    "# Path to output directory\n",
-    "output_path = os.path.join('/home/lfelipe/sigpatsearch_devel/cython_wrapper/example_output/region_gwas', dataset)\n",
-    "\n",
-    "# Create output directory (if it does not exist)\n",
-    "if not os.path.isdir(output_path):\n",
-    "    os.makedirs(output_path)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Create object to carry out a Genome-Wide Association Study (GWAS) at a region level\n",
-    "region_gwas = sg.createSigPatSearch(method='fastcmh')\n",
-    "\n",
-    "# Set hyperparameters\n",
-    "region_gwas.set_alpha(0.05)  # Target FWER\n",
-    "region_gwas.set_lmax(0)  # Include regions of any size in the analysis"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 4,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Read input files\n",
-    "region_gwas.read_eth_files(genotype_file, phenotype_file, covariate_file)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Run significant pattern mining algorithm to retrieve statistically associated genomic regions\n",
-    "region_gwas.execute()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 6,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Write high-level summary and profiling info related to the execution of the algorithm\n",
-    "region_gwas.write_summary(os.path.join(output_path, 'summary.txt'))\n",
-    "region_gwas.write_profile(os.path.join(output_path, 'profiling.txt'))\n",
-    "\n",
-    "# Write raw list of (possibly redundant) significantly associated genomic regions\n",
-    "region_gwas.write_pvals_significant_intervals(os.path.join(output_path, 'significant_regions_raw.csv'))\n",
-    "\n",
-    "# Write post-processed list of disjoint clusters of significantly associated genomic regions\n",
-    "region_gwas.write_filtered_intervals(os.path.join(output_path, 'significant_regions_clustered.csv'))\n",
-    "\n",
-    "# Optional: write list of P-values for all testable genomic regions (significantly associated or not)\n",
-    "# NOTE: Seems to be broken, so perhaps we should remove it for now\n",
-    "region_gwas.write_pvals_testable_intervals(os.path.join(output_path, 'testable_regions_pvalues.csv'))"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 2",
-   "language": "python",
-   "name": "python2"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 2
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython2",
-   "version": "2.7.10"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 0
-}
+---
+title: "Use case 1: Region-based association study"
+output: html_notebook
+---
+
+First, we load the library:
+
+```{r}
+# Import CASMAP package
+library(sigpatsearch)
+```
+
+Next, we create an object that will search using the `FACS` method:
+
+```{r}
+# Create object to search for high-order epistasis in a Genome-Wide Association Study (GWAS)
+high_order_epistasis <- sigpatsearch(method='FACS')
+
+# Set hyperparameters
+high_order_epistasis$set_alpha(0.05)  # Target FWER
+high_order_epistasis$set_lmax(0)  # Include interactions of any order in the analysis
+```
+
+First, we get the paths to the data files:
+```{r}
+
+# Path to input files (genotype, phenotype and categorical covariate)
+dataset = 'avrB'
+
+
+# Get current working directory. Used to set the output directory relative to the current one.
+current_dir = getwd()
+
+#now create paths
+data_path <- file.path(current_dir, '..', 'data', 'high_order_epistasis', dataset)
+
+#and get file names
+genotype_file  <- file.path(data_path, 'X.dat')
+phenotype_file <- file.path(data_path, 'Y.dat')
+covariate_file <- file.path(data_path, 'C.dat')
+```
+
+Next we read the data:
+```{r}
+# Read input files
+high_order_epistasis$read_eth_files(genotype_file, phenotype_file, covariate_file)
+```
+
+Then the next step runs the data:
+```{r, eval=FALSE}
+# Run significant pattern mining algorithm to retrieve statistically associated interactions between genomic variants
+high_order_epistasis$execute()
+```
+
+
+Then the next step runs the data:
+```{r, eval=FALSE}
+# Run significant pattern mining algorithm to retrieve statistically associated interactions between genomic variants
+high_order_epistasis$execute()
+```
+
+Save the results to files:
+```{r, eval=FALSE}
+# Path to output directory
+# Get current working directory. Used to set the output directory relative to the current one.
+current_dir = getwd()
+#obtain the path separator, since Windows uses "\" and Unix-based systems use "/"
+os_sep <- .Platform$file.sep
+#output_path <- (current_dir, '..', os_sep, 'output', os_sep, 'high_order_epistasis', os_sep, dataset, os_sep)
+output_path <- file.path(current_dir, '..', 'output', 'high_order_epistasis', dataset)
+
+# Write high-level summary and profiling info related to the execution of the algorithm
+summary_path <- file.path(output_path, 'summary.txt')
+high_order_epistasis.write_summary(summary_path)
+
+profiling_path <- file.path(output_path, 'profiling.txt')
+high_order_epistasis.write_profile(profiling_path)
+```
+
+
