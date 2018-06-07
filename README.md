@@ -16,7 +16,7 @@ Alternatively, download the repository as a ZIP file and decompress in your loca
 
 ## Installation and compilation
 
-*Firstly, all dependencies must be installed (R, Python, various packages - see detailed instructions below).* After that, installing CASMAP is simple.
+**Firstly, all dependencies must be installed (R, Python, various packages - see detailed instructions below).** After that, installing CASMAP is simple.
 
 ### Step 1: Obtaining the C++ compiler
 
@@ -83,19 +83,6 @@ Run the command:
 ```
 make
 ```
-
-#### Testing
-
-For both the R and Python wrappers, run:
-
-```
-make test
-```
-
-in the respective folders.
-
-
-
 
 #### Uninstall
 
