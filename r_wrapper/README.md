@@ -7,12 +7,16 @@
 You need a C++ compiler that sufficiently supports a C++11 standard, i.e.
 GCC >= 5, or, recommended, LLVM >= 7; cf.
 
-    $ g++ --version
+```
+g++ --version
+```
 
-You need an `R` installation on your computer, then run:
+You need an `R` installation on your computer, then start R and run:
 
-    $ R
-    > install.packages(c('Rcpp', 'testthat', 'devtools', 'roxygen2'))
+```
+$ R
+> install.packages(c('Rcpp', 'testthat', 'devtools', 'roxygen2'))
+```
 
 which should install all tools needed to build C/C++ based R packages.
 
@@ -20,31 +24,52 @@ which should install all tools needed to build C/C++ based R packages.
 (`dependencies=TRUE` argument of `install.packages`), however, beware that this
 make take very long, in particular, for the `devtools` package.
 
-### Build, install and test
+### Build and install
 
 To build and install the wrappers run in this folder:
 
-    $ make install
-
-To run then tests:
-
-    $ make test
-
-**Beware**: tests check output which depends on using `rand`/`srand` from
-`stdlib` (WY methods), so despite setting same seed you might still get
-_slightly_ different results between different versions of `stdlib` (different
-OSs in particular). Checks should always pass for non-WY methods and with
-C libraries provided by Apple LLVM version 8.0.0.
+```
+make install
+```
 
 #### Troubleshooting
 
-If you stumble upon problems while installing `devtools`, `roxygen2` packages,
-or while installing this package (e.g. `'no such file..'` error), then try
-simplified and explicit installation and tests calls:
+If you stumble upon problems while installing the `devtools` or `roxygen2` packages; or while installing `CASMAP` (e.g. `'no such file..'` error), then there are two additional steps you can follow
 
-    $ make clean
-    $ make install_cwd # build & install from a current working directory
-    $ (cd tests/ && Rscript testthat.R) # run tests w/o devtools
+##### Simplified and explicit installation
+
+In the subdirectory `r_wrapper` of the *root folder*, execute
+```
+make clean
+make install_cwd    # build & install from a current working directory
+```
+
+##### Manual installation
+
+In the subdirectory `r_wrapper` of the *root folder*, execute
+```
+make clean
+```
+to remove traces of a previous compilation
+
+Build the package
+```
+Rscript -e "devtools::build()"
+```
+If the file `~/.R/Makevars` does not exist, create it. You may need to create the `~/.R` directory first.
+Edit the file `~/.R/Makevars` and add the following contents:
+```
+CC=gcc-6
+CXX=gcc-6
+CXX1X=gcc-6
+```
+This allows R to compile the source code of the package using the `gcc-6` compiler. Refer to the environment variable `CC` that was set in the general installation steps.
+
+Start R and install the package from source
+```
+$ R
+> install.packages("../sigpatsearch_0.3.tar.gz", repos=NULL, type="source")
+```
 
 ### Build with CRAN flgs and check
 
