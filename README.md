@@ -61,7 +61,7 @@ Run the command:
 make package
 ```
 
-Troubleshooting: If the previous command does not work, then run:
+**Troubleshooting**: If the previous command does not work, then run:
 
 ```
 Rscript -e "devtools::build()"
@@ -83,6 +83,16 @@ Run the command:
 ```
 make
 ```
+
+**Troubleshooting**: If the previous command fails with `make: *** [wrapper] Error 1`, then run:
+
+```
+export CC=gcc-6
+make
+```
+
+which will make sure that the compilation is done with a newer version of the `gcc` compiler.
+
 
 #### Uninstall
 
