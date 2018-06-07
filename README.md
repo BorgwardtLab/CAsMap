@@ -35,7 +35,7 @@ brew install gcc@6
 ```
 
 
-### Step 2: Compiling the code base and R/Pyton packages
+### Step 2: Compiling the code base and R/Python packages
 
 The commands below apply to both **Linux** and **Mac OSX**.
 
