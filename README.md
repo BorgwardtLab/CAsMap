@@ -1,5 +1,5 @@
 # CASMAP
-Combinatorial Association MAPping
+**C**ombinatorial **AS**sociation **MAP**ping
 
 A repository with the source code of the CASMAP package (Application Note submission).
 
@@ -16,7 +16,7 @@ Alternatively, download the repository as a ZIP file and decompress in your loca
 
 ## Installation and compilation
 
-If all of the dependencies are installed (R, Python, various packages - see below), then installation is simple. 
+**Firstly, all dependencies must be installed (R, Python, various packages - see detailed instructions below).** After that, installing CASMAP is simple.
 
 ### Step 1: Obtaining the C++ compiler
 
@@ -35,7 +35,7 @@ brew install gcc@6
 ```
 
 
-### Step 2: Compiling the code base and R/Pyton packages
+### Step 2: Compiling the code base and R/Python packages
 
 The commands below apply to both **Linux** and **Mac OSX**.
 
@@ -49,7 +49,7 @@ make
 
 #### Compilation of the R wrapper
 
-From the *root folder* change directory to the subdirectory r_wrapper:
+From the *root folder* change directory to the subdirectory `r_wrapper`:
 
 ```
 cd r_wrapper
@@ -61,7 +61,7 @@ Run the command:
 make package
 ```
 
-Troubleshooting: If the previous command does not work, then run:
+**Troubleshooting**: If the previous command does not work, then run:
 
 ```
 Rscript -e "devtools::build()"
@@ -72,7 +72,7 @@ which will then create the R package .tar.gz file.
 
 #### Compilation of the Python wrapper
 
-From the *root folder* change directory to the subdirectory cython_wrapper:
+From the *root folder* change directory to the subdirectory `cython_wrapper`:
 
 ```
 cd cython_wrapper
@@ -84,22 +84,19 @@ Run the command:
 make
 ```
 
-#### Testing
-
-For both the R and Python wrappers, run:
+**Troubleshooting**: If the previous command fails with `make: *** [wrapper] Error 1`, then run:
 
 ```
-make test
+export CC=gcc-6
+make
 ```
 
-in the respective folders.
-
-
+which will make sure that the compilation is done with a newer version of the `gcc` compiler.
 
 
 #### Uninstall
 
-To remove the compiled files (perhaps before recompiling), in the root directory run:
+To remove the compiled files (perhaps before recompiling), in the *root folder* run:
 
 ```
 make clean
@@ -107,7 +104,7 @@ make clean
 
 ### Step 3: Installing the R package
 
-Follow the steps described in the README.md file under the subdirectory `r_wrapper`.
+Follow the steps described in the [README.md](r_wrapper/README.md) file under the subdirectory `r_wrapper`.
 
 ### Step 4: Installing the Python package
 
