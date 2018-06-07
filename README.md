@@ -1,40 +1,67 @@
-# CAsMap
+# CASMAP
+Combinatorial Association MAPping
 
-A repository with the software for the Application Note submission.
+A repository with the source code of the CASMAP package (Application Note submission).
 
-### Data files
+## Downloading the repository
 
- **Note:** The large data files have been excluded here - please do not add large data files to the repo, at least for the moment.
+Clone the repository with the git command
+```
+git clone https://github.com/BorgwardtLab/CASMAP.git
+```
+The location of the downloaded repository will be referred to as *root folder*.
 
-Note that the data folder can be downloaded from the original [SIS repo on GitLab](https://sissource.ethz.ch/sispub/significant_interval_search_rewrite)
+Alternatively, download the repository as a ZIP file and decompress in your local computer.
 
-Specifically, the data folder is [here](https://sissource.ethz.ch/sispub/significant_interval_search_rewrite/tree/master/data)
 
-## Installation/compilation
+## Installation and compilation
 
-If all of the dependencies are installed (R, Python, various packages - see below), then installation is simple. In the root folder, simply run
+If all of the dependencies are installed (R, Python, various packages - see below), then installation is simple. 
 
+### Step 1: Obtaining the C++ compiler
+
+The current version uses the GCC 6 compiler (`gcc-6`) in the Makefiles. 
+**For Linux (Ubuntu)**, GCC 6 can be installed [using the following commands](https://askubuntu.com/questions/746369/how-can-i-install-and-use-gcc-6-on-xenial/746480#746480):
+```
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-6 g++-6
+```
+
+**For Mac OSX**, install GCC 6 with the following commands:
+```
+brew update
+brew install gcc@6
+```
+
+
+### Step 2: Compiling the code base and R/Pyton packages
+
+The commands below apply to both **Linux** and **Mac OSX**.
+
+Change directory to the *root folder*. There, simply run:
+
+#### Compilation of core functions
 
 ```
 make
 ```
 
-### R wrapper compilation
+#### Compilation of the R wrapper
 
-Move to the folder
+From the *root folder* change directory to the subdirectory r_wrapper:
 
 ```
 cd r_wrapper
 ```
 
-and use the following command:
-
+Run the command:
 
 ```
 make package
 ```
 
-If that does not work in Linux, then run:
+Troubleshooting: If the previous command does not work, then run:
 
 ```
 Rscript -e "devtools::build()"
@@ -43,21 +70,21 @@ Rscript -e "devtools::build()"
 which will then create the R package .tar.gz file.
 
 
-### Python wrapper compilation
+#### Compilation of the Python wrapper
 
-Similarly, in the folder
+From the *root folder* change directory to the subdirectory cython_wrapper:
 
 ```
 cd cython_wrapper
 ```
 
-run
+Run the command:
 
 ```
 make
 ```
 
-### Testing
+#### Testing
 
 For both the R and Python wrappers, run:
 
@@ -70,7 +97,7 @@ in the respective folders.
 
 
 
-### Uninstall
+#### Uninstall
 
 To remove the compiled files (perhaps before recompiling), in the root directory run:
 
@@ -78,12 +105,18 @@ To remove the compiled files (perhaps before recompiling), in the root directory
 make clean
 ```
 
+### Step 3: Installing the R package
+
+Follow the steps described in the README.md file under the subdirectory `r_wrapper`.
+
+### Step 4: Installing the Python package
+
+Follow the steps described in the README.md file under the subdirectory `cython_wrapper`.
 
 
 ## Troubleshooting
 
-
-On Ubuntu 16.04, make sure the following packages are installed:
+On **Ubuntu 16.04**, make sure the following packages are installed:
 
  * libxml2-dev (needed for R's devtools)
  * curl (needed for R's devtools)
@@ -105,16 +138,6 @@ sudo apt install ipython
 sudo apt install cython
 ```
 
-### Using gcc6
-
-The current version uses the gcc6 compiler in the makefile, in an attempt to remove minor differences between Linux and OSX. It is not necessary, but I think there were a few minor numerical differences using gcc5. Anyway, gcc6 can be installed [using the following commands](https://askubuntu.com/questions/746369/how-can-i-install-and-use-gcc-6-on-xenial/746480#746480):
-
-```
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt-get update
-sudo apt-get install gcc-6 g++-6
-```
-
 
 ### The R wrapper
 
@@ -131,6 +154,7 @@ Note that this will take a long time! If a few dependencies are not successfully
 ```
 library(devtools)
 ```
+Follow the steps described in the README.md file under the subdirectory `r_wrapper`.
 
 
 ### The Python wrapper
@@ -177,3 +201,4 @@ sudo pip install --upgrade pip
 pip install sphinx --user
 ```
 
+Follow the steps described in the README.md file under the subdirectory `cython_wrapper`.
