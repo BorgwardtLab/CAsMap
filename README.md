@@ -1,5 +1,5 @@
 # CASMAP
-Combinatorial Association MAPping
+**C**ombinatorial **AS**sociation **MAP**ping
 
 A repository with the source code of the CASMAP package (Application Note submission).
 
@@ -104,7 +104,7 @@ make clean
 
 ### Step 3: Installing the R package
 
-Follow the steps described in the README.md file under the subdirectory `r_wrapper`.
+Follow the steps described in the [README.md](r_wrapper/README.md) file under the subdirectory `r_wrapper`.
 
 ### Step 4: Installing the Python package
 
