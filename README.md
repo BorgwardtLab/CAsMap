@@ -108,7 +108,7 @@ Follow the steps described in the [README.md](r_wrapper/README.md) file under th
 
 ### Step 4: Installing the Python package
 
-Follow the steps described in the README.md file under the subdirectory `cython_wrapper`.
+Follow the steps described in the [README.md](cython_wrapper/README.md) file under the subdirectory `cython_wrapper`.
 
 
 ## Troubleshooting
