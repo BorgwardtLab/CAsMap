@@ -40,25 +40,20 @@ To install the wrappers from the folder run:
 
     $ make install
 
-Optionally, to generate separate HTML docs for the installed packae run:
+Optionally, to generate separate HTML docs for the installed package run:
 
-   $ make doc_html
+    $ make doc_html
 
 Note that the output folder given is relative to the `doc/` folder.
 
-To test the installed package run:
-
-    $ make test
-
-**Beware**: tests check output which depends on using `rand`/`srand` from
-`stdlib` (WY methods), so despite setting same seed you might still get
-_slightly_ different results between different versions of `stdlib` (different
-OSs in particular). Checks should always pass for non-WY methods and with
-C libraries provided by Apple LLVM version 8.0.0.
-
 #### Troubleshooting
 
-Make sure that you have successfully installed prerequisites, in particular that the
+If the previous commands do not work, then run:
+
+    $ make
+    $ python setup.py install --user
+
+Also, make sure that you have successfully installed prerequisites, in particular that the
 `pytest` and `sphinx` binaries are visible; try:
 
     $ which py.test

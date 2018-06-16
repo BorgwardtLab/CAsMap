@@ -25,16 +25,6 @@ Welcome to Significant Pattern Search's documentation!
    :undoc-members:
    :inherited-members:
 
-.. autoclass:: sigpatsearch.wrapper._SignificantIntervalSearchWyExact
-   :members:
-   :undoc-members:
-   :inherited-members:
-
-.. autoclass:: sigpatsearch.wrapper._SignificantIntervalSearchWyChi
-   :members:
-   :undoc-members:
-   :inherited-members:
-
 .. autoclass:: sigpatsearch.wrapper._SignificantIntervalSearchFastCmh
    :members:
    :undoc-members:

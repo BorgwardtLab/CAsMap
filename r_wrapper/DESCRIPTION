@@ -1,7 +1,7 @@
 Package: sigpatsearch
 Type: Package
 Title: CASMAP: Detection of statistically significant combinations of SNPs in association mapping
-Version: 0.4
+Version: 0.3
 Date: 2018-06-16
 Author: Matthew Baker, Dean Bodenham, Felipe Llinares Lopez, Laetitia Papaxanthos, Damian Roqueiro, Mikolaj Rybinski, Uwe Schmitt
 Maintainer: Mikolaj Rybinski <mikolaj.rybinski@id.ethz.ch>

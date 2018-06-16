@@ -34,15 +34,7 @@ make install
 
 #### Troubleshooting
 
-If you stumble upon problems while installing the `devtools` or `roxygen2` packages; or while installing `CASMAP` (e.g. `'no such file..'` error), then there are two additional steps you can follow
-
-##### Simplified and explicit installation
-
-In the subdirectory `r_wrapper` of the *root folder*, execute
-```
-make clean
-make install_cwd    # build & install from a current working directory
-```
+If you stumble upon problems while installing the `devtools` or `roxygen2` packages; or while installing `CASMAP` (e.g. `'no such file..'` error), then there are two alternative installation procedures you can follow
 
 ##### Manual installation
 
@@ -72,7 +64,15 @@ $ R
 > install.packages("../sigpatsearch_0.3.tar.gz", repos=NULL, type="source")
 ```
 
-### Build with CRAN flgs and check
+##### Simplified and explicit installation
+
+In the subdirectory `r_wrapper` of the *root folder*, execute
+```
+make clean
+make install_cwd    # build & install from a current working directory
+```
+
+### Build with CRAN flags and check
 
 To just build the wrapper with extra CRAN curator's flags, which print more
 warnings, run in this folder:

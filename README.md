@@ -20,7 +20,7 @@ Alternatively, download the repository as a ZIP file and decompress in your loca
 
 ### Step 1: Obtaining the C++ compiler
 
-The current version uses the GCC 6 compiler (`gcc-6`) in the Makefiles. 
+The current version uses the GCC 6 compiler (`gcc-6`) in the Makefiles.
 **For Linux (Ubuntu)**, GCC 6 can be installed [using the following commands](https://askubuntu.com/questions/746369/how-can-i-install-and-use-gcc-6-on-xenial/746480#746480):
 ```
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
@@ -157,25 +157,6 @@ Follow the steps described in the README.md file under the subdirectory `r_wrapp
 ### The Python wrapper
 
 Similarly, for the Python wrapper to work, we need Python to be installed. We also need cython and pip to be installed. One way to do this is to follow the instructions [on this page](http://pip.readthedocs.io/en/stable/installing/).
-
-Note that before one could simply use
-
-```
-import sigpatsearch as s
-```
-
-but now for Ubuntu it seems it is necessary to use 
-
-```
-import sigpatsearch.wrapper as s
-```
-
-in order to access the ```createSigPatSearch``` command from the new wrapper/constructor, as in:
-
-```
-sig_fais1 = s.createSigPatSearch(method='fais')
-```
-
 
 ### Installing sphinx
 
