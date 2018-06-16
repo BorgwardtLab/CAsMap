@@ -106,6 +106,17 @@ double SignificantIntervalSearchExact::compute_pval(longint a, longint x){
     return fisher_pval(a, x, N, n, loggamma, log_inv_binom_N_n);
 }
 
+double SignificantIntervalSearchExact::compute_score(longint a, longint x){
+    return fisher_pval(a, x, N, n, loggamma, log_inv_binom_N_n);  // TODO: Change dummy function
+}
+
+double SignificantIntervalSearchExact::compute_odds_ratio(longint a, longint x){
+    return odds_ratio(a, x, N, n);
+}
+
+double SignificantIntervalSearchExact::score_to_pval(double score){
+    return score;  // TODO: Change dummy function
+}
 
 
 } /* namespace SignificantPattern */

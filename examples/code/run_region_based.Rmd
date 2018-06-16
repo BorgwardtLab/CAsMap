@@ -1,80 +1,84 @@
----
-title: "Use case 1: Region-based association study"
-output: html_notebook
----
-
-First, we load the library:
-
 ```{r}
 # Import CASMAP package
 library(sigpatsearch)
 ```
 
-Next, we create an object that will search using the `FACS` method:
-
 ```{r}
-# Create object to search for high-order epistasis in a Genome-Wide Association Study (GWAS)
-high_order_epistasis <- sigpatsearch(method='FACS')
+# NOTE: THESE PATHS ASSUME YOU ARE EXECUTING THE NOTEBOOK FROM THE FOLDER examples/code. 
+#       IF NOT, PLEASE ADJUST THE PATHS ACCORDINGLY
 
-# Set hyperparameters
-high_order_epistasis$set_alpha(0.05)  # Target FWER
-high_order_epistasis$set_lmax(0)  # Include interactions of any order in the analysis
-```
-
-First, we get the paths to the data files:
-```{r}
+# Get current working directory. Used to set the output directory relative to the current one.
+current_dir = getwd()
 
 # Path to input files (genotype, phenotype and categorical covariate)
+data_path <- file.path(dirname(current_dir), 'data', 'region_based')
 dataset = 'avrB'
 
+genotype_file  <- file.path(data_path, dataset, 'X.dat')
+phenotype_file <- file.path(data_path, dataset, 'Y.dat')
+covariate_file <- file.path(data_path, dataset, 'C.dat')
 
-# Get current working directory. Used to set the output directory relative to the current one.
-current_dir = getwd()
+# Path to output directory
+output_path <- file.path(dirname(current_dir), 'output', 'region_based', dataset)
 
-#now create paths
-data_path <- file.path(current_dir, '..', 'data', 'high_order_epistasis', dataset)
-
-#and get file names
-genotype_file  <- file.path(data_path, 'X.dat')
-phenotype_file <- file.path(data_path, 'Y.dat')
-covariate_file <- file.path(data_path, 'C.dat')
+# Create output directory (if it does not exist)
+dir.create(output_path, recursive=TRUE, showWarnings=FALSE)
 ```
 
-Next we read the data:
+```{r}
+# Create object to carry out a Genome-Wide Association Study (GWAS) at a region level
+region_gwas <- CASMAP(mode="regionGWAS")
+
+# Customize the hyperparameters of the analysis
+#     alpha: Target Family-Wise Error Rate (FWER)
+#     max_comb_size: Maximum number of markers per region (set max_comb_size = 0 for unlimited number of markers)
+region_gwas$setTargetFWER(alpha=0.05)  # Target FWER
+region_gwas$setMaxCombinationSize(max_comb_size=0)  # Include regions of unlimited size in the analysis
+
+# Display state of region_gwas object
+print(region_gwas)
+```
+
 ```{r}
 # Read input files
-high_order_epistasis$read_eth_files(genotype_file, phenotype_file, covariate_file)
+# NOTE: Order below does not reflect positional input argument order. 
+#       We recommended to use keyword arguments as shown below.
+region_gwas$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file, covariate_file=covariate_file)
+
+# The covariate file is optional.
+# Omit it to run the analysis without correcting for a categorical covariate.
+# region_gwas$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file)
+
+# For input genotype files using an additive encoding (0 = homozygous major, 1 = heterozygous, 2 = homozygous minor), use
+# the extra input argument 'encoding' to select between a dominant (0 = homozygous major, 1 = heterozygous and homozygous 
+# minor) or a recessive encoding (0 = homozygous major and heterozygous, 1 = homozygous minor).
+# NOTE: The files provided in this example are already binary. Hence, a 'dominant' encoding will leave the files unchanged
+#       whereas a 'recessive' encoding would result in a file of all zeros, not being applicable to this example.
+
+# region_gwas$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file, 
+#                       covariate_file=covariate_file, encoding='dominant')
+# region_gwas$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file, 
+#                       covariate_file=covariate_file, encoding='recessive')  # Do not use with already binarized data
+
+# Display state of region_gwas object again
+print(region_gwas)
 ```
 
-Then the next step runs the data:
-```{r, eval=FALSE}
-# Run significant pattern mining algorithm to retrieve statistically associated interactions between genomic variants
-high_order_epistasis$execute()
+```{r}
+# Run significant pattern mining algorithm to retrieve statistically associated genomic regions
+region_gwas$execute()
 ```
 
-
-Then the next step runs the data:
-```{r, eval=FALSE}
-# Run significant pattern mining algorithm to retrieve statistically associated interactions between genomic variants
-high_order_epistasis$execute()
-```
-
-Save the results to files:
-```{r, eval=FALSE}
-# Path to output directory
-# Get current working directory. Used to set the output directory relative to the current one.
-current_dir = getwd()
-#obtain the path separator, since Windows uses "\" and Unix-based systems use "/"
-os_sep <- .Platform$file.sep
-#output_path <- (current_dir, '..', os_sep, 'output', os_sep, 'high_order_epistasis', os_sep, dataset, os_sep)
-output_path <- file.path(current_dir, '..', 'output', 'high_order_epistasis', dataset)
-
+```{r}
 # Write high-level summary and profiling info related to the execution of the algorithm
-summary_path <- file.path(output_path, 'summary.txt')
-high_order_epistasis.write_summary(summary_path)
+region_gwas$writeSummary(file.path(output_path, 'summary.txt'))
+region_gwas$writeProfile(file.path(output_path, 'profiling.txt'))
 
-profiling_path <- file.path(output_path, 'profiling.txt')
-high_order_epistasis.write_profile(profiling_path)
+# Write raw list of (possibly redundant) significantly associated genomic regions
+region_gwas$writeSignificantRegions(file.path(output_path, 'significant_regions_raw.txt'))
+
+# Write post-processed list of disjoint clusters of significantly associated genomic regions
+region_gwas$writeSignificantClusterRepresentatives(file.path(output_path, 'significant_regions_clustered.txt'))
 ```
 
 

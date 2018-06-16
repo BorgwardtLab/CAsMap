@@ -85,6 +85,16 @@ double SignificantIntervalSearchChi::compute_pval(longint a, longint x){
     return chi2_pval(a, x, N, n, class_ratio_bin);
 }
 
+double SignificantIntervalSearchChi::compute_score(longint a, longint x){
+    return chi2_score(a, x, N, n, class_ratio_bin);
+}
 
+double SignificantIntervalSearchChi::compute_odds_ratio(longint a, longint x){
+    return odds_ratio(a, x, N, n);
+}
+
+double SignificantIntervalSearchChi::score_to_pval(double score){
+    return Chi2_sf(score, 1);
+}
 
 } /* namespace SignificantPattern */

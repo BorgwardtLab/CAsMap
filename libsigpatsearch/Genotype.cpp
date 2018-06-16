@@ -94,7 +94,7 @@ namespace SignificantPattern
         reallocArray({L, N});
     }
 
-    void Genotype::readETHFile(const std::string& filename, longint N)
+    void Genotype::readETHFile(const std::string& filename, longint N, const std::string& encoding)
     {
         #ifdef DEBUG
         fprintf(stderr, "Genotype::readETHFile(): BEGIN, current data size: LxN=%ldx%ld\n", getNumFeatures(), getNumObservations());
@@ -105,7 +105,7 @@ namespace SignificantPattern
         #ifdef DEBUG
         fprintf(stderr, "Genotype::readETHFile(): pre-parse, current data size: LxN=%ldx%ld\n", getNumFeatures(), getNumObservations());
         #endif
-        parseEthDataFile(filename, getArrayPtr());
+        parseEthDataFile(filename, getArrayPtr(), encoding);
         #ifdef DEBUG
         fprintf(stderr, "Genotype::readETHFile(): END, current data size: LxN=%ldx%ld\n", getNumFeatures(), getNumObservations());
         #endif
@@ -223,6 +223,43 @@ namespace SignificantPattern
         file.close();
 
     }
+
+
+    //LP: add function. To check when PLINK function is ready.
+    // void Genotype::encodingProcessedPlinkFile(std::vector<short>& variants, const std::string& encoding){
+    // 	std::vector<int>::iterator it = variants.begin();
+    // 	char curr_char; short curr_val;
+    // 	if (encoding == "dominant"){
+    // 	for (; it!= variants.end(); ++it){
+    // 		curr_char = *it;
+    // 		switch (curr_char) {
+    // 		case '0': curr_val = 0;
+    //				break;
+    //	case '1':
+    //	case '2':
+    //		curr_val = 1;
+    //	        break;
+    //	}
+    //	variants[it-PLINK_RAW_NCOL_META] = curr_val;
+    // 	}
+    // 	}
+
+    //	if (encoding == "recessive"){
+    //	for (; it!= variants.end(); ++it){
+    //		curr_char = *it;
+    //		switch (curr_char) {
+    //		case '0':
+    //		case '1':
+    //			curr_val = 0;
+    //				break;
+    //		case '2':
+    //			curr_val = 1;
+    //		        break;
+    //		}
+    //		variants[it-PLINK_RAW_NCOL_META] = curr_val;
+    //	}
+    //	}
+    // }
 
     void Genotype::splitRawLine(const std::string& line,
         std::string& fid, std::string& iid,
@@ -421,15 +458,14 @@ namespace SignificantPattern
     }
 
 
-    void Genotype::parseEthDataFile(const std::string& filename, unsigned char *data_buf){
+    void Genotype::parseEthDataFile(const std::string& filename, unsigned char *data_buf, const std::string& encoding){
         // Just parsing 0 and 1s, ignoring everything else (no format validation)
         ifstream f_dat ;
         int n_read;
         unsigned char char_to_int[256];//Array for converting chars to int fast
         char *read_buf_start, *read_buf_aux, *read_buf_end;//Buffer for reading from file and extra pointers for loops
         unsigned char read_buf_uchar; unsigned char read_buf_int;
-        unsigned char zero = '0'; unsigned char one = '1';
-
+        unsigned char zero = '0'; unsigned char one = '1'; unsigned char two = '2';
         tryOpenFile(filename, f_dat);
 
         //Try to allocate memory for the buffer, giving an error message if it fails
@@ -439,9 +475,13 @@ namespace SignificantPattern
 
         //Initialize the char to int converter
         std::fill_n(char_to_int, 256, 127);
-        // We only care about the chars '0' and '1'. Everything else is mapped into the same "bucket"
-        char_to_int[zero] = 0; char_to_int[one] = 1;
-
+        // We only care about the chars '0', '1' and '2'. Everything else is mapped into the same "bucket" \\LP: dominant/recessive
+        if (encoding == "dominant"){
+            char_to_int[zero] = 0; char_to_int[one] = 1; char_to_int[two] = 1;
+        }
+        if (encoding == "recessive"){
+            char_to_int[zero] = 0; char_to_int[one] = 0; char_to_int[two] = 1;
+        }
         // Read the entire file
         while(1)
         {

@@ -195,15 +195,15 @@ Phenotype SignificantFeaturesSearch::readLabelsFileToBuffer(
     return phenotype_buf;
 }
 void SignificantFeaturesSearch::readDataFile(
-        const std::string& xfilename, bool plinkFormat, Phenotype& phenotype_buf)
+        const std::string& xfilename, bool plinkFormat, Phenotype& phenotype_buf, const std::string& encoding)
 {
     profiler.markStartFileIO();
     if (plinkFormat) genotype.readPlinkRawFile(xfilename, phenotype_buf);
-    else genotype.readETHFile(xfilename, phenotype_buf.getNumObservations());
+    else genotype.readETHFile(xfilename, phenotype_buf.getNumObservations(), encoding);
     profiler.markEndFileIO();
 }
 
-void SignificantFeaturesSearch::readFiles(const std::string& xfilename, const std::string& yfilename, bool plinkFormat){
+void SignificantFeaturesSearch::readFiles(const std::string& xfilename, const std::string& yfilename, bool plinkFormat, const std::string& encoding){
     #ifdef DEBUG
     fprintf(stderr, "SignificantFeaturesSearch::readFiles(): BEGIN, current data size: LxN=%ldx%ld\n", genotype.getNumFeatures(), genotype.getNumObservations());
     #endif
@@ -212,7 +212,7 @@ void SignificantFeaturesSearch::readFiles(const std::string& xfilename, const st
     // labels file (Y), which has to be read first. Label files are small, so
     // mem overhead is no issue.
     Phenotype phenotype_buf = readLabelsFileToBuffer(yfilename, plinkFormat);
-    readDataFile(xfilename, plinkFormat, phenotype_buf);
+    readDataFile(xfilename, plinkFormat, phenotype_buf, encoding);
     // no errors, genotype is already set, set phenotype from the buffer
     phenotype = phenotype_buf;
     #ifdef DEBUG
@@ -220,9 +220,9 @@ void SignificantFeaturesSearch::readFiles(const std::string& xfilename, const st
     #endif
 }
 
-void SignificantFeaturesSearch::readETHFiles(const std::string& xfilename, const std::string& yfilename)
+void SignificantFeaturesSearch::readETHFiles(const std::string& xfilename, const std::string& yfilename, const std::string& encoding)
 {
-    readFiles(xfilename, yfilename, false);
+    readFiles(xfilename, yfilename, false, encoding);
 }
 
 std::string SignificantFeaturesSearch::getPlinkDataFilename(const std::string& basefilename) const {
@@ -231,9 +231,9 @@ std::string SignificantFeaturesSearch::getPlinkDataFilename(const std::string& b
 std::string SignificantFeaturesSearch::getPlinkLabelsFilename(const std::string& basefilename) const {
     return basefilename+".fam";
 }
-void SignificantFeaturesSearch::readPlinkFiles(const std::string& basefilename)
+void SignificantFeaturesSearch::readPlinkFiles(const std::string& basefilename, const std::string& encoding)
 {
-    readFiles(getPlinkDataFilename(basefilename), getPlinkLabelsFilename(basefilename), true);
+    readFiles(getPlinkDataFilename(basefilename), getPlinkLabelsFilename(basefilename), true, encoding);
 }
 
 void SignificantFeaturesSearch::writeETHFiles(const std::string& xfilename, const std::string& yfilename) {

@@ -1,127 +1,82 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Import libraries\n",
-    "import os\n",
-    "\n",
-    "# Import CASMAP package\n",
-    "import sigpatsearch as sg"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Get current working directory. Used to set the output directory relative to the current one.\n",
-    "current_dir = os.getcwd()\n",
-    "\n",
-    "# Path to input files (genotype, phenotype and categorical covariate)\n",
-    "data_path = '../data/higher_order_epistasis'\n",
-    "dataset = 'avrB'\n",
-    "\n",
-    "genotype_file  = os.path.join(data_path, dataset, 'X.dat')\n",
-    "phenotype_file = os.path.join(data_path, dataset, 'Y.dat')\n",
-    "covariate_file = os.path.join(data_path, dataset, 'C.dat')\n",
-    "\n",
-    "# Path to output directory\n",
-    "output_path = os.path.join(current_dir, '../output/higher_order_epistasis', dataset)\n",
-    "\n",
-    "# Create output directory (if it does not exist)\n",
-    "if not os.path.isdir(output_path):\n",
-    "    os.makedirs(output_path)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Create object to search for high-order epistasis in a Genome-Wide Association Study (GWAS)\n",
-    "higher_order_epistasis = sg.createSigPatSearch(method='facs')\n",
-    "\n",
-    "# Set hyperparameters\n",
-    "higher_order_epistasis.set_alpha(0.05)  # Target FWER\n",
-    "higher_order_epistasis.set_lmax(0)  # Include interactions of any order in the analysis"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 4,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Read input files\n",
-    "higher_order_epistasis.read_eth_files(genotype_file, phenotype_file, covariate_file)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Run significant pattern mining algorithm to retrieve statistically associated interactions between genomic variants\n",
-    "higher_order_epistasis.execute()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "# Write high-level summary and profiling info related to the execution of the algorithm\n",
-    "higher_order_epistasis.write_summary(os.path.join(output_path, 'summary.txt'))\n",
-    "higher_order_epistasis.write_profile(os.path.join(output_path, 'profiling.txt'))\n",
-    "\n",
-    "# Write raw list of (possibly redundant) significantly associated multiplicative interactions of genomic variants\n",
-    "higher_order_epistasis.write_pvals_significant_itemsets(os.path.join(output_path, 'significant_interactions.csv'))\n",
-    "\n",
-    "# Optional: write list of P-values for all testable interactions (significantly associated or not)\n",
-    "# NOTE: Seems to be broken, so perhaps we should remove it for now\n",
-    "higher_order_epistasis.write_pvals_testable_itemsets(os.path.join(output_path, 'testable_interactions_pvalues.csv'))"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 2",
-   "language": "python",
-   "name": "python2"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 2
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython2",
-   "version": "2.7.10"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 0
-}
+```{r}
+# Import CASMAP package
+library(sigpatsearch)
+```
+
+```{r}
+# NOTE: THESE PATHS ASSUME YOU ARE EXECUTING THE NOTEBOOK FROM THE FOLDER examples/code. 
+#       IF NOT, PLEASE ADJUST THE PATHS ACCORDINGLY
+
+# Get current working directory. Used to set the output directory relative to the current one.
+current_dir = getwd()
+
+# Path to input files (genotype, phenotype and categorical covariate)
+data_path <- file.path(dirname(current_dir), 'data', 'higher_order_epistasis')
+dataset = 'avrB'
+
+genotype_file  <- file.path(data_path, dataset, 'X.dat')
+phenotype_file <- file.path(data_path, dataset, 'Y.dat')
+covariate_file <- file.path(data_path, dataset, 'C.dat')
+
+# Path to output directory
+output_path <- file.path(dirname(current_dir), 'output', 'higher_order_epistasis', dataset)
+
+# Create output directory (if it does not exist)
+dir.create(output_path, recursive=TRUE, showWarnings=FALSE)
+```
+
+```{r}
+# Create object to search for higher-order epistasis in a Genome-Wide Association Study (GWAS)
+higher_order_epistasis <- CASMAP(mode="higherOrderEpistasis")
+
+# Customize the hyperparameters of the analysis
+#     alpha: Target Family-Wise Error Rate (FWER)
+#     max_comb_size: Maximum number of interacting variants (set max_comb_size = 0 for unlimited order)
+higher_order_epistasis$setTargetFWER(alpha=0.05)  # Target FWER
+higher_order_epistasis$setMaxCombinationSize(max_comb_size=0)  # Include interactions of any order in the analysis
+
+# Display state of higher_order_epistasis object
+print(higher_order_epistasis)
+```
+
+```{r}
+# Read input files
+# NOTE: Order below does not reflect positional input argument order. 
+#       We recommended to use keyword arguments as shown below.
+higher_order_epistasis$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file, covariate_file=covariate_file)
+
+# The covariate file is optional.
+# Omit it to run the analysis without correcting for a categorical covariate.
+# higher_order_epistasis$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file)
+
+# For input genotype files using an additive encoding (0 = homozygous major, 1 = heterozygous, 2 = homozygous minor), use
+# the extra input argument 'encoding' to select between a dominant (0 = homozygous major, 1 = heterozygous and homozygous 
+# minor) or a recessive encoding (0 = homozygous major and heterozygous, 1 = homozygous minor).
+# NOTE: The files provided in this example are already binary. Hence, a 'dominant' encoding will leave the files unchanged
+#       whereas a 'recessive' encoding would result in a file of all zeros, not being applicable to this example.
+
+# higher_order_epistasis$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file, 
+#                                  covariate_file=covariate_file, encoding='dominant')
+# higher_order_epistasis$readFiles(genotype_file=genotype_file, phenotype_file=phenotype_file, 
+#                                  covariate_file=covariate_file, encoding='recessive')  # Do not use with already binarized data
+
+
+# Display state of higher_order_epistasis object again
+print(higher_order_epistasis)
+```
+
+```{r}
+# Run significant pattern mining algorithm to retrieve statistically associated interactions between genomic variants
+higher_order_epistasis$execute()
+```
+
+```{r}
+# Write high-level summary and profiling info related to the execution of the algorithm
+higher_order_epistasis$writeSummary(file.path(output_path, 'summary.txt'))
+higher_order_epistasis$writeProfile(file.path(output_path, 'profiling.txt'))
+
+# Write raw list of (possibly redundant) significantly associated multiplicative interactions of genomic variants
+higher_order_epistasis$writeSignificantInteractions(file.path(output_path, 'significant_interactions.txt'))
+```
+
+

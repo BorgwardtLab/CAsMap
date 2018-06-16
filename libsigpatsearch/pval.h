@@ -32,9 +32,19 @@ void chi2_minpvals(longint N, longint n, longint N_over_2, double class_ratio,
                    /*out*/ double *psi);
 
 /**
- * Evaluate Fisher's Chi2-approximated test for a setting like in fisher_pval().
+ * Evaluate Fisher's Chi2-approximated P-value for a setting like in fisher_pval().
  */
 double chi2_pval(longint a, longint x, longint N, longint n, double class_ratio_bin);
+
+/**
+ * Evaluate Fisher's Chi2-approximated test statistic for a setting like in fisher_pval().
+ */
+double chi2_score(longint a, longint x, longint N, longint n, double class_ratio_bin);
+
+/**
+ * Compute odds ratio for a single contingency table.
+ */
+double odds_ratio(longint a, longint x, longint N, longint n);
 
 /**
  * Computes the minimum attainable CMH p-value depending on the margins x, n and
@@ -51,4 +61,18 @@ double cmh_minpval(longint *x, unsigned short K, longint* Nt, longint* nt,
 double cmh_pval(longint a, longint *x, unsigned short K, longint* Nt,
         double* gammat, double* gammabint);
 
+/**
+ * Computes the CMH test statistic as a function of the margins x, n and N and the cell
+ * counts a for the K tables
+ */
+double cmh_score(longint a, longint *x, unsigned short K, longint* Nt,
+                double* gammat, double* gammabint);
+
+/**
+ * Compute odds ratio for K contingency tables.
+ */
+double cmh_odds_ratio(longint* at, longint* x, unsigned short K, longint* Nt, longint* nt);
+
 #endif
+
+

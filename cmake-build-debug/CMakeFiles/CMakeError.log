@@ -1,0 +1,40 @@
+Detecting C [-std=c11] compiler features failed to compile with the following output:
+Change Dir: /Volumes/lfelipe$/CAsMap_light/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9d07b/fast"
+/Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_9d07b.dir/build.make CMakeFiles/cmTC_9d07b.dir/build
+make[1]: *** No rule to make target `/Volumes/lfelipeCAsMap_light/cmake-build-debug/CMakeFiles/feature_tests.c', needed by `CMakeFiles/cmTC_9d07b.dir/feature_tests.c.o'.  Stop.
+make: *** [cmTC_9d07b/fast] Error 2
+
+
+
+Detecting CXX [-std=c++1z] compiler features failed to compile with the following output:
+Change Dir: /Volumes/lfelipe$/CAsMap_light/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b7c4a/fast"
+/Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_b7c4a.dir/build.make CMakeFiles/cmTC_b7c4a.dir/build
+make[1]: *** No rule to make target `/Volumes/lfelipeCAsMap_light/cmake-build-debug/CMakeFiles/feature_tests.cxx', needed by `CMakeFiles/cmTC_b7c4a.dir/feature_tests.cxx.o'.  Stop.
+make: *** [cmTC_b7c4a/fast] Error 2
+
+
+
+Detecting C [-std=c11] compiler features failed to compile with the following output:
+Change Dir: /Volumes/lfelipe$/CAsMap_light/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_02fcc/fast"
+/Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_02fcc.dir/build.make CMakeFiles/cmTC_02fcc.dir/build
+make[1]: *** No rule to make target `/Volumes/lfelipeCAsMap_light/cmake-build-debug/CMakeFiles/feature_tests.c', needed by `CMakeFiles/cmTC_02fcc.dir/feature_tests.c.o'.  Stop.
+make: *** [cmTC_02fcc/fast] Error 2
+
+
+
+Detecting CXX [-std=c++1z] compiler features failed to compile with the following output:
+Change Dir: /Volumes/lfelipe$/CAsMap_light/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2b49c/fast"
+/Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_2b49c.dir/build.make CMakeFiles/cmTC_2b49c.dir/build
+make[1]: *** No rule to make target `/Volumes/lfelipeCAsMap_light/cmake-build-debug/CMakeFiles/feature_tests.cxx', needed by `CMakeFiles/cmTC_2b49c.dir/feature_tests.cxx.o'.  Stop.
+make: *** [cmTC_2b49c/fast] Error 2
+
+
+

@@ -35,7 +35,7 @@ protected:
 
     void readFilesWithCovariates(
             const std::string& xfilename, const std::string& yfilename, bool plinkFormat,
-            const std::string& covfilename, bool covPlinkFormat = false);
+            const std::string& covfilename, bool covPlinkFormat = false, const std::string& encoding = "dominant");
 
     inline Phenotype const &getCovariates() const {
         return covariates;
@@ -81,8 +81,8 @@ public:
      *
      * Additionally, after successful read, call initCovariates().
      */
-    inline void readETHFiles(const std::string& xfilename, const std::string& yfilename) override {
-        super::readETHFiles(xfilename, yfilename);
+    inline void readETHFiles(const std::string& xfilename, const std::string& yfilename, const std::string& encoding) override {
+        super::readETHFiles(xfilename, yfilename, encoding);
         initCovariates();
     };
     /**
@@ -90,16 +90,16 @@ public:
      *
      * Additionally, after successful read, call initCovariates().
      */
-    inline void readPlinkFiles(const std::string& basefilename) override {
-        super::readPlinkFiles(basefilename);
+    inline void readPlinkFiles(const std::string& basefilename, const std::string& encoding) override {
+        super::readPlinkFiles(basefilename, encoding);
         initCovariates();
     };
     void readETHFilesWithCovariates(
             const std::string& xfilename, const std::string& yfilename,
-            const std::string& covfilename, bool covPlinkFormat = false);
+            const std::string& covfilename, bool covPlinkFormat = false, const std::string& encoding = "dominant" );
     void readPlinkFilesWithCovariates(
             const std::string& basefilename,
-            const std::string& covfilename, bool covPlinkFormat = true);
+            const std::string& covfilename, bool covPlinkFormat = true, const std::string& encoding = "dominant");
     void readCovariatesFile(
             const std::string& covfilename, bool plinkFormat = false);
     void writeETHFilesWithCovariates(

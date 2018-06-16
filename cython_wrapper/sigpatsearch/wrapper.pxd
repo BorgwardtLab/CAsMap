@@ -1,5 +1,6 @@
 from libcpp.string cimport string
 from libcpp.vector cimport vector
+from libcpp cimport bool
 
 cdef extern from "types.h":
     ctypedef long longint
@@ -48,8 +49,10 @@ cdef extern from "FeatureSet.h" namespace "SignificantPattern":
     cdef cppclass IntervalSet:
         void writeToFile(string filename) except +
 
-    cdef cppclass ItemsetSet:
+    cdef cppclass ItemsetSetWithOddsRatio:
         vector[vector[longint]] & getItemsetsVector()
+        vector[double] & getScoreVector()
+        vector[double] & getOddsRatioVector()
         vector[double] & getPValueVector()
         void writeToFile(string filename) except +
 
@@ -59,6 +62,8 @@ cdef extern from "FilterIntervals.h" namespace "SignificantPattern":
     cdef cppclass Interval:
         size_t getStart()
         size_t getEnd()
+        double getScore()
+        double getOddsRatio()
         double getPvalue()
 
     cdef cppclass FilterIntervals:
@@ -73,9 +78,9 @@ cdef extern from "SignificantFeaturesSearch.h" namespace "SignificantPattern":
 
     cdef cppclass SignificantFeaturesSearch:
 
-        void readETHFiles(string, string) except +
+        void readETHFiles(string, string, string) except +
         void writeETHFiles(string, string) except +
-        void readPlinkFiles(string) except +
+        void readPlinkFiles(string, string) except +
         void execute(double, longint) except +
         Profiler & getProfiler()
 
@@ -109,34 +114,13 @@ cdef extern from "SignificantIntervalSearchChi.h" namespace "SignificantPattern"
         SignificantIntervalSearchChi()
 
 
-cdef extern from "SignificantIntervalSearchWy.h" namespace "SignificantPattern":
-
-    cdef cppclass SignificantIntervalSearchWy(SignificantIntervalSearchFais):
-
-        longint getNPerm
-        void setNPerm(longint)
-        void setPermutationsFilename(string)
-        void setSeed(unsigned)
-
-cdef extern from "SignificantIntervalSearchWyExact.h" namespace "SignificantPattern":
-
-    cdef cppclass SignificantIntervalSearchWyExact(SignificantIntervalSearchWy):
-
-        SignificantIntervalSearchWyExact()
-
-cdef extern from "SignificantIntervalSearchWyChi.h" namespace "SignificantPattern":
-
-    cdef cppclass SignificantIntervalSearchWyChi(SignificantIntervalSearchWy):
-
-        SignificantIntervalSearchWyChi()
-
 cdef extern from "SignificantFeaturesSearchWithCovariates.h" namespace "SignificantPattern":
 
     cdef cppclass SignificantFeaturesSearchWithCovariates(SignificantFeaturesSearch):
 
-        void readETHFilesWithCovariates(string, string, string) except +
+        void readETHFilesWithCovariates(string, string, string, bool, string) except +
         void writeETHFilesWithCovariates(string, string, string) except +
-        void readPlinkFilesWithCovariates(string, string) except +
+        void readPlinkFilesWithCovariates(string, string, bool, string) except +
         void readCovariatesFile(string) except +
         void writeCovariatesFile(string) except +
 
@@ -152,8 +136,8 @@ cdef extern from "SignificantItemsetSearch.h" namespace "SignificantPattern":
 
     cdef cppclass SignificantItemsetSearch:
 
-        ItemsetSet & getPValsTestableIsets()
-        ItemsetSet & getPValsSigIsets()
+        ItemsetSetWithOddsRatio & getPValsTestableIsets()
+        ItemsetSetWithOddsRatio & getPValsSigIsets()
 
 cdef extern from "SignificantItemsetSearchFacs.h" namespace "SignificantPattern":
 

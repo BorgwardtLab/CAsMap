@@ -10,6 +10,7 @@
 
 #include "SignificantIntervalSearch.h"
 #include "SignificantFeaturesSearchTaroneCmh.h"
+#include "chi2.h"
 
 namespace SignificantPattern
 {
@@ -22,8 +23,8 @@ private:
     typedef SignificantFeaturesSearchTaroneCmh super_cov;
     typedef SignificantIntervalSearch super_feat;
 
-    IntervalSet pValsTestableInts;
-    IntervalSet pValsSigInts;
+    IntervalSetWithOddsRatio pValsTestableInts;
+    IntervalSetWithOddsRatio pValsSigInts;
 
 
     void execute_constructor_fastcmh();
@@ -32,11 +33,11 @@ private:
 protected:
     //OPT: Record frequencies for each class freq_par_cov[tau] (define and use
     //     IntervalSetWithFreqInClasses)
-    inline void saveSignificantInterval(double pval, longint tau, longint l, longint a) override {
-        pValsSigInts.addFeature(tau, tau+l, a, pval);
+    inline void saveSignificantInterval(double pval, double score, double odds_ratio, longint tau, longint l, longint a) override {
+        pValsSigInts.addFeature(tau, tau+l, a, score, odds_ratio, pval);
     }
-    inline void saveTestableInterval(double pval, longint tau, longint l, longint a) override {
-        pValsTestableInts.addFeature(tau, tau+l, a, pval);
+    inline void saveTestableInterval(double pval, double score, double odds_ratio, longint tau, longint l, longint a) override {
+        pValsTestableInts.addFeature(tau, tau+l, a, score, odds_ratio, pval);
     }
 
     /* -------------------------------- INITIALISATION AND TERMINATION METHODS ----------------------------------------- */
@@ -54,7 +55,23 @@ protected:
 
     /* ---------------------------------------FUNCTIONS TO FIND THE SIGNIFICANT INTERVALS-------------------------------- */
     inline double compute_interval_pval(longint a, longint tau) override {
-        return compute_pval(a,freq_par_cov[tau]);
+        return compute_pval(a, freq_par_cov[tau]);
+    };
+
+    inline double compute_interval_score(longint a, longint tau) override {
+        return compute_score(a, freq_par_cov[tau]);
+    };
+
+    inline double compute_interval_odds_ratio(std::vector<longint> &at, longint tau){
+        return compute_odds_ratio(at.data(), freq_par_cov[tau]);
+    };
+
+    inline double compute_interval_odds_ratio(longint a, longint tau) override {
+        return -1;  //Dummy function, never should be called. Use version above instead
+    };
+
+    inline double score_to_pval(double score){
+        return Chi2_sf(score, 1);
     };
 
     inline bool istestable_int(longint tau) override {
@@ -71,13 +88,14 @@ protected:
     void process_intervals_threshold() override;
 
 public:
+    using SignificantFeaturesSearchTaroneCmh::score_to_pval;  //TODO: Placement
     SignificantIntervalSearchFastCmh();
     virtual ~SignificantIntervalSearchFastCmh();
 
-    inline IntervalSet const& getPValsTestableInts() const override {
+    inline IntervalSetWithOddsRatio const& getPValsTestableInts() const override {
         return pValsTestableInts;
     }
-    inline IntervalSet const& getPValsSigInts() const override {
+    inline IntervalSetWithOddsRatio const& getPValsSigInts() const override {
         return pValsSigInts;
     }
 };

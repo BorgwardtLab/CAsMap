@@ -9,14 +9,6 @@ lib_new_search_chi <- function() {
     .Call('_sigpatsearch_lib_new_search_chi', PACKAGE = 'sigpatsearch')
 }
 
-lib_new_search_wy_e <- function() {
-    .Call('_sigpatsearch_lib_new_search_wy_e', PACKAGE = 'sigpatsearch')
-}
-
-lib_new_search_wy_chi <- function() {
-    .Call('_sigpatsearch_lib_new_search_wy_chi', PACKAGE = 'sigpatsearch')
-}
-
 lib_new_search_fastcmh <- function() {
     .Call('_sigpatsearch_lib_new_search_fastcmh', PACKAGE = 'sigpatsearch')
 }
@@ -33,14 +25,6 @@ lib_delete_search_chi <- function(inst) {
     invisible(.Call('_sigpatsearch_lib_delete_search_chi', PACKAGE = 'sigpatsearch', inst))
 }
 
-lib_delete_search_wy_e <- function(inst) {
-    invisible(.Call('_sigpatsearch_lib_delete_search_wy_e', PACKAGE = 'sigpatsearch', inst))
-}
-
-lib_delete_search_wy_chi <- function(inst) {
-    invisible(.Call('_sigpatsearch_lib_delete_search_wy_chi', PACKAGE = 'sigpatsearch', inst))
-}
-
 lib_delete_search_fastcmh <- function(inst) {
     invisible(.Call('_sigpatsearch_lib_delete_search_fastcmh', PACKAGE = 'sigpatsearch', inst))
 }
@@ -49,28 +33,28 @@ lib_delete_search_facs <- function(inst) {
     invisible(.Call('_sigpatsearch_lib_delete_search_facs', PACKAGE = 'sigpatsearch', inst))
 }
 
-lib_read_eth_files <- function(inst, x_filename, y_filename) {
-    invisible(.Call('_sigpatsearch_lib_read_eth_files', PACKAGE = 'sigpatsearch', inst, x_filename, y_filename))
+lib_read_eth_files <- function(inst, x_filename, y_filename, encoding) {
+    invisible(.Call('_sigpatsearch_lib_read_eth_files', PACKAGE = 'sigpatsearch', inst, x_filename, y_filename, encoding))
 }
 
-lib_read_eth_files_with_cov_fastcmh <- function(inst, x_filename, y_filename, covfilename) {
-    invisible(.Call('_sigpatsearch_lib_read_eth_files_with_cov_fastcmh', PACKAGE = 'sigpatsearch', inst, x_filename, y_filename, covfilename))
+lib_read_eth_files_with_cov_fastcmh <- function(inst, x_filename, y_filename, covfilename, encoding) {
+    invisible(.Call('_sigpatsearch_lib_read_eth_files_with_cov_fastcmh', PACKAGE = 'sigpatsearch', inst, x_filename, y_filename, covfilename, encoding))
 }
 
-lib_read_eth_files_with_cov_facs <- function(inst, x_filename, y_filename, covfilename) {
-    invisible(.Call('_sigpatsearch_lib_read_eth_files_with_cov_facs', PACKAGE = 'sigpatsearch', inst, x_filename, y_filename, covfilename))
+lib_read_eth_files_with_cov_facs <- function(inst, x_filename, y_filename, covfilename, encoding) {
+    invisible(.Call('_sigpatsearch_lib_read_eth_files_with_cov_facs', PACKAGE = 'sigpatsearch', inst, x_filename, y_filename, covfilename, encoding))
 }
 
-lib_read_plink_files <- function(inst, base_filename) {
-    invisible(.Call('_sigpatsearch_lib_read_plink_files', PACKAGE = 'sigpatsearch', inst, base_filename))
+lib_read_plink_files <- function(inst, base_filename, encoding) {
+    invisible(.Call('_sigpatsearch_lib_read_plink_files', PACKAGE = 'sigpatsearch', inst, base_filename, encoding))
 }
 
-lib_read_plink_files_with_cov_fastcmh <- function(inst, base_filename, covfilename) {
-    invisible(.Call('_sigpatsearch_lib_read_plink_files_with_cov_fastcmh', PACKAGE = 'sigpatsearch', inst, base_filename, covfilename))
+lib_read_plink_files_with_cov_fastcmh <- function(inst, base_filename, covfilename, encoding) {
+    invisible(.Call('_sigpatsearch_lib_read_plink_files_with_cov_fastcmh', PACKAGE = 'sigpatsearch', inst, base_filename, covfilename, encoding))
 }
 
-lib_read_plink_files_with_cov_facs <- function(inst, base_filename, covfilename) {
-    invisible(.Call('_sigpatsearch_lib_read_plink_files_with_cov_facs', PACKAGE = 'sigpatsearch', inst, base_filename, covfilename))
+lib_read_plink_files_with_cov_facs <- function(inst, base_filename, covfilename, encoding) {
+    invisible(.Call('_sigpatsearch_lib_read_plink_files_with_cov_facs', PACKAGE = 'sigpatsearch', inst, base_filename, covfilename, encoding))
 }
 
 lib_read_covariates_file_fastcmh <- function(inst, cov_filename) {
@@ -107,10 +91,6 @@ lib_execute_int <- function(inst, alpha, l_max) {
 
 lib_summary_write_to_file_fais <- function(inst, output_file) {
     invisible(.Call('_sigpatsearch_lib_summary_write_to_file_fais', PACKAGE = 'sigpatsearch', inst, output_file))
-}
-
-lib_summary_write_to_file_wy <- function(inst, output_file) {
-    invisible(.Call('_sigpatsearch_lib_summary_write_to_file_wy', PACKAGE = 'sigpatsearch', inst, output_file))
 }
 
 lib_summary_write_to_file_fastcmh <- function(inst, output_file) {
@@ -155,22 +135,6 @@ lib_get_filtered_intervals <- function(inst) {
 
 lib_get_significant_itemsets <- function(inst) {
     .Call('_sigpatsearch_lib_get_significant_itemsets', PACKAGE = 'sigpatsearch', inst)
-}
-
-lib_get_n_perm_wy <- function(inst) {
-    .Call('_sigpatsearch_lib_get_n_perm_wy', PACKAGE = 'sigpatsearch', inst)
-}
-
-lib_set_n_perm_wy <- function(inst, n_perm) {
-    invisible(.Call('_sigpatsearch_lib_set_n_perm_wy', PACKAGE = 'sigpatsearch', inst, n_perm))
-}
-
-lib_set_perm_file_name_wy <- function(inst, filename) {
-    invisible(.Call('_sigpatsearch_lib_set_perm_file_name_wy', PACKAGE = 'sigpatsearch', inst, filename))
-}
-
-lib_set_seed_wy <- function(inst, s) {
-    invisible(.Call('_sigpatsearch_lib_set_seed_wy', PACKAGE = 'sigpatsearch', inst, s))
 }
 
 lib_get_result_fais <- function(inst) {

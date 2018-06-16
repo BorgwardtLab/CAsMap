@@ -10,9 +10,6 @@
 #include "SignificantIntervalSearchFais.h"
 #include "SignificantIntervalSearchExact.h"
 #include "SignificantIntervalSearchChi.h"
-#include "SignificantIntervalSearchWy.h"
-#include "SignificantIntervalSearchWyExact.h"
-#include "SignificantIntervalSearchWyChi.h"
 #include "SignificantFeaturesSearchWithCovariates.h"
 #include "SignificantIntervalSearchFastCmh.h"
 
@@ -27,21 +24,27 @@ SEXP _get_intervals(std::vector<SignificantPattern::Interval>& intervals) {
 
     IntegerVector starts(size);
     IntegerVector ends(size);
+    DoubleVector scores(size);
+    DoubleVector odds_ratios(size);
     DoubleVector pvalues(size);
 
     for (size_t i = 0; i < size; i++) {
         starts[i] = intervals[i].getStart();
         ends[i] = intervals[i].getEnd();
+        scores[i] = intervals[i].getScore();
+        odds_ratios[i] = intervals[i].getOddsRatio();
         pvalues[i] = intervals[i].getPvalue();
     }
 
     return DataFrame::create(Named("start") = starts, Named("end") = ends,
-                             Named("pvalue") = pvalues);
+                             Named("score") = scores, Named("odds_ratio") = odds_ratios, Named("pvalue") = pvalues);
 }
 
-SEXP _get_itemsets(const SignificantPattern::ItemsetSet itemsets) {
+SEXP _get_itemsets(const SignificantPattern::ItemsetSetWithOddsRatio itemsets) {
 
     size_t size = itemsets.getLength();
+    const std::vector<double> scores  = itemsets.getScoreVector();
+    const std::vector<double> odds_ratios  = itemsets.getOddsRatioVector();
     const std::vector<double> pvals  = itemsets.getPValueVector();
     const std::vector< std::vector<longint> > itemsets_vec = itemsets.getItemsetsVector();
     IntegerVector rownamesVec(size);
@@ -66,6 +69,8 @@ SEXP _get_itemsets(const SignificantPattern::ItemsetSet itemsets) {
     // List ret = List::create(Named("itemsets") = itemsetsList,
     //                         Named("pvalue") =  pvalsVec);
     List ret =  List::create(Named("itemsets") = itemsets_vec,
+                             Named("score") =  scores,
+                             Named("odds_ratio") =  odds_ratios,
                              Named("pvalue") =  pvals);
     ret.attr("class") = "data.frame";
     ret.attr("row.names") = rownamesVec;
@@ -81,18 +86,6 @@ SEXP lib_new_search_e() {
 // [[Rcpp::export]]
 SEXP lib_new_search_chi() {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchChi> ptr( new SignificantPattern::SignificantIntervalSearchChi(), true );
-    return ptr;
-}
-
-// [[Rcpp::export]]
-SEXP lib_new_search_wy_e() {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWyExact> ptr( new SignificantPattern::SignificantIntervalSearchWyExact(), true );
-    return ptr;
-}
-
-// [[Rcpp::export]]
-SEXP lib_new_search_wy_chi() {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWyChi> ptr( new SignificantPattern::SignificantIntervalSearchWyChi(), true );
     return ptr;
 }
 
@@ -121,18 +114,6 @@ void lib_delete_search_chi(SEXP inst) {
 }
 
 // [[Rcpp::export]]
-void lib_delete_search_wy_e(SEXP inst) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWyExact> ptr(inst);
-    ptr.release();
-}
-
-// [[Rcpp::export]]
-void lib_delete_search_wy_chi(SEXP inst) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWyChi> ptr(inst);
-    ptr.release();
-}
-
-// [[Rcpp::export]]
 void lib_delete_search_fastcmh(SEXP inst) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchFastCmh> ptr(inst);
     ptr.release();
@@ -152,9 +133,9 @@ void lib_delete_search_facs(SEXP inst) {
 // results.
 
 // [[Rcpp::export]]
-void lib_read_eth_files(SEXP inst, std::string x_filename, std::string y_filename) {
+void lib_read_eth_files(SEXP inst, std::string x_filename, std::string y_filename, std::string encoding) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearch> ptr(inst);
-    ptr->readETHFiles(x_filename, y_filename);
+    ptr->readETHFiles(x_filename, y_filename, encoding);
 }
 
 //TODO: read_eth_files_{int,iset}
@@ -172,20 +153,20 @@ void lib_read_eth_files(SEXP inst, std::string x_filename, std::string y_filenam
 // }
 
 // [[Rcpp::export]]
-void lib_read_eth_files_with_cov_fastcmh(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename) {
+void lib_read_eth_files_with_cov_fastcmh(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename, std::string encoding) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchFastCmh> ptr(inst);
-    ptr->readETHFilesWithCovariates(x_filename, y_filename, covfilename);
+    ptr->readETHFilesWithCovariates(x_filename, y_filename, covfilename, false, encoding);
 }
 // [[Rcpp::export]]
-void lib_read_eth_files_with_cov_facs(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename) {
+void lib_read_eth_files_with_cov_facs(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename, std::string encoding) {
     Rcpp::XPtr<SignificantPattern::SignificantItemsetSearchFacs> ptr(inst);
-    ptr->readETHFilesWithCovariates(x_filename, y_filename, covfilename);
+    ptr->readETHFilesWithCovariates(x_filename, y_filename, covfilename, false, encoding);
 }
 
 // [[Rcpp::export]]
-void lib_read_plink_files(SEXP inst, std::string base_filename) {
+void lib_read_plink_files(SEXP inst, std::string base_filename, std::string encoding) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearch> ptr(inst);
-    ptr->readPlinkFiles(base_filename);
+    ptr->readPlinkFiles(base_filename, encoding);
 }
 
 //TODO: read_plink_files_{int,iset}
@@ -203,14 +184,14 @@ void lib_read_plink_files(SEXP inst, std::string base_filename) {
 // }
 
 // [[Rcpp::export]]
-void lib_read_plink_files_with_cov_fastcmh(SEXP inst, std::string base_filename, std::string covfilename) {
+void lib_read_plink_files_with_cov_fastcmh(SEXP inst, std::string base_filename, std::string covfilename, std::string encoding) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchFastCmh> ptr(inst);
-    ptr->readPlinkFilesWithCovariates(base_filename, covfilename);
+    ptr->readPlinkFilesWithCovariates(base_filename, covfilename, true, encoding);
 }
 // [[Rcpp::export]]
-void lib_read_plink_files_with_cov_facs(SEXP inst, std::string base_filename, std::string covfilename) {
+void lib_read_plink_files_with_cov_facs(SEXP inst, std::string base_filename, std::string covfilename, std::string encoding) {
     Rcpp::XPtr<SignificantPattern::SignificantItemsetSearchFacs> ptr(inst);
-    ptr->readPlinkFilesWithCovariates(base_filename, covfilename);
+    ptr->readPlinkFilesWithCovariates(base_filename, covfilename, true, encoding);
 }
 
 // [[Rcpp::export]]
@@ -263,11 +244,7 @@ void lib_summary_write_to_file_fais(SEXP inst, std::string output_file) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchFais> ptr(inst);
     ptr->getSummary().writeToFile(output_file);
 }
-// [[Rcpp::export]]
-void lib_summary_write_to_file_wy(SEXP inst, std::string output_file) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWy> ptr(inst);
-    ptr->getSummary().writeToFile(output_file);
-}
+
 // [[Rcpp::export]]
 void lib_summary_write_to_file_fastcmh(SEXP inst, std::string output_file) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchFastCmh> ptr(inst);
@@ -335,30 +312,6 @@ SEXP lib_get_significant_itemsets(SEXP inst) {
 }
 
 // [[Rcpp::export]]
-longint lib_get_n_perm_wy(SEXP inst) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWy> ptr(inst);
-    return ptr->getNPerm();
-}
-
-// [[Rcpp::export]]
-void lib_set_n_perm_wy(SEXP inst, longint n_perm) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWy> ptr(inst);
-    ptr->setNPerm(n_perm);
-}
-
-// [[Rcpp::export]]
-void lib_set_perm_file_name_wy(SEXP inst, std::string filename) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWy> ptr(inst);
-    ptr->setPermutationsFilename(filename);
-}
-
-// [[Rcpp::export]]
-void lib_set_seed_wy(SEXP inst, unsigned s) {
-    Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchWy> ptr(inst);
-    ptr->setSeed(s);
-}
-
-// [[Rcpp::export]]
 SEXP lib_get_result_fais(SEXP inst) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearchFais> ptr(inst);
     SignificantPattern::SummaryFais sum = ptr->getSummary();
@@ -368,14 +321,12 @@ SEXP lib_get_result_fais(SEXP inst) {
     SEXP region = List::create(Named("start") = start,
                                Named("end") = end);
 
-    return List::create(Named("sig.int") = lib_get_significant_intervals(inst),
-                        Named("sig.int.clustered") = lib_get_filtered_intervals(inst),
-                        Named("int.processed") = sum.getNumFeaturesProcessed(),
-                        Named("int.testable") = sum.getm(),
+    return List::create(Named("n.int.processed") = sum.getNumFeaturesProcessed(),
+                        Named("n.int.testable") = sum.getm(),
                         Named("testability.region") = region,
                         Named("testability.threshold") = sum.getDelta(),
-                        Named("significance.level") = sum.getAlpha(),
-                        Named("corrected.significance.level") = sum.getDelta_opt());
+                        Named("target.fwer") = sum.getAlpha(),
+                        Named("corrected.significance.threshold") = sum.getDelta_opt());
 }
 
 // [[Rcpp::export]]
@@ -383,13 +334,11 @@ SEXP lib_get_result_int(SEXP inst) {
     Rcpp::XPtr<SignificantPattern::SignificantIntervalSearch> ptr(inst);
     SignificantPattern::SummaryInt sum = ptr->getSummary();
 
-    return List::create(Named("sig.int") = lib_get_significant_intervals(inst),
-                        Named("sig.int.clustered") = lib_get_filtered_intervals(inst),
-                        Named("int.processed") = sum.getNumFeaturesProcessed(),
-                        Named("int.testable") = sum.getm(),
+    return List::create(Named("n.int.processed") = sum.getNumFeaturesProcessed(),
+                        Named("n.int.testable") = sum.getm(),
                         Named("testability.threshold") = sum.getDelta(),
-                        Named("significance.level") = sum.getAlpha(),
-                        Named("corrected.significance.level") = sum.getDelta_opt());
+                        Named("target.fwer") = sum.getAlpha(),
+                        Named("corrected.significance.threshold") = sum.getDelta_opt());
 }
 
 // [[Rcpp::export]]
@@ -397,12 +346,11 @@ SEXP lib_get_result_iset(SEXP inst) {
     Rcpp::XPtr<SignificantPattern::SignificantItemsetSearch> ptr(inst);
     SignificantPattern::SummaryIset sum = ptr->getSummary();
 
-    return List::create(Named("sig.iset") = lib_get_significant_itemsets(inst),
-                        Named("iset.processed") = sum.getNumFeaturesProcessed(),
-                        Named("iset.testable") = sum.getm(),
+    return List::create(Named("n.iset.processed") = sum.getNumFeaturesProcessed(),
+                        Named("n.iset.testable") = sum.getm(),
                         Named("testability.threshold") = sum.getDelta(),
-                        Named("significance.level") = sum.getAlpha(),
-                        Named("corrected.significance.level") = sum.getDelta_opt());
+                        Named("target.fwer") = sum.getAlpha(),
+                        Named("corrected.significance.threshold") = sum.getDelta_opt());
 }
 
 // [[Rcpp::export]]
@@ -410,11 +358,10 @@ SEXP lib_get_result_facs(SEXP inst) {
     Rcpp::XPtr<SignificantPattern::SignificantItemsetSearchFacs> ptr(inst);
     SignificantPattern::SummaryFacs sum = ptr->getSummary();
 
-    return List::create(Named("sig.iset") = lib_get_significant_itemsets(inst),
-                        Named("iset.processed") = sum.getNumFeaturesProcessed(),
-                        Named("iset.closed.processed") = sum.getNumItemsetsClosedProcessed(),
-                        Named("iset.testable") = sum.getm(),
+    return List::create(Named("n.iset.processed") = sum.getNumFeaturesProcessed(),
+                        Named("n.iset.closed.processed") = sum.getNumItemsetsClosedProcessed(),
+                        Named("n.iset.testable") = sum.getm(),
                         Named("testability.threshold") = sum.getDelta(),
-                        Named("significance.level") = sum.getAlpha(),
-                        Named("corrected.significance.level") = sum.getDelta_opt());
+                        Named("target.fwer") = sum.getAlpha(),
+                        Named("corrected.significance.threshold") = sum.getDelta_opt());
 }

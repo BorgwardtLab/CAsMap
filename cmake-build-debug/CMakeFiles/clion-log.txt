@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Volumes/lfelipe$/CAsMap_light
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Volumes/lfelipe$/CAsMap_light/cmake-build-debug

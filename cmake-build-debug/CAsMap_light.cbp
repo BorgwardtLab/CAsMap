@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="CAsMap_light"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CAsMap_light">
+				<Option output="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/CAsMap_light" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 CAsMap_light"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CAsMap_light/fast">
+				<Option output="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/CAsMap_light" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Volumes/lfelipe$/CAsMap_light/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 CAsMap_light/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/lfelipe$/CAsMap_light/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/ArrayFile.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/ArrayFile.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/CumulativeTimeMeasurement.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/CumulativeTimeMeasurement.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Exception.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Exception.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/FeatureSet.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/FeatureSet.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/FilterIntervals.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/FilterIntervals.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Genotype.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Genotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/PValues.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/PValues.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Phenotype.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Phenotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Profiler.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Profiler.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantFeaturesSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantFeaturesSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantFeaturesSearchTaroneCmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantFeaturesSearchTaroneCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantFeaturesSearchWithCovariates.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantFeaturesSearchWithCovariates.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchChi.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchChi.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchExact.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchExact.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchFais.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchFais.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchFastCmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantIntervalSearchFastCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantItemsetSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantItemsetSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantItemsetSearchFacs.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/SignificantItemsetSearchFacs.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Summary.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/Summary.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/TransactionsData.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/TransactionsData.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/chi2.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/double_comp.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/double_comp.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/gamma.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/gamma.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/mem_rss.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/mem_rss.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/pval.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/pval.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/types.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/cython_wrapper/sigpatsearch/wrapper.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/executables/significant_interval_search_chi.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/executables/significant_interval_search_exact.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/executables/significant_interval_search_fastcmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/executables/significant_itemset_search_facs.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/ArrayFile.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/ArrayFile.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/CumulativeTimeMeasurement.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/CumulativeTimeMeasurement.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Exception.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Exception.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/FeatureSet.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/FeatureSet.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/FilterIntervals.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/FilterIntervals.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Genotype.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Genotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/PValues.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/PValues.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Phenotype.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Phenotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Profiler.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Profiler.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantFeaturesSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantFeaturesSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantFeaturesSearchTaroneCmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantFeaturesSearchTaroneCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantFeaturesSearchWithCovariates.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantFeaturesSearchWithCovariates.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchChi.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchChi.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchExact.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchExact.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchFais.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchFais.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchFastCmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantIntervalSearchFastCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantItemsetSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantItemsetSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantItemsetSearchFacs.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/SignificantItemsetSearchFacs.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Summary.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/Summary.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/TransactionsData.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/TransactionsData.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/chi2.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/double_comp.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/double_comp.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/gamma.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/gamma.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/mem_rss.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/mem_rss.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/pval.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/pval.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/libsigpatsearch/types.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/ArrayFile.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/CumulativeTimeMeasurement.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/Exception.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/FeatureSet.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/FilterIntervals.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/Genotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/PValues.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/Phenotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/Profiler.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantFeaturesSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantFeaturesSearchTaroneCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantFeaturesSearchWithCovariates.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantIntervalSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantIntervalSearchChi.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantIntervalSearchExact.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantIntervalSearchFais.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantIntervalSearchFastCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantItemsetSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/SignificantItemsetSearchFacs.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/Summary.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/TransactionsData.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/chi2.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/double_comp.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/gamma.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/mem_rss.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/pval.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/sigpatsearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/inst/include/types.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/ArrayFile.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/ArrayFile.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/CumulativeTimeMeasurement.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/CumulativeTimeMeasurement.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Exception.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Exception.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/FeatureSet.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/FeatureSet.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/FilterIntervals.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/FilterIntervals.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Genotype.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Genotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/PValues.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/PValues.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Phenotype.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Phenotype.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Profiler.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Profiler.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/RcppExports.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantFeaturesSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantFeaturesSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantFeaturesSearchTaroneCmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantFeaturesSearchTaroneCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantFeaturesSearchWithCovariates.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantFeaturesSearchWithCovariates.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchChi.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchChi.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchExact.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchExact.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchFais.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchFais.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchFastCmh.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantIntervalSearchFastCmh.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantItemsetSearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantItemsetSearch.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantItemsetSearchFacs.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/SignificantItemsetSearchFacs.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Summary.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/Summary.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/TransactionsData.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/TransactionsData.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/chi2.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/double_comp.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/double_comp.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/gamma.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/gamma.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/mem_rss.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/mem_rss.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/pval.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/pval.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/sigpatsearch.cpp">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/r_wrapper/src/types.h">
+			<Option target="CAsMap_light"/>
+		</Unit>
+		<Unit filename="/Volumes/lfelipe$/CAsMap_light/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -171,6 +171,14 @@ double SignificantFeaturesSearchTaroneCmh::compute_pval(longint a, longint* x){
     return cmh_pval(a, x, K, Nt.data(), gammat.data(), gammabint.data());
 }
 
+double SignificantFeaturesSearchTaroneCmh::compute_score(longint a, longint* x){
+    return cmh_score(a, x, K, Nt.data(), gammat.data(), gammabint.data());
+}
+
+double SignificantFeaturesSearchTaroneCmh::compute_odds_ratio(longint* at, longint* x){
+    return cmh_odds_ratio(at, x, K, Nt.data(), nt.data());
+}
+
 double SignificantFeaturesSearchTaroneCmh::compute_minpval(longint *x){
     return cmh_minpval(x, K, Nt.data(), nt.data(), Nt_nt.data(), gammat.data(),
             gammabint.data());

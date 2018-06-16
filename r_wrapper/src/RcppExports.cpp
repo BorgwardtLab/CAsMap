@@ -26,26 +26,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// lib_new_search_wy_e
-SEXP lib_new_search_wy_e();
-RcppExport SEXP _sigpatsearch_lib_new_search_wy_e() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(lib_new_search_wy_e());
-    return rcpp_result_gen;
-END_RCPP
-}
-// lib_new_search_wy_chi
-SEXP lib_new_search_wy_chi();
-RcppExport SEXP _sigpatsearch_lib_new_search_wy_chi() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(lib_new_search_wy_chi());
-    return rcpp_result_gen;
-END_RCPP
-}
 // lib_new_search_fastcmh
 SEXP lib_new_search_fastcmh();
 RcppExport SEXP _sigpatsearch_lib_new_search_fastcmh() {
@@ -86,26 +66,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// lib_delete_search_wy_e
-void lib_delete_search_wy_e(SEXP inst);
-RcppExport SEXP _sigpatsearch_lib_delete_search_wy_e(SEXP instSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    lib_delete_search_wy_e(inst);
-    return R_NilValue;
-END_RCPP
-}
-// lib_delete_search_wy_chi
-void lib_delete_search_wy_chi(SEXP inst);
-RcppExport SEXP _sigpatsearch_lib_delete_search_wy_chi(SEXP instSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    lib_delete_search_wy_chi(inst);
-    return R_NilValue;
-END_RCPP
-}
 // lib_delete_search_fastcmh
 void lib_delete_search_fastcmh(SEXP inst);
 RcppExport SEXP _sigpatsearch_lib_delete_search_fastcmh(SEXP instSEXP) {
@@ -127,75 +87,81 @@ BEGIN_RCPP
 END_RCPP
 }
 // lib_read_eth_files
-void lib_read_eth_files(SEXP inst, std::string x_filename, std::string y_filename);
-RcppExport SEXP _sigpatsearch_lib_read_eth_files(SEXP instSEXP, SEXP x_filenameSEXP, SEXP y_filenameSEXP) {
+void lib_read_eth_files(SEXP inst, std::string x_filename, std::string y_filename, std::string encoding);
+RcppExport SEXP _sigpatsearch_lib_read_eth_files(SEXP instSEXP, SEXP x_filenameSEXP, SEXP y_filenameSEXP, SEXP encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type x_filename(x_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type y_filename(y_filenameSEXP);
-    lib_read_eth_files(inst, x_filename, y_filename);
+    Rcpp::traits::input_parameter< std::string >::type encoding(encodingSEXP);
+    lib_read_eth_files(inst, x_filename, y_filename, encoding);
     return R_NilValue;
 END_RCPP
 }
 // lib_read_eth_files_with_cov_fastcmh
-void lib_read_eth_files_with_cov_fastcmh(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename);
-RcppExport SEXP _sigpatsearch_lib_read_eth_files_with_cov_fastcmh(SEXP instSEXP, SEXP x_filenameSEXP, SEXP y_filenameSEXP, SEXP covfilenameSEXP) {
+void lib_read_eth_files_with_cov_fastcmh(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename, std::string encoding);
+RcppExport SEXP _sigpatsearch_lib_read_eth_files_with_cov_fastcmh(SEXP instSEXP, SEXP x_filenameSEXP, SEXP y_filenameSEXP, SEXP covfilenameSEXP, SEXP encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type x_filename(x_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type y_filename(y_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type covfilename(covfilenameSEXP);
-    lib_read_eth_files_with_cov_fastcmh(inst, x_filename, y_filename, covfilename);
+    Rcpp::traits::input_parameter< std::string >::type encoding(encodingSEXP);
+    lib_read_eth_files_with_cov_fastcmh(inst, x_filename, y_filename, covfilename, encoding);
     return R_NilValue;
 END_RCPP
 }
 // lib_read_eth_files_with_cov_facs
-void lib_read_eth_files_with_cov_facs(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename);
-RcppExport SEXP _sigpatsearch_lib_read_eth_files_with_cov_facs(SEXP instSEXP, SEXP x_filenameSEXP, SEXP y_filenameSEXP, SEXP covfilenameSEXP) {
+void lib_read_eth_files_with_cov_facs(SEXP inst, std::string x_filename, std::string y_filename, std::string covfilename, std::string encoding);
+RcppExport SEXP _sigpatsearch_lib_read_eth_files_with_cov_facs(SEXP instSEXP, SEXP x_filenameSEXP, SEXP y_filenameSEXP, SEXP covfilenameSEXP, SEXP encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type x_filename(x_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type y_filename(y_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type covfilename(covfilenameSEXP);
-    lib_read_eth_files_with_cov_facs(inst, x_filename, y_filename, covfilename);
+    Rcpp::traits::input_parameter< std::string >::type encoding(encodingSEXP);
+    lib_read_eth_files_with_cov_facs(inst, x_filename, y_filename, covfilename, encoding);
     return R_NilValue;
 END_RCPP
 }
 // lib_read_plink_files
-void lib_read_plink_files(SEXP inst, std::string base_filename);
-RcppExport SEXP _sigpatsearch_lib_read_plink_files(SEXP instSEXP, SEXP base_filenameSEXP) {
+void lib_read_plink_files(SEXP inst, std::string base_filename, std::string encoding);
+RcppExport SEXP _sigpatsearch_lib_read_plink_files(SEXP instSEXP, SEXP base_filenameSEXP, SEXP encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type base_filename(base_filenameSEXP);
-    lib_read_plink_files(inst, base_filename);
+    Rcpp::traits::input_parameter< std::string >::type encoding(encodingSEXP);
+    lib_read_plink_files(inst, base_filename, encoding);
     return R_NilValue;
 END_RCPP
 }
 // lib_read_plink_files_with_cov_fastcmh
-void lib_read_plink_files_with_cov_fastcmh(SEXP inst, std::string base_filename, std::string covfilename);
-RcppExport SEXP _sigpatsearch_lib_read_plink_files_with_cov_fastcmh(SEXP instSEXP, SEXP base_filenameSEXP, SEXP covfilenameSEXP) {
+void lib_read_plink_files_with_cov_fastcmh(SEXP inst, std::string base_filename, std::string covfilename, std::string encoding);
+RcppExport SEXP _sigpatsearch_lib_read_plink_files_with_cov_fastcmh(SEXP instSEXP, SEXP base_filenameSEXP, SEXP covfilenameSEXP, SEXP encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type base_filename(base_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type covfilename(covfilenameSEXP);
-    lib_read_plink_files_with_cov_fastcmh(inst, base_filename, covfilename);
+    Rcpp::traits::input_parameter< std::string >::type encoding(encodingSEXP);
+    lib_read_plink_files_with_cov_fastcmh(inst, base_filename, covfilename, encoding);
     return R_NilValue;
 END_RCPP
 }
 // lib_read_plink_files_with_cov_facs
-void lib_read_plink_files_with_cov_facs(SEXP inst, std::string base_filename, std::string covfilename);
-RcppExport SEXP _sigpatsearch_lib_read_plink_files_with_cov_facs(SEXP instSEXP, SEXP base_filenameSEXP, SEXP covfilenameSEXP) {
+void lib_read_plink_files_with_cov_facs(SEXP inst, std::string base_filename, std::string covfilename, std::string encoding);
+RcppExport SEXP _sigpatsearch_lib_read_plink_files_with_cov_facs(SEXP instSEXP, SEXP base_filenameSEXP, SEXP covfilenameSEXP, SEXP encodingSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type base_filename(base_filenameSEXP);
     Rcpp::traits::input_parameter< std::string >::type covfilename(covfilenameSEXP);
-    lib_read_plink_files_with_cov_facs(inst, base_filename, covfilename);
+    Rcpp::traits::input_parameter< std::string >::type encoding(encodingSEXP);
+    lib_read_plink_files_with_cov_facs(inst, base_filename, covfilename, encoding);
     return R_NilValue;
 END_RCPP
 }
@@ -303,17 +269,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
     Rcpp::traits::input_parameter< std::string >::type output_file(output_fileSEXP);
     lib_summary_write_to_file_fais(inst, output_file);
-    return R_NilValue;
-END_RCPP
-}
-// lib_summary_write_to_file_wy
-void lib_summary_write_to_file_wy(SEXP inst, std::string output_file);
-RcppExport SEXP _sigpatsearch_lib_summary_write_to_file_wy(SEXP instSEXP, SEXP output_fileSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    Rcpp::traits::input_parameter< std::string >::type output_file(output_fileSEXP);
-    lib_summary_write_to_file_wy(inst, output_file);
     return R_NilValue;
 END_RCPP
 }
@@ -438,50 +393,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// lib_get_n_perm_wy
-longint lib_get_n_perm_wy(SEXP inst);
-RcppExport SEXP _sigpatsearch_lib_get_n_perm_wy(SEXP instSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    rcpp_result_gen = Rcpp::wrap(lib_get_n_perm_wy(inst));
-    return rcpp_result_gen;
-END_RCPP
-}
-// lib_set_n_perm_wy
-void lib_set_n_perm_wy(SEXP inst, longint n_perm);
-RcppExport SEXP _sigpatsearch_lib_set_n_perm_wy(SEXP instSEXP, SEXP n_permSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    Rcpp::traits::input_parameter< longint >::type n_perm(n_permSEXP);
-    lib_set_n_perm_wy(inst, n_perm);
-    return R_NilValue;
-END_RCPP
-}
-// lib_set_perm_file_name_wy
-void lib_set_perm_file_name_wy(SEXP inst, std::string filename);
-RcppExport SEXP _sigpatsearch_lib_set_perm_file_name_wy(SEXP instSEXP, SEXP filenameSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
-    lib_set_perm_file_name_wy(inst, filename);
-    return R_NilValue;
-END_RCPP
-}
-// lib_set_seed_wy
-void lib_set_seed_wy(SEXP inst, unsigned s);
-RcppExport SEXP _sigpatsearch_lib_set_seed_wy(SEXP instSEXP, SEXP sSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type inst(instSEXP);
-    Rcpp::traits::input_parameter< unsigned >::type s(sSEXP);
-    lib_set_seed_wy(inst, s);
-    return R_NilValue;
-END_RCPP
-}
 // lib_get_result_fais
 SEXP lib_get_result_fais(SEXP inst);
 RcppExport SEXP _sigpatsearch_lib_get_result_fais(SEXP instSEXP) {
@@ -530,22 +441,18 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_sigpatsearch_lib_new_search_e", (DL_FUNC) &_sigpatsearch_lib_new_search_e, 0},
     {"_sigpatsearch_lib_new_search_chi", (DL_FUNC) &_sigpatsearch_lib_new_search_chi, 0},
-    {"_sigpatsearch_lib_new_search_wy_e", (DL_FUNC) &_sigpatsearch_lib_new_search_wy_e, 0},
-    {"_sigpatsearch_lib_new_search_wy_chi", (DL_FUNC) &_sigpatsearch_lib_new_search_wy_chi, 0},
     {"_sigpatsearch_lib_new_search_fastcmh", (DL_FUNC) &_sigpatsearch_lib_new_search_fastcmh, 0},
     {"_sigpatsearch_lib_new_search_facs", (DL_FUNC) &_sigpatsearch_lib_new_search_facs, 0},
     {"_sigpatsearch_lib_delete_search_e", (DL_FUNC) &_sigpatsearch_lib_delete_search_e, 1},
     {"_sigpatsearch_lib_delete_search_chi", (DL_FUNC) &_sigpatsearch_lib_delete_search_chi, 1},
-    {"_sigpatsearch_lib_delete_search_wy_e", (DL_FUNC) &_sigpatsearch_lib_delete_search_wy_e, 1},
-    {"_sigpatsearch_lib_delete_search_wy_chi", (DL_FUNC) &_sigpatsearch_lib_delete_search_wy_chi, 1},
     {"_sigpatsearch_lib_delete_search_fastcmh", (DL_FUNC) &_sigpatsearch_lib_delete_search_fastcmh, 1},
     {"_sigpatsearch_lib_delete_search_facs", (DL_FUNC) &_sigpatsearch_lib_delete_search_facs, 1},
-    {"_sigpatsearch_lib_read_eth_files", (DL_FUNC) &_sigpatsearch_lib_read_eth_files, 3},
-    {"_sigpatsearch_lib_read_eth_files_with_cov_fastcmh", (DL_FUNC) &_sigpatsearch_lib_read_eth_files_with_cov_fastcmh, 4},
-    {"_sigpatsearch_lib_read_eth_files_with_cov_facs", (DL_FUNC) &_sigpatsearch_lib_read_eth_files_with_cov_facs, 4},
-    {"_sigpatsearch_lib_read_plink_files", (DL_FUNC) &_sigpatsearch_lib_read_plink_files, 2},
-    {"_sigpatsearch_lib_read_plink_files_with_cov_fastcmh", (DL_FUNC) &_sigpatsearch_lib_read_plink_files_with_cov_fastcmh, 3},
-    {"_sigpatsearch_lib_read_plink_files_with_cov_facs", (DL_FUNC) &_sigpatsearch_lib_read_plink_files_with_cov_facs, 3},
+    {"_sigpatsearch_lib_read_eth_files", (DL_FUNC) &_sigpatsearch_lib_read_eth_files, 4},
+    {"_sigpatsearch_lib_read_eth_files_with_cov_fastcmh", (DL_FUNC) &_sigpatsearch_lib_read_eth_files_with_cov_fastcmh, 5},
+    {"_sigpatsearch_lib_read_eth_files_with_cov_facs", (DL_FUNC) &_sigpatsearch_lib_read_eth_files_with_cov_facs, 5},
+    {"_sigpatsearch_lib_read_plink_files", (DL_FUNC) &_sigpatsearch_lib_read_plink_files, 3},
+    {"_sigpatsearch_lib_read_plink_files_with_cov_fastcmh", (DL_FUNC) &_sigpatsearch_lib_read_plink_files_with_cov_fastcmh, 4},
+    {"_sigpatsearch_lib_read_plink_files_with_cov_facs", (DL_FUNC) &_sigpatsearch_lib_read_plink_files_with_cov_facs, 4},
     {"_sigpatsearch_lib_read_covariates_file_fastcmh", (DL_FUNC) &_sigpatsearch_lib_read_covariates_file_fastcmh, 2},
     {"_sigpatsearch_lib_read_covariates_file_facs", (DL_FUNC) &_sigpatsearch_lib_read_covariates_file_facs, 2},
     {"_sigpatsearch_lib_write_eth_files_iset", (DL_FUNC) &_sigpatsearch_lib_write_eth_files_iset, 3},
@@ -555,7 +462,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sigpatsearch_lib_execute_iset", (DL_FUNC) &_sigpatsearch_lib_execute_iset, 3},
     {"_sigpatsearch_lib_execute_int", (DL_FUNC) &_sigpatsearch_lib_execute_int, 3},
     {"_sigpatsearch_lib_summary_write_to_file_fais", (DL_FUNC) &_sigpatsearch_lib_summary_write_to_file_fais, 2},
-    {"_sigpatsearch_lib_summary_write_to_file_wy", (DL_FUNC) &_sigpatsearch_lib_summary_write_to_file_wy, 2},
     {"_sigpatsearch_lib_summary_write_to_file_fastcmh", (DL_FUNC) &_sigpatsearch_lib_summary_write_to_file_fastcmh, 2},
     {"_sigpatsearch_lib_summary_write_to_file_facs", (DL_FUNC) &_sigpatsearch_lib_summary_write_to_file_facs, 2},
     {"_sigpatsearch_lib_profiler_write_to_file", (DL_FUNC) &_sigpatsearch_lib_profiler_write_to_file, 2},
@@ -567,10 +473,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sigpatsearch_lib_get_significant_intervals", (DL_FUNC) &_sigpatsearch_lib_get_significant_intervals, 1},
     {"_sigpatsearch_lib_get_filtered_intervals", (DL_FUNC) &_sigpatsearch_lib_get_filtered_intervals, 1},
     {"_sigpatsearch_lib_get_significant_itemsets", (DL_FUNC) &_sigpatsearch_lib_get_significant_itemsets, 1},
-    {"_sigpatsearch_lib_get_n_perm_wy", (DL_FUNC) &_sigpatsearch_lib_get_n_perm_wy, 1},
-    {"_sigpatsearch_lib_set_n_perm_wy", (DL_FUNC) &_sigpatsearch_lib_set_n_perm_wy, 2},
-    {"_sigpatsearch_lib_set_perm_file_name_wy", (DL_FUNC) &_sigpatsearch_lib_set_perm_file_name_wy, 2},
-    {"_sigpatsearch_lib_set_seed_wy", (DL_FUNC) &_sigpatsearch_lib_set_seed_wy, 2},
     {"_sigpatsearch_lib_get_result_fais", (DL_FUNC) &_sigpatsearch_lib_get_result_fais, 1},
     {"_sigpatsearch_lib_get_result_int", (DL_FUNC) &_sigpatsearch_lib_get_result_int, 1},
     {"_sigpatsearch_lib_get_result_iset", (DL_FUNC) &_sigpatsearch_lib_get_result_iset, 1},

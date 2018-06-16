@@ -43,28 +43,28 @@ library(methods)
             .self$.file_loaded <- TRUE
         },
 
-        read_eth_files = function(data_path, labels_path, ...)
+        read_eth_files = function(data_path, labels_path, cov_path=NULL, encoding="dominant")
         {
             .self$.check_if_read_is_allowed()
-            .self$.do_read_eth_files(data_path, labels_path, ...)
+            .self$.do_read_eth_files(data_path, labels_path, cov_path, encoding)
             .self$.mark_read_done()
         },
 
         # TODO: split for _int and _iset due to multi-inheritance
-        .do_read_eth_files = function(data_path, labels_path, ...) {
-            lib_read_eth_files(.self$.inst, data_path, labels_path)
+        .do_read_eth_files = function(data_path, labels_path, cov_path=NULL, encoding="dominant") {
+            lib_read_eth_files(.self$.inst, data_path, labels_path, encoding)
         },
 
-        read_plink_files = function(base_path, ...)
+        read_plink_files = function(base_path, cov_path=NULL, encoding="dominant")
         {
             .self$.check_if_read_is_allowed()
-            .self$.do_read_plink_files(base_path, ...)
+            .self$.do_read_plink_files(base_path, cov_path, encoding)
             .self$.mark_read_done()
         },
 
         # TODO: split for _int and _iset due to multi-inheritance
-        .do_read_plink_files = function(base_path, ...) {
-            lib_read_plink_files(.self$.inst, base_path)
+        .do_read_plink_files = function(base_path, cov_path=NULL, encoding="dominant") {
+            lib_read_plink_files(.self$.inst, base_path, encoding)
         },
 
         .check_if_write_is_allowed = function() {
@@ -132,7 +132,7 @@ library(methods)
         {
             .self$.check_if_result_available()
             result <- .self$.get_result()
-            result["significance.level"] <-.self$.alpha
+            result["target.fwer"] <-.self$.alpha
             return(result)
         },
 
@@ -279,7 +279,7 @@ library(methods)
 
 #' Exact fast significant interval search
 #'
-#' Class for exact significant intervals search with Taron correction for
+#' Class for exact significant intervals search with Tarone correction for
 #' bounding intermediate FWERs.
 #'
 #' @format \code{\link{RefClass}} object.
@@ -296,7 +296,7 @@ SignificantIntervalSearchExact <- setRefClass("SignificantIntervalSearchExact",
 
 #' Approximate fast significant interval search
 #'
-#' Class for approximate significant intervals search with Taron correction for
+#' Class for approximate significant intervals search with Tarone correction for
 #' bounding intermediate FWERs.
 #'
 #' @format \code{\link{RefClass}} object.
@@ -312,92 +312,6 @@ SignificantIntervalSearchChi <- setRefClass("SignificantIntervalSearchChi",
 )
 
 
-.SignificantIntervalSearchWy <- setRefClass(".SignificantIntervalSearchWy",
-
-    contains = c(".SignificantIntervalSearchFais"),
-    fields = c(".n_perm"),
-    methods = list(
-
-        initialize = function(set_defaults=TRUE, ...) {
-            callSuper(set_defaults=set_defaults, ...)
-            .self$.n_perm <- NULL
-            if (set_defaults) {
-                .self$set_n_perm(50)
-            }
-        },
-
-        .write_summary = function(file_path)
-        {
-            lib_summary_write_to_file_wy(.self$.inst, file_path)
-        },
-
-        .check_if_n_perm_value_is_allowed = function(x)
-        {
-            if (!(x%%1==0 && x>0)) {
-                stop("you need to set n_perm to a positive integer value")
-            }
-        },
-
-        set_n_perm = function(n_perm) {
-            .self$.check_if_n_perm_value_is_allowed(n_perm)
-            lib_set_n_perm_wy(.self$.inst, n_perm)
-            .self$.n_perm <- n_perm
-            .self$.result_available <- FALSE
-        },
-
-        get_n_perm = function() {
-            return(.self$.n_perm)
-        },
-
-        set_seed = function(seed) {
-            lib_set_seed_wy(.self$.inst, seed)
-            .self$.result_available <- FALSE
-        },
-
-        set_perm_file_name = function(file_name) {
-            lib_set_perm_file_name_wy(.self$.inst, file_name)
-        }
-    )
-)
-
-#' Exact power-full significant interval search
-#'
-#' Class for exact significant intervals search with Westfall-Young
-#' permutation-based estimation of intermediate FWERs.
-#'
-#' @format \code{\link{RefClass}} object.
-#'
-#' @template SignificantFeaturesSearch_methods
-#' @template SignificantIntervalSearch_methods
-#' @template SignificantIntervalSearchWy_methods
-SignificantIntervalSearchWyExact <- setRefClass("SignificantIntervalSearchWyExact",
-    contains = c(".SignificantIntervalSearchWy"),
-    methods = list(
-        .create_instance = lib_new_search_wy_e,
-        .delete_instance = lib_delete_search_wy_e
-    )
-)
-
-#' Approximate power-full significant interval search
-#'
-#' Class for approximate significant intervals search with Westfall-Young
-#' permutation-based estimation of intermediate FWERs.
-#'
-#' @format \code{\link{RefClass}} object.
-#'
-#' @template SignificantFeaturesSearch_methods
-#' @template SignificantIntervalSearch_methods
-#' @template SignificantIntervalSearchWy_methods
-SignificantIntervalSearchWyChi <- setRefClass("SignificantIntervalSearchWyChi",
-    contains = c(".SignificantIntervalSearchWy"),
-    methods = list(
-        .create_instance = lib_new_search_wy_chi,
-        .delete_instance = lib_delete_search_wy_chi
-    )
-)
-
-
-
 .SignificantFeaturesSearchWithCovariates <- setRefClass(".SignificantFeaturesSearchWithCovariates",
     contains = c(".SignificantFeaturesSearch"),
     fields = c(".cov_loaded"),
@@ -408,22 +322,22 @@ SignificantIntervalSearchWyChi <- setRefClass("SignificantIntervalSearchWyChi",
             .self$.cov_loaded <- FALSE
         },
 
-        .do_read_eth_files = function(data_path, labels_path, cov_path=NULL, ...) {
+        .do_read_eth_files = function(data_path, labels_path, cov_path=NULL, encoding="dominant") {
             if (is.null(cov_path)) {
-                callSuper(data_path, labels_path, ...)
+                callSuper(data_path, labels_path, encoding)
                 .self$.cov_loaded <- FALSE
             } else {
-                .self$.read_eth_files_with_cov(data_path, labels_path, cov_path)
+                .self$.read_eth_files_with_cov(data_path, labels_path, cov_path, encoding)
                 .self$.cov_loaded <- TRUE
             }
         },
 
-        .do_read_plink_files = function(base_path, cov_path=NULL, ...) {
+        .do_read_plink_files = function(base_path, cov_path=NULL, encoding="dominant") {
             if (is.null(cov_path)) {
-                callSuper(base_path, ...)
+                callSuper(base_path, encoding)
                 .self$.cov_loaded <- FALSE
             } else {
-                .self$.read_plink_files_with_cov(base_path, cov_path)
+                .self$.read_plink_files_with_cov(base_path, cov_path, encoding)
                 .self$.cov_loaded <- TRUE
             }
         },
@@ -448,7 +362,7 @@ SignificantIntervalSearchWyChi <- setRefClass("SignificantIntervalSearchWyChi",
 
         .check_if_covariates_are_loaded = function() {
             if (!.self$.cov_loaded) {
-                warning("assuming one covariate for all observations; to change covariates call the update_covariates_file method first")
+                #warning("assuming one covariate for all observations; to change covariates call the update_covariates_file method first")
             }
         },
 
@@ -483,14 +397,14 @@ SignificantIntervalSearchFastCmh <- setRefClass("SignificantIntervalSearchFastCm
         .create_instance = lib_new_search_fastcmh,
         .delete_instance = lib_delete_search_fastcmh,
 
-        .read_eth_files_with_cov = function(x_file, y_file, cov_path)
+        .read_eth_files_with_cov = function(x_file, y_file, cov_path, encoding)
         {
-            lib_read_eth_files_with_cov_fastcmh(.self$.inst, x_file, y_file, cov_path)
+            lib_read_eth_files_with_cov_fastcmh(.self$.inst, x_file, y_file, cov_path, encoding)
         },
 
-        .read_plink_files_with_cov = function(base_path, cov_path)
+        .read_plink_files_with_cov = function(base_path, cov_path, encoding)
         {
-            lib_read_plink_files_with_cov_fastcmh(.self$.inst, base_path, cov_path)
+            lib_read_plink_files_with_cov_fastcmh(.self$.inst, base_path, cov_path, encoding)
         },
 
         .write_eth_files_with_cov = function(x_file, y_file, cov_path, ...)
@@ -580,14 +494,14 @@ SignificantItemsetSearchFacs <- setRefClass("SignificantItemsetSearchFacs",
         .create_instance = lib_new_search_facs,
         .delete_instance = lib_delete_search_facs,
 
-        .read_eth_files_with_cov = function(x_file, y_file, cov_path)
+        .read_eth_files_with_cov = function(x_file, y_file, cov_path, encoding)
         {
-            lib_read_eth_files_with_cov_facs(.self$.inst, x_file, y_file, cov_path)
+            lib_read_eth_files_with_cov_facs(.self$.inst, x_file, y_file, cov_path, encoding)
         },
 
-        .read_plink_files_with_cov = function(base_path, cov_path)
+        .read_plink_files_with_cov = function(base_path, cov_path, encoding)
         {
-            lib_read_plink_files_with_cov_facs(.self$.inst, base_path, cov_path)
+            lib_read_plink_files_with_cov_facs(.self$.inst, base_path, cov_path, encoding)
         },
 
         .write_eth_files_with_cov = function(x_file, y_file, cov_path)
@@ -667,204 +581,216 @@ checkIsBoolean <- function(var, name){
 }
 
 
+CASMAP <- setRefClass("CASMAP",
+    fields = c('.mode', '.alpha', '.max_comb_size', '.core', '.use_covariates'),
+    methods = list(
+        initialize = function(mode, alpha=0.05, max_comb_size=0) {
+            .self$.mode <- mode
+            .self$.alpha <- alpha
+            .self$setMaxCombinationSize(max_comb_size)
 
-#' A constructor for a significant pattern search object
-#'
-#' Initialises an object for the \code{FAIS}, \code{FastCMH} or \code{FACS}
-#' methods. Returns the object.
-#'
-#' @param method A string specifying the method. Use either \code{'fais'}, 
-#'               \code{'fastcmh'} or \code{'facs'}. Default is code{''}.
-#'               Another way to set the method is to set the 
-#'               \code{use_intervals}, \code{use_combinations} and
-#'               \code{use_covariate} boolean flags (see below).
-#'
-#' @param use_intervals Boolean flag to set whether to use intervals
-#'                      or combinations. Default is \code{NA}. 
-#'                      At least one of 'use_intervals' or 
-#'                      'use_combinations' needs to be set to \code{TRUE}
-#'                      or \code{FALSE}.
-#'
-#' @param use_combinations Boolean flag to set whether to use combinations 
-#'                         or intervals Default is \code{NA}.
-#'                         At least one of 'use_intervals' or 
-#'                         'use_combinations' needs to be set to \code{TRUE}
-#'                         or \code{FALSE}.
-#'
-#' @param use_covariate Boolean flag to set whether or not to use a covariate.
-#'                      Default is \code{NA}, which is interpreted as 
-#'                      \code{FALSE}.
-#'
-#' @param alpha Value in range \eqn{(0, 1)} (excluding 0 and 1) which sets
-#'              significance threshold. If outside range, error is thrown.
-#'              Default value is \code{0.05}.
-#'
-#' @param max_length A value which, for the interval-based methods \code{FAIS} 
-#'                   \code{FastCMH}, if the user so desired, 
-#'                   sets the maximum interval length. For 
-#'                   example, if \code{max_length=5}, only intervals up to
-#'                   length 5 will be considered. Negative values will be 
-#'                   interpreted as \code{0},
-#'                   which means that there is no restriction on the interval 
-#'                   length (all possible intervals will be considered).
-#'                   Non-integer values will be rounded down to nearest 
-#'                   integer. Default value is \code{0}
-#'
-#' @export
-sigpatsearch <- function(method='',
-                         use_intervals=NA, 
-                         use_combinations=NA, 
-                         use_covariate=FALSE,
-                         alpha=0.05,
-                         max_length=0
-                         ){
+            .self$.core <- NULL
+            .self$.use_covariates <- NULL
+        },
 
-    #check max_length
-    if (is.finite(max_length)){
-        max_length <- floor(max_length)
-        if (max_length < 0)
-            max_length <- 0
-    } else { 
-        message <- "'max_length' needs to be either 0 or a positive integer."
-        stop(message)
-    }
+        getMode = function() {
+            return(.self$.mode)
+        },
 
-    #check alpha
-    if (!isInOpenInterval(alpha)){
-        message <- "'alpha' needs to be a value strictly in interval (0, 1)."
-        stop(message)
-    }
+        getTargetFWER = function() {
+            return(.self$.alpha)
+        },
 
+        getMaxCombinationSize = function() {
+            return(.self$.max_comb_size)
+        },
 
-    #TODO: add support for LAMP (use_combinations==TRUE and use_covariate=FALSE)
-    #TODO: Add examples
-    #TODO: check default case
-    if ( (method=='') & (is.na(use_intervals)) & (is.na(use_combinations)) ){
-        message <- paste0("Need to set at least one of 'method',",
-                          " 'use_intervals' or 'use_combinations'.")
-        stop(message)
-    }
+        isInitialized = function() {
+            return(!is.null(.self$.core))
+        },
 
-    if (method != ''){
-        #convert to lower case
-        method <- tolower(method)
+        .checkInitialized = function() {
+            if (is.null(.self$.core)){
+                stop("Object not initialized or hyperparameters changed since last execution. Please call method readFiles prior to execute.")
+            }
+        },
 
-        #check if one of 'fais', 'fastcmh' or 'facs'
-        correctName <- FALSE
+        setMode = function(mode){
+            if (!is.element(mode, c('regionGWAS', 'higherOrderEpistasis'))){
+                stop("Currently implemented modes: < regionGWAS | higherOrderEpistasis >")
+            }
+            .self$.mode <- mode
+            .self$.core <- NULL
+            .self$.use_covariates <- NULL
+        },
 
-        #fais
-        if (method=='fais'){
-            correctName <- TRUE
-            use_intervals <- TRUE
-            use_combinations <- FALSE
-            use_covariate <- FALSE
-            sig <- SignificantIntervalSearchExact()
-            sig$set_alpha(alpha) 
-            sig$set_lmax(max_length)
-            return(sig)
+        setTargetFWER = function(alpha=0.05) {
+            #check alpha
+            if (!isInOpenInterval(alpha)){
+                stop("Target FWER 'alpha' needs to be a value strictly between 0 and 1.")
+            }
+            .self$.alpha <- alpha
+            .self$.core <- NULL
+            .self$.use_covariates <- NULL
+        },
+
+        setMaxCombinationSize = function(max_comb_size=0) {
+            if (is.finite(max_comb_size)){
+                max_comb_size <- floor(max_comb_size)
+                if (.self$.mode == 'higherOrderEpistasis' & max_comb_size > 0){
+                    print("The current implementation of higher-order epistasis analyses does not support a limited maximum number of interacting variants. The analysis will be carried out for an unlimited order.")
+                    max_comb_size <- 0
+                }
+                if (max_comb_size < 0){
+                    max_comb_size <- 0
+                }
+            } else {
+                stop("Maximum combination size 'max_comb_size' needs to be either 0 (unlimited) or a positive integer.")
+            }
+            .self$.max_comb_size <- max_comb_size
+            .self$.core <- NULL
+            .self$.use_covariates <- NULL
+        },
+
+        .createCore = function() {
+            if (!is.null(.self$.use_covariates)){
+                # Instantiate object of the appropriate depending on options
+                if (.self$.mode == 'regionGWAS' & !.self$.use_covariates){
+                    .self$.core <- SignificantIntervalSearchChi()
+                } else if (.self$.mode == 'regionGWAS' & .self$.use_covariates){
+                    .self$.core <- SignificantIntervalSearchFastCmh()
+                } else if (.self$.mode == 'higherOrderEpistasis'){
+                    .self$.core <- SignificantItemsetSearchFacs()
+                }
+
+                # Set parameters of the object
+                .self$.core$set_alpha(.self$.alpha)
+                .self$.core$set_lmax(.self$.max_comb_size)
+
+            } else {
+                .self$.core <- NULL
+                .self$.use_covariates <- NULL
+            }
+        },
+
+        readFiles = function(genotype_file=NULL, phenotype_file=NULL, plink_file_root=NULL, covariate_file=NULL, encoding="dominant") {
+            # Check whether user decided to use tab-separated text files (binary_format) or PLINK formatted files (plink_format)
+            binary_format <- !is.null(genotype_file) & !is.null(phenotype_file)
+            plink_format <- !is.null(plink_file_root)
+            # At least one of the two must be two, otherwise raise an error
+            if (!(binary_format | plink_format)){
+                stop("Either plink_file_root or genotype_file and phenotype_file must be specified as arguments.")
+            }
+            # Check that encoding type is correct
+            if (!is.element(encoding, c('dominant', 'recessive'))){
+                stop("Currently implemented encodings: < dominant | recessive >")
+            }
+
+            # If an additional covariates file was specified, set the object into "CMH mode"
+            .self$.use_covariates <- !is.null(covariate_file)
+
+            # Create appropriate "core" object
+            .self$.createCore()
+
+            # Give preference to plink_format over binary_format if, by any reason, a user decides to mess around and
+            # specify both
+            if (plink_format){
+                if(.self$.use_covariates){
+                    .self$.core$read_plink_files(plink_file_root, covariate_file, encoding)
+                } else {
+                    .self$.core$read_plink_files(plink_file_root, encoding)
+                }
+            } else if(binary_format){
+                if(.self$.use_covariates){
+                    .self$.core$read_eth_files(data_path=genotype_file, labels_path=phenotype_file, cov_path=covariate_file, encoding=encoding)
+                } else {
+                    .self$.core$read_eth_files(data_path=genotype_file, labels_path=phenotype_file, encoding=encoding)
+                }
+            } else{
+                stop("Either plink_file_root or genotype_file and phenotype_file must be specified as arguments.")
+            }
+        },
+
+        execute = function(){
+            .self$.checkInitialized()
+            .self$.core$execute()
+        },
+
+        writeSummary = function(path){
+            .self$.checkInitialized()
+            .self$.core$write_summary(path)
+        },
+
+        writeProfile = function(path){
+            .self$.checkInitialized()
+            .self$.core$write_profile(path)
+        },
+
+        writeSignificantRegions = function(path){
+            if (.self$.mode != 'regionGWAS'){
+                stop("Method writeSignificantInteractions only available for region-based GWAS analyses.")
+            }
+            .self$.checkInitialized()
+            .self$.core$write_pvals_significant_intervals(path)
+        },
+
+        writeSignificantClusterRepresentatives = function(path){
+            if (.self$.mode != 'regionGWAS'){
+                stop("Method writeSignificantClusterRepresentatives only available for region-based GWAS analyses.")
+            }
+            .self$.checkInitialized()
+            .self$.core$write_filtered_intervals(path)
+        },
+
+        writeSignificantInteractions = function(path){
+            if (.self$.mode != 'higherOrderEpistasis'){
+                stop("Method writeSignificantInteractions only available for higher-order epistasis analyses.")
+            }
+            .self$.checkInitialized()
+            .self$.core$write_pvals_significant_itemsets(path)
+        },
+
+        getSummary = function(){
+            .self$.checkInitialized()
+            return(.self$.core$get_result())
+        },
+
+        getSignificantRegions = function(){
+            if (.self$.mode != 'regionGWAS'){
+                stop("Method getSignificantRegions only available for region-based GWAS analyses.")
+            }
+            .self$.checkInitialized()
+            return(.self$.core$get_significant_intervals())
+        },
+
+        getSignificantClusterRepresentatives = function(){
+            if (.self$.mode != 'regionGWAS'){
+                stop("Method getSignificantClusterRepresentatives only available for region-based GWAS analyses.")
+            }
+            .self$.checkInitialized()
+            return(.self$.core$get_filtered_intervals())
+        },
+
+        getSignificantInteractions = function(){
+            if (.self$.mode != 'higherOrderEpistasis'){
+                stop("Method getSignificantInteractions only available for higher-order epistasis analyses.")
+            }
+            .self$.checkInitialized()
+            return(.self$.core$get_significant_itemsets())
+        },
+
+        show = function(){
+            cat("CASMAP object with:", "\n")
+            cat(paste(" * Mode =", .self$.mode), "\n")
+            cat(paste(" * Target FWER =", .self$.alpha), "\n")
+            cat(paste(" * Maximum combination size =", .self$.max_comb_size), "\n")
+            if (!is.null(.self$.core)){
+                cat(" * Input files read", "\n")
+                cat(paste(" * Covariate =", .self$.use_covariates), "\n")
+            } else{
+                cat(" * No input files read", "\n")
+            }
         }
-
-        #fastcmh
-        if (method=='fastcmh'){
-            correctName <- TRUE
-            use_intervals <- TRUE
-            use_combinations <- FALSE
-            use_covariate <- TRUE
-            sig <- SignificantIntervalSearchFastCmh()
-            sig$set_alpha(alpha) 
-            sig$set_lmax(max_length)
-            return(sig)
-        }
-    
-        #facs
-        if (method=='facs'){
-            correctName <- TRUE
-            use_intervals <- FALSE
-            use_combinations <- TRUE
-            use_covariate <- TRUE
-            sig <- SignificantItemsetSearchFacs()
-            sig$set_alpha(alpha) 
-            sig$set_lmax(max_length)
-            return(sig)
-        }
-
-        if (correctName==FALSE){
-            message <- paste0("'method' parameter needs to be one of ", 
-                              "'fais', 'fastcmh' or 'facs'. Otherwise, ",
-                              "set the 'use_intervals' or 'use_combinations' ",
-                              "flags.")
-            stop(message)
-        }
-
-
-    }
-
-    #now we look at the case that the name as NOT been set, but the flags
-    #use_intervals or use_combinations have been set.
-
-    #FIRST: check how many NAs
-    na_intervals <- is.na(use_intervals)
-    na_combinations <- is.na(use_combinations)
-    trueCount <- na_intervals + na_combinations
-    if(trueCount==2){
-        message <- paste0("Need to set 'method', or at least one of the ",
-                          "boolean flags 'use_intervals' and ",
-                          "'use_combinations'.")
-
-        stop(message)
-    }
-
-    #NOW check flags are all booleans
-    #and convert NAs to FALSE 
-    use_intervals <- checkIsBoolean(use_intervals, "use_intervals")
-    use_combinations <- checkIsBoolean(use_combinations, "use_combinations")
-    use_covariate <- checkIsBoolean(use_covariate, "use_covariate")
-
-    #At this point, either use_intervals or use_combinations must be NOT NA
-    #NA values receive lower priority
-    if (na_intervals){
-        use_intervals <- !(use_combinations)
-    }
-    
-    if (na_combinations){
-        use_combinations <- !(use_intervals)
-    }
-
-    #FALSE==0
-    #TRUE==1
-    #If all are FALSE, throw error
-    #Don't need use_covariate to be set; NA is interpreted as FALSE
-
-    #do fais
-    if ( (use_intervals || !use_combinations) & (!use_covariate)){
-        sig <- SignificantIntervalSearchExact()
-        sig$set_alpha(alpha) 
-        sig$set_lmax(max_length)
-        return(sig)
-    }
-
-    #do fastcmh
-    if ( (use_intervals || !use_combinations) & (use_covariate)){
-        sig <- SignificantIntervalSearchFastCmh()
-        sig$set_alpha(alpha) 
-        sig$set_lmax(max_length)
-        return(sig)
-    }
-
-    #do facs/lamp
-    if ( (use_combinations || !use_intervals) ){
-        sig <- SignificantItemsetSearchFacs()
-        sig$set_alpha(alpha) 
-        sig$set_lmax(max_length)
-        return(sig)
-    }
-
-    #should never reach this point
-    #if here, return error
-    message <- paste0("Error: no correct flags were used.")
-    stop(message)
-    #alternative: could return FAIS object with warning? 
-}
-
-
+    )
+)
 

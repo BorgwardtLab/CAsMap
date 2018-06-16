@@ -210,7 +210,7 @@ protected:
      * @param yfilename Labels file path
      * @param plinkFormat Flag indicating PLINK (or ETH) file format
      */
-    virtual void readFiles(const std::string& xfilename, const std::string& yfilename, bool plinkFormat);
+    virtual void readFiles(const std::string& xfilename, const std::string& yfilename, bool plinkFormat, const std::string& encoding);
     /**
      * Add file name extension of the PLINK data file.
      *
@@ -241,7 +241,7 @@ protected:
      * @param phenotype_buf Labels file object corresponding to the data file,
      *                      to check for size consistency
      */
-    void readDataFile(const std::string& xfilename, bool plinkFormat, Phenotype& phenotype_buf);
+    void readDataFile(const std::string& xfilename, bool plinkFormat, Phenotype& phenotype_buf, const std::string& encoding);
 
     /**
      * @name INITIALISATION AND TERMINATION METHODS
@@ -415,7 +415,7 @@ public:
      * @param xfilename Data file path
      * @param yfilename Labels file path
      */
-    virtual void readETHFiles(const std::string& xfilename, const std::string& yfilename);
+    virtual void readETHFiles(const std::string& xfilename, const std::string& yfilename, const std::string& encoding);
     /**
      * Write data and labels from memory to files in the ETH file format.
      *
@@ -429,7 +429,7 @@ public:
      * @param basefilename Same path and name for both data and labels files in
      *                     PLINK file format, w/o file extension
      */
-    virtual void readPlinkFiles(const std::string& basefilename);
+    virtual void readPlinkFiles(const std::string& basefilename, const std::string& encoding);
     /**
      * Execute search for significant features.
      *

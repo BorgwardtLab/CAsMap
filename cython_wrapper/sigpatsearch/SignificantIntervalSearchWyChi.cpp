@@ -1,1 +1,0 @@
-../../libsigpatsearch/SignificantIntervalSearchWyChi.cpp
