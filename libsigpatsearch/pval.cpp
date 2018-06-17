@@ -9,13 +9,15 @@
 
 #include <math.h>
 
+#include <limits>
+
 #include "chi2.h" // Chi2_sf
 #include "double_comp.h" // doubleeq
 
 //#define RATIO_TH -23
 #define LOGPVAL_EQ_RELTOL 1E-12 // exp(-27.6) \approx 1E-12
 
-
+using namespace std;
 
 void chi2_minpvals(longint N, longint n, longint N_over_2, double class_ratio,
                    double class_ratio_bin,
@@ -53,6 +55,23 @@ double chi2_pval(longint a, longint x, longint N, longint n, double class_ratio_
     return Chi2_sf(num/den,1);
 }
 
+double chi2_score(longint a, longint x, longint N, longint n, double class_ratio_bin)
+{
+    double aux, num, den;
+    aux = ((double)x)/N;
+    num = a-n*aux; num = pow(num,2);
+    den = x*(1-aux)*class_ratio_bin;
+    return num/den;
+}
+
+double odds_ratio(longint a, longint x, longint N, longint n)
+{
+    double num, den;
+    num = a * ((N + a) - (x + n));
+    den = (n - a) * (x - a);
+    if (den==0) return std::numeric_limits<double>::infinity();  //TODO: Test
+    else return num/den;
+}
 
 
 void fisher_minpvals(longint N, longint n, longint N_over_2,
@@ -200,4 +219,30 @@ double cmh_pval(longint a, longint *x, unsigned short K, longint* Nt,
     num *= num;
     if(den==0) return 1;
     else return Chi2_sf(num/den,1);
+}
+
+double cmh_score(longint a, longint *x, unsigned short K, longint* Nt,
+                double* gammat, double* gammabint){
+    long long k;
+    double num = a, den = 0;
+    for(k=0; k<K; k++){
+        num -= x[k]*gammat[k];
+        den += x[k]*(1-((double)x[k])/Nt[k])*gammabint[k];
+    }
+    num *= num;
+    if(den==0) return 0;
+    else return num/den;
+}
+
+double cmh_odds_ratio(longint* at, longint* x, unsigned short K, longint* Nt, longint* nt)
+{
+    longint k;
+    double num = 0, den = 0;
+    for(k=0; k<K; k++){
+        if(Nt[k]==0) continue;
+        num += at[k] * ((Nt[k] + at[k]) - (x[k] + nt[k]));
+        den += (nt[k] - at[k]) * (x[k] - at[k]);
+    }
+    if (den==0) return std::numeric_limits<double>::infinity();  //TODO: Test
+    else return num/den;
 }

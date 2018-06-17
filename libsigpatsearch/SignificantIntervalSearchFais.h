@@ -23,8 +23,11 @@ private:
     void execute_constructor_fais();
     void execute_destructor_fais();
 
-    IntervalSetWithFreq pValsTestableInts;
-    IntervalSetWithFreq pValsSigInts;
+    //IntervalSetWithFreq pValsTestableInts;
+    //IntervalSetWithFreq pValsSigInts;
+
+    IntervalSetWithOddsRatio pValsTestableInts;
+    IntervalSetWithOddsRatio pValsSigInts;
 
     SummaryFais summary;
 
@@ -91,11 +94,11 @@ protected:
     void freq_constructor() override;
     void freq_destructor() override;
 
-    inline void saveSignificantInterval(double pval, longint tau, longint l, longint a) override {
-        pValsSigInts.addFeature(tau, tau+l, a, freq_par[tau], pval);
+    inline void saveSignificantInterval(double pval, double score, double odds_ratio, longint tau, longint l, longint a) {
+        pValsSigInts.addFeature(tau, tau+l, a, score, odds_ratio, pval);
     }
-    inline void saveTestableInterval(double pval, longint tau, longint l, longint a) override {
-        pValsTestableInts.addFeature(tau, tau+l, a, freq_par[tau], pval);
+    inline void saveTestableInterval(double pval, double score, double odds_ratio, longint tau, longint l, longint a) {
+        pValsTestableInts.addFeature(tau, tau+l, a, score, odds_ratio, pval);
     }
 
     /**
@@ -157,6 +160,15 @@ protected:
     inline double compute_interval_pval(longint a, longint tau) override {
         return compute_pval(a,freq_par[tau]);
     };
+
+    inline double compute_interval_score(longint a, longint tau) override {
+        return compute_score(a,freq_par[tau]);
+    };
+
+    inline double compute_interval_odds_ratio(longint a, longint tau) override {
+        return compute_odds_ratio(a,freq_par[tau]);
+    };
+
     /**
      * Evaluate Fisher's test on a table with margins `x`, #n and #N, and cell
      * count `a`.
@@ -171,6 +183,12 @@ protected:
      * @return p-value
      */
     virtual double compute_pval(longint a, longint x) = 0;
+
+    virtual double compute_score(longint a, longint x) = 0;
+
+    virtual double compute_odds_ratio(longint a, longint x) = 0;
+
+    virtual double score_to_pval(double score) = 0;
 
     /**
      * @copydoc super::decrease_threshold()
@@ -197,10 +215,10 @@ public:
     SignificantIntervalSearchFais();
     virtual ~SignificantIntervalSearchFais();
 
-    inline IntervalSetWithFreq const& getPValsTestableInts() const override {
+    inline IntervalSetWithOddsRatio const& getPValsTestableInts() const override {
         return pValsTestableInts;
     }
-    inline IntervalSetWithFreq const& getPValsSigInts() const override {
+    inline IntervalSetWithOddsRatio const& getPValsSigInts() const override {
         return pValsSigInts;
     }
 

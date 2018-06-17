@@ -14,12 +14,12 @@ MemoryUsage = namedtuple("MemoryUsage", ["current", "peak"])
 
 
 
-IntervalWithP = namedtuple("IntervalWithP", ["start", "end", "pvalue"])
+IntervalWithP = namedtuple("IntervalWithP", ["start", "end", "score", "odds_ratio", "pvalue"])
 
 Region = namedtuple("Region", "start end")
 
-_SummaryBase = namedtuple("Summary", "testability_threshold significance_level corrected_signficance_level")
-_SummaryInt = namedtuple("Summary", ('int_processed', 'int_testable',) + _SummaryBase._fields)
+_SummaryBase = namedtuple("Summary", "testability_threshold target_fwer corrected_significance_threshold")
+_SummaryInt = namedtuple("Summary", ('n_int_processed', 'n_int_testable',) + _SummaryBase._fields)
 _SummaryFais = namedtuple('Summary', _SummaryInt._fields + ('testability_region',))
 
 
@@ -91,7 +91,7 @@ cdef class _SignificantFeaturesSearch:
         """
         return self.lmax
 
-    def read_eth_files(self, str x_file, str y_file):
+    def read_eth_files(self, str x_file, str y_file, str encoding):
         """Read the ETH format files.
 
         :param x_file: Data file path
@@ -99,20 +99,20 @@ cdef class _SignificantFeaturesSearch:
         """
         self._check_if_read_is_allowed()
         try:
-            self._readETHFiles(x_file, y_file)
+            self._readETHFiles(x_file, y_file, encoding)
         except RuntimeError as e:
             raise IOError(e.message)
         self._set_results_unavailable()
         self._file_loaded = True
 
-    def read_plink_files(self, str base_file_path):
+    def read_plink_files(self, str base_file_path, str encoding):
         """Read the PLINK format files.
 
         :param: base_file_path: base name path string (w/o extension) for all PLINK files
         """
         self._check_if_read_is_allowed()
         try:
-            self._readPlinkFiles(base_file_path)
+            self._readPlinkFiles(base_file_path, encoding)
         except RuntimeError as e:
             raise IOError(e.message)
         self._set_results_unavailable()
@@ -189,7 +189,7 @@ cdef class _SignificantFeaturesSearch:
     def __repr__(self):
         myclasstype = str(type(self).__name__)
         mytype = "unknown"
-        if myclasstype=="_SignificantIntervalSearchExact":
+        if myclasstype=="_SignificantIntervalSearchExact": # TODO: What about Chi2?
             mytype = "FAIS"
         if myclasstype=="_SignificantIntervalSearchFastCmh":
             mytype = "FastCMH"
@@ -200,7 +200,7 @@ cdef class _SignificantFeaturesSearch:
         myalpha = str(self.alpha)
         mylmax = str(self.lmax)
 
-        #output message to be returned
+        #output message to be returned:
         message = mytype + " object with:\n" + \
                   " * alpha = " + myalpha + "\n" + \
                   " * lmax = " + mylmax
@@ -238,7 +238,7 @@ cdef class _SignificantIntervalSearch(_SignificantFeaturesSearch):
         cdef int i
         for i in range(ivec.size()):
             iv = ivec.at(i)
-            intervals.append(IntervalWithP(iv.getStart(), iv.getEnd(), iv.getPvalue()))
+            intervals.append(IntervalWithP(iv.getStart(), iv.getEnd(), iv.getScore(), iv.getOddsRatio(), iv.getPvalue()))
         return intervals
 
     def get_significant_intervals(self):
@@ -296,11 +296,11 @@ cdef class _SignificantIntervalSearchExact(_SignificantIntervalSearchFais):
     def __cinit__(self, **kwargs):
         self.inst = SignificantIntervalSearchExact()
 
-    def _readETHFiles(self, x_file, y_file):
-        self.inst.readETHFiles(x_file, y_file)
+    def _readETHFiles(self, x_file, y_file, encoding):
+        self.inst.readETHFiles(x_file, y_file, encoding)
 
-    def _readPlinkFiles(self, base_file_path):
-        self.inst.readPlinkFiles(base_file_path)
+    def _readPlinkFiles(self, base_file_path, encoding):
+        self.inst.readPlinkFiles(base_file_path, encoding)
 
     def _writeETHFiles(self, x_file, y_file):
         self.inst.writeETHFiles(x_file, y_file)
@@ -355,11 +355,11 @@ cdef class _SignificantIntervalSearchChi(_SignificantIntervalSearchFais):
     def __cinit__(self, **kwargs):
         self.inst = SignificantIntervalSearchChi()
 
-    def _readETHFiles(self, x_file, y_file):
-        self.inst.readETHFiles(x_file, y_file)
+    def _readETHFiles(self, x_file, y_file, encoding):
+        self.inst.readETHFiles(x_file, y_file, encoding)
 
-    def _readPlinkFiles(self, base_file_path):
-        self.inst.readPlinkFiles(base_file_path)
+    def _readPlinkFiles(self, base_file_path, encoding):
+        self.inst.readPlinkFiles(base_file_path, encoding)
 
     def _writeETHFiles(self, x_file, y_file):
         self.inst.writeETHFiles(x_file, y_file)
@@ -406,175 +406,6 @@ cdef class _SignificantIntervalSearchChi(_SignificantIntervalSearchFais):
 
     def _get_peak_memory(self):
         return self.inst.getProfiler().getPeakMemory()
-
-
-cdef class _SignificantIntervalSearchWy(_SignificantIntervalSearchFais):
-    cdef object n_perm
-
-    def __cinit__(self, set_defaults=True, **kwargs):
-        """Create a new instance.
-
-        :param set_defaults: Set default alpha, lmax and n_perm values (default: True)
-        """
-        self.n_perm = None
-        if (set_defaults):
-            self.set_n_perm(50)
-
-    def _check_if_n_perm_value_is_allowed(self, x):
-        assert isinstance(x, (int, long,)) and x > 0, "you need to set n_perm to a positive integer value"
-
-    def set_n_perm(self, n_perm):
-        """Set number of permutations of the observations used for estimation of intermediate FWERs.
-
-        :param n_perm: Number of permutations (positive integer)
-        """
-        self._check_if_n_perm_value_is_allowed(n_perm)
-        self._set_n_perm(n_perm)
-        self.n_perm = n_perm
-        self._set_results_unavailable()
-
-    def get_n_perm(self, n_perm):
-        """Get number of permutations of the observations used for estimation of intermediate FWERs.
-        """
-        return self.n_perm
-
-    def set_seed(self, unsigned seed):
-        """Set random seed (for reproducibility).
-
-        :param seed: Random number generator seed (non-negative integer)
-        """
-        self._set_seed(seed)
-        self._set_results_unavailable()
-
-cdef class _SignificantIntervalSearchWyChi(_SignificantIntervalSearchWy):
-
-    cdef SignificantIntervalSearchWyChi inst
-
-    def __cinit__(self, **kwargs):
-        self.inst = SignificantIntervalSearchWyChi()
-
-    def _readETHFiles(self, x_file, y_file):
-        self.inst.readETHFiles(x_file, y_file)
-
-    def _readPlinkFiles(self, base_file_path):
-        self.inst.readPlinkFiles(base_file_path)
-
-    def _writeETHFiles(self, x_file, y_file):
-        self.inst.writeETHFiles(x_file, y_file)
-
-    def _execute(self, alpha, lmax):
-        self.inst.execute(alpha, lmax)
-
-    def _write_summary(self, path):
-        self.inst.getSummary().writeToFile(path)
-
-    def _write_profile(self, path):
-        self.inst.getProfiler().writeToFile(path)
-
-    def _write_filtered_intervals(self, path):
-        self.inst.getFilteredIntervals().writeToFile(path)
-
-    def _write_pvals_testable_intervals(self, path):
-        self.inst.getPValsTestableInts().writeToFile(path)
-
-    def _write_pvals_significant_intervals(self, path):
-        self.inst.getPValsSigInts().writeToFile(path)
-
-    def _get_significant_intervals(self):
-        cdef vector[Interval] ivec = self.inst.getSignificantIntervals().getSigInts()
-        return self._intervals(ivec)
-
-    def _get_filtered_intervals(self):
-        cdef vector[Interval] ivec = self.inst.getFilteredIntervals().getSigInts()
-        return self._intervals(ivec)
-
-    def _get_summary_fais(self):
-        cdef SummaryFais summary = self.inst.getSummary()
-        region = Region((summary.getSl1(), summary.getSu1()), (summary.getSl2(), summary.getSu2()))
-
-        return _SummaryFais(
-            summary.getNumFeaturesProcessed(), summary.getm(),
-            summary.getDelta(), summary.getAlpha(), summary.getDelta_opt(),
-            region
-        )
-
-    def _get_curr_memory(self):
-        return self.inst.getProfiler().getCurrMemory()
-
-    def _get_peak_memory(self):
-        return self.inst.getProfiler().getPeakMemory()
-
-    def _set_n_perm(self, n_perm):
-        self.inst.setNPerm(n_perm)
-
-    def _set_seed(self, seed):
-        self.inst.setSeed(seed)
-
-
-cdef class _SignificantIntervalSearchWyExact(_SignificantIntervalSearchWy):
-
-    cdef SignificantIntervalSearchWyExact inst
-
-    def __cinit__(self, **kwargs):
-        self.inst = SignificantIntervalSearchWyExact()
-
-    def _readETHFiles(self, x_file, y_file):
-        self.inst.readETHFiles(x_file, y_file)
-
-    def _readPlinkFiles(self, base_file_path):
-        self.inst.readPlinkFiles(base_file_path)
-
-    def _writeETHFiles(self, x_file, y_file):
-        self.inst.writeETHFiles(x_file, y_file)
-
-    def _execute(self, alpha, lmax):
-        self.inst.execute(alpha, lmax)
-
-    def _write_summary(self, path):
-        self.inst.getSummary().writeToFile(path)
-
-    def _write_profile(self, path):
-        self.inst.getProfiler().writeToFile(path)
-
-    def _write_filtered_intervals(self, path):
-        self.inst.getFilteredIntervals().writeToFile(path)
-
-    def _write_pvals_testable_intervals(self, path):
-        self.inst.getPValsTestableInts().writeToFile(path)
-
-    def _write_pvals_significant_intervals(self, path):
-        self.inst.getPValsSigInts().writeToFile(path)
-
-    def _get_significant_intervals(self):
-        cdef vector[Interval] ivec = self.inst.getSignificantIntervals().getSigInts()
-        return self._intervals(ivec)
-
-    def _get_filtered_intervals(self):
-        cdef vector[Interval] ivec = self.inst.getFilteredIntervals().getSigInts()
-        return self._intervals(ivec)
-
-    def _get_summary_fais(self):
-        cdef SummaryFais summary = self.inst.getSummary()
-        region = Region((summary.getSl1(), summary.getSu1()), (summary.getSl2(), summary.getSu2()))
-
-        return _SummaryFais(
-            summary.getNumFeaturesProcessed(), summary.getm(),
-            summary.getDelta(), summary.getAlpha(), summary.getDelta_opt(),
-            region
-        )
-
-    def _get_curr_memory(self):
-        return self.inst.getProfiler().getCurrMemory()
-
-    def _get_peak_memory(self):
-        return self.inst.getProfiler().getPeakMemory()
-
-    def _set_n_perm(self, n_perm):
-        self.inst.setNPerm(n_perm)
-
-    def _set_seed(self, seed):
-        self.inst.setSeed(seed)
-
 
 
 # Note: no multiple inheritance in Cython, so this part is duplicated for isets
@@ -593,41 +424,43 @@ cdef class _SignificantIntervalSearchWithCovariates(_SignificantIntervalSearch):
     def _check_if_covariates_are_loaded(self):
         if self._cov_loaded:
             return
-        warn("assuming one covariate for all observations; to change covariates call the update_covariates_file method first")
+        #warn("assuming one covariate for all observations; to change covariates call the update_covariates_file method first")
 
-    def read_eth_files(self, str x_file, str y_file, object cov_file = None):
+    def read_eth_files(self, str x_file, str y_file, object cov_file = None, str encoding = "dominant"):
         """Read the ETH format files.
 
         :param x_file: Data file path
         :param y_file: Labels file path
         :param cov_file: Covariates file path (default: None, means single covariate for all observations)
+        :param encoding: < "dominant" | "recessive" >. Default: "dominant"
         """
         self._check_if_read_is_allowed()
         try:
             if cov_file != None:
-                self._readETHFilesWithCovariates(x_file, y_file, cov_file)
+                self._readETHFilesWithCovariates(x_file, y_file, cov_file, encoding)
                 self._cov_loaded = True
             else:
-                self._readETHFiles(x_file, y_file)
+                self._readETHFiles(x_file, y_file, encoding)
         except RuntimeError as e:
             raise IOError(e.message)
         self._set_results_unavailable()
         self._file_loaded = True
 
-    def read_plink_files(self, str base_file_path, object cov_file = None):
+    def read_plink_files(self, str base_file_path, object cov_file = None, str encoding = "dominant"):
         """Read the ETH format files.
 
         :param x_file: Data file path
         :param y_file: Labels file path
         :param cov_file: Covariates file path (default: None, means single covariate for all observations)
+        :param encoding: < "dominant" | "recessive" >. Default: "dominant"
         """
         self._check_if_read_is_allowed()
         try:
             if cov_file != None:
-                self._readPlinkFilesWithCovariates(base_file_path, cov_file)
+                self._readPlinkFilesWithCovariates(base_file_path, cov_file, encoding)
                 self._cov_loaded = True
             else:
-                self._readPlinkFiles(base_file_path)
+                self._readPlinkFiles(base_file_path, encoding)
         except RuntimeError as e:
             raise IOError(e.message)
         self._set_results_unavailable()
@@ -663,17 +496,17 @@ cdef class _SignificantIntervalSearchFastCmh(_SignificantIntervalSearchWithCovar
     def __cinit__(self, **kwargs):
         self.inst = SignificantIntervalSearchFastCmh()
 
-    def _readETHFiles(self, x_file, y_file):
-        self.inst.readETHFiles(x_file, y_file)
+    def _readETHFiles(self, x_file, y_file, encoding):
+        self.inst.readETHFiles(x_file, y_file, encoding)
 
-    def _readPlinkFiles(self, base_file_path):
-        self.inst.readPlinkFiles(base_file_path)
+    def _readPlinkFiles(self, base_file_path, encoding):
+        self.inst.readPlinkFiles(base_file_path, encoding)
 
-    def _readETHFilesWithCovariates(self, x_file, y_file, cov_file):
-        self.inst.readETHFilesWithCovariates(x_file, y_file, cov_file)
+    def _readETHFilesWithCovariates(self, x_file, y_file, cov_file, encoding):
+        self.inst.readETHFilesWithCovariates(x_file, y_file, cov_file, False, encoding)
 
-    def _readPlinkFilesWithCovariates(self, base_file_path, cov_file):
-        self.inst.readPlinkFilesWithCovariates(base_file_path, cov_file)
+    def _readPlinkFilesWithCovariates(self, base_file_path, cov_file, encoding):
+        self.inst.readPlinkFilesWithCovariates(base_file_path, cov_file, True, encoding)
 
     def _writeETHFiles(self, x_file, y_file):
         self.inst.writeETHFiles(x_file, y_file)
@@ -726,9 +559,9 @@ cdef class _SignificantIntervalSearchFastCmh(_SignificantIntervalSearchWithCovar
 
 
 
-ItemsetWithP = namedtuple("ItemsetWithP", ["itemset", "pvalue"])
+ItemsetWithP = namedtuple("ItemsetWithP", ["itemset", "score", "odds_ratio", "pvalue"])
 
-_SummaryFacs = namedtuple("Summary", ('iset_processed', 'iset_closed_processed', 'iset_testable',) + _SummaryBase._fields)
+_SummaryFacs = namedtuple("Summary", ('n_iset_processed', 'n_iset_closed_processed', 'n_iset_testable',) + _SummaryBase._fields)
 
 _ResultIset = namedtuple("Result", "summary sig_iset")
 class ResultIset(_ResultIset):
@@ -760,14 +593,16 @@ cdef class _SignificantItemsetSearch(_SignificantFeaturesSearch):
         self._check_if_results_available()
         self._write_pvals_significant_itemsets(path)
 
-    cdef _itemsets(self, ItemsetSet iset):
+    cdef _itemsets(self, ItemsetSetWithOddsRatio iset):
         cdef vector[vector[longint]] ivec = iset.getItemsetsVector();
+        cdef vector[double] scores = iset.getScoreVector();
+        cdef vector[double] odds_ratios = iset.getOddsRatioVector();
         cdef vector[double] pvals = iset.getPValueVector();
 
         cdef list itemsets = []
         cdef int i
         for i in range(ivec.size()):
-            itemsets.append(ItemsetWithP(ivec.at(i), pvals.at(i)))
+            itemsets.append(ItemsetWithP(ivec.at(i), scores.at(i), odds_ratios.at(i), pvals.at(i)))
         return itemsets
 
     def get_significant_itemsets(self):
@@ -812,41 +647,43 @@ cdef class _SignificantItemsetSearchWithCovariates(_SignificantItemsetSearch):
     def _check_if_covariates_are_loaded(self):
         if self._cov_loaded:
             return
-        warn("assuming one covariate for all observations; to change covariates call the update_covariates_file method first")
+        #warn("assuming one covariate for all observations; to change covariates call the update_covariates_file method first")
 
-    def read_eth_files(self, str x_file, str y_file, object cov_file = None):
+    def read_eth_files(self, str x_file, str y_file, object cov_file = None, str encoding = "dominant"):
         """Read the ETH format files.
 
         :param x_file: Data file path
         :param y_file: Labels file path
         :param cov_file: Covariates file path (default: None, means single covariate for all observations)
+        :param encoding: < "dominant" | "recessive" >. Default: "dominant"
         """
         self._check_if_read_is_allowed()
         try:
             if cov_file != None:
-                self._readETHFilesWithCovariates(x_file, y_file, cov_file)
+                self._readETHFilesWithCovariates(x_file, y_file, cov_file, encoding)
                 self._cov_loaded = True
             else:
-                self._readETHFiles(x_file, y_file)
+                self._readETHFiles(x_file, y_file, encoding)
         except RuntimeError as e:
             raise IOError(e.message)
         self._set_results_unavailable()
         self._file_loaded = True
 
-    def read_plink_files(self, str base_file_path, object cov_file = None):
+    def read_plink_files(self, str base_file_path, object cov_file = None, str encoding = "dominant"):
         """Read the ETH format files.
 
         :param x_file: Data file path
         :param y_file: Labels file path
         :param cov_file: Covariates file path (default: None, means single covariate for all observations)
+        :param encoding: < "dominant" | "recessive" >. Default: "dominant"
         """
         self._check_if_read_is_allowed()
         try:
             if cov_file != None:
-                self._readPlinkFilesWithCovariates(base_file_path, cov_file)
+                self._readPlinkFilesWithCovariates(base_file_path, cov_file, encoding)
                 self._cov_loaded = True
             else:
-                self._readPlinkFiles(base_file_path)
+                self._readPlinkFiles(base_file_path, encoding)
         except RuntimeError as e:
             raise IOError(e.message)
         self._set_results_unavailable()
@@ -883,17 +720,18 @@ cdef class _SignificantItemsetSearchFacs(_SignificantItemsetSearchWithCovariates
         self.inst = SignificantItemsetSearchFacs()
 
 
-    def _readETHFiles(self, x_file, y_file):
-        self.inst.readETHFiles(x_file, y_file)
+    def _readETHFiles(self, x_file, y_file, encoding):
+        self.inst.readETHFiles(x_file, y_file, encoding)
 
-    def _readPlinkFiles(self, base_file_path):
-        self.inst.readPlinkFiles(base_file_path)
+    def _readPlinkFiles(self, base_file_path, encoding):
+        self.inst.readPlinkFiles(base_file_path, encoding)
 
-    def _readETHFilesWithCovariates(self, x_file, y_file, cov_file):
-        self.inst.readETHFilesWithCovariates(x_file, y_file, cov_file)
+    def _readETHFilesWithCovariates(self, x_file, y_file, cov_file, encoding):
+        print('caca')
+        self.inst.readETHFilesWithCovariates(x_file, y_file, cov_file, False, encoding)
 
-    def _readPlinkFilesWithCovariates(self, base_file_path, cov_file):
-        self.inst.readPlinkFilesWithCovariates(base_file_path, cov_file)
+    def _readPlinkFilesWithCovariates(self, base_file_path, cov_file, encoding):
+        self.inst.readPlinkFilesWithCovariates(base_file_path, cov_file, 1, encoding)
 
     def _writeETHFiles(self, x_file, y_file):
         self.inst.writeETHFiles(x_file, y_file)
@@ -993,202 +831,182 @@ def checkIsBoolean(var, name):
         return(False)
 
 
+class CASMAP(object):
 
-def createSigPatSearch(*args, 
-                       method='', 
-                       use_intervals=None, 
-                       use_combinations=None,
-                       use_covariate=False,
-                       alpha=0.05,
-                       max_length=0,
-                       **kwargs):
-    '''Creates an object to run one of the following methods:
-        * FAIS
-        * FastCMH
-        * FACS
-       
-       There are two ways to initilise the object, either using the
-       'method' parameter or using the 'use_intervals' boolean flag.
-       More details below.
+    _ALLOWABLE_MODES = ('regionGWAS', 'higherOrderEpistasis')
+    _ALLOWABLE_ENCODINGS = ('dominant', 'recessive')
 
-       Args:
-        * 'method': one of 'fais', 'fastcmh' or 'facs' (upper/lower case 
-          does not matter). Default is empty string ''.
+    def __init__(self, mode, alpha=0.05, max_comb_size=0):
+        self.setMode(mode)
+        self.setTargetFWER(alpha)
+        self.setMaxCombinationSize(max_comb_size)
 
-        * 'use_intervals': boolean for setting whether intervals are used 
-                            (i.e. True for FAIS and FastCMH), 
-                            or not (i.e. False for FACS)
+        self._core = None
+        self._use_covariates = None
 
-        * 'use_combinations': boolean for setting whether combinations are 
-                              used (i.e. True for FACS) or not  
-                              (i.e. False for FAIS and FACS). This is the 
-                              opposite of use_intervals, but note that if
-                              there is a conflict, in that both use_intervals
-                              and use_combinations are set to the same value,
-                              a method with intervals will be used
-                              (FAIS or FastCMH).
+    def getMode(self):
+        return self._mode
 
-        * 'use_covariate': boolean for setting whether a covariate is used
-                            (i.e. True for FastCMH or FACS) or not 
-                            (i.e. False for FAIS). Default value is False.
+    def getTargetFWER(self):
+        return self._alpha
 
-        * 'alpha': A numerical value strictly between 0 and 1 which specifies
-                   the significance threshold. Default value is 0.05.
+    def getMaxCombinationSize(self):
+        return self._max_comb_size
 
-        * 'max_length': The length of the largest interval/combination that
-                        is searched for, i.e. if max_length=5, then only
-                        intervals/combinations of length 1, 2, 3, 4 and 5 will
-                        be considered. Setting this value to 0 means ALL
-                        possible lengths are considered. Default value is 0.
+    def isInitialized(self):
+        return self._core is not None
 
-        Examples to follow...
+    def _checkInitialized(self):
+        if self._core is None:
+            raise ValueError('Object not initialized or hyperparameters changed since last execution. Please call method readFiles prior to execute.')
 
-    '''
+    def setMode(self, mode):
+        # check mode
+        if mode not in CASMAP._ALLOWABLE_MODES:
+            raise ValueError("Currently implemented modes: < " + " | ".join(CASMAP._ALLOWABLE_MODES) + " >.")
+        self._mode = mode
 
-    #check maxlength
-    # Python does not seem to have a nice way to check for finite
-    # numbers, when argument could be string, nan or inf
-    if isinstance(max_length, numbers.Number):
-        if  math.isnan(max_length) | math.isinf(max_length):
-            message = "'max_length' needs to be either 0 or a positive integer."
-            raise ValueError(message)
+        # Delete previous "core" object (if any)
+        self._core = None
+
+    def setTargetFWER(self, alpha=0.05):
+        #check alpha
+        if not isInOpenInterval(alpha):
+            raise ValueError("Target FWER 'alpha' needs to be a value strictly between 0 and 1.")
+        self._alpha = alpha
+
+        # Delete previous "core" object (if any)
+        self._core = None
+
+    def setMaxCombinationSize(self, max_comb_size=0):
+        #check maxlength
+        # Python does not seem to have a nice way to check for finite
+        # numbers, when argument could be string, nan or inf
+        if isinstance(max_comb_size, numbers.Number):
+            if  math.isnan(max_comb_size) | math.isinf(max_comb_size):
+                raise ValueError("Maximum combination size 'max_comb_size' needs to be either 0 (unlimited) or a positive integer.")
+            else:
+                self._max_comb_size = int(max_comb_size)
+                if self._mode == 'higherOrderEpistasis' and self._max_comb_size > 0:
+                    print("The current implementation of higher-order epistasis analyses does not support a limited maximum number of interacting variants. The analysis will be carried out for an unlimited order.")
+                    self._max_comb_size = 0
+                if self._max_comb_size < 0:
+                    self._max_comb_size = 0
         else:
-            max_length = int(max_length)
-            if max_length < 0:
-                max_length = 0
-    else:
-        message = "'max_length' needs to be either 0 or a positive integer."
-        raise ValueError(message)
+            raise ValueError("Maximum combination size 'max_comb_size' needs to be either 0 (unlimited) or a positive integer.")
 
+        # Delete previous "core" object (if any)
+        self._core = None
 
-    #check alpha
-    if not isInOpenInterval(alpha):
-        message ="'alpha' needs to be a value strictly in interval (0, 1)."
-        raise ValueError(message)
+    def _createCore(self):
+        if self._use_covariates is not None:
+            # Instantiate object of the appropriate depending on options
+            if self._mode == 'regionGWAS' and self._use_covariates is False:
+                self._core = _SignificantIntervalSearchChi()
+            elif self._mode == 'regionGWAS' and self._use_covariates is True:
+                self._core = _SignificantIntervalSearchFastCmh()
+            elif self._mode == 'higherOrderEpistasis':
+                self._core = _SignificantItemsetSearchFacs()
 
+            # Set parameters of the object
+            self._core.set_alpha(self._alpha)
+            self._core.set_lmax(self._max_comb_size)
+        else:
+            self._core = None
 
-    #check alpha
-    if not isInOpenInterval(alpha):
-        message ="'alpha' needs to be a value strictly in interval (0, 1)."
-        raise ValueError(message)
+    def readFiles(self, genotype_file=None, phenotype_file=None, plink_file_root=None, covariate_file=None, encoding="dominant"):
+        # Check whether user decided to use tab-separated text files (binary_format) or PLINK formatted files (plink_format)
+        binary_format = genotype_file is not None and phenotype_file is not None
+        plink_format = plink_file_root is not None
+        # At least one of the two must be two, otherwise raise an error
+        if not (binary_format or plink_format):
+            raise ValueError('Either plink_file_root or genotype_file and phenotype_file must be specified as arguments.')
+        # Check that encoding type is correct
+        if encoding not in CASMAP._ALLOWABLE_ENCODINGS:
+            raise ValueError("Currently implemented encodings: < " + " | ".join(CASMAP._ALLOWABLE_ENCODINGS) + " >.")
 
+        # If an additional covariates file was specified, set the object into "CMH mode"
+        self._use_covariates = covariate_file is not None
 
-    #TODO: add support for LAMP (use_combinations==True and use_covariate=False)
-    #TODO: Add examples
-    #TODO: check default case
-    #TODO: Add check for unrecognized arguments; for example if "blah=False" is
-    #      passed to the function
-    if (method=='') & (use_intervals is None) & (use_combinations is None):
-        message = "Need to set at least one of 'method',"
-        message += " 'use_intervals' or 'use_combinations'."
-        raise ValueError(message)
+        # Create appropriate "core" object
+        self._createCore()
 
-    if (method != ''):
-        #convert to lower case (first convert to string)
-        method = str(method).lower()
+        # Give preference to plink_format over binary_format if, by any reason, a user decides to mess around and
+        # specify both
+        if plink_format:
+            if self._use_covariates:
+                self._core.read_plink_files(plink_file_root, covariate_file, encoding)
+            else:
+                self._core.read_plink_files(plink_file_root, encoding)
+        elif binary_format:
+            if self._use_covariates:
+                self._core.read_eth_files(genotype_file, phenotype_file, covariate_file, encoding)
+            else:
+                self._core.read_eth_files(genotype_file, phenotype_file, encoding)
+        else:  # this branch should not be reachable due to the check above...
+            raise ValueError('Either plink_file_root or genotype_file and phenotype_file must be specified as arguments.')
 
+    def execute(self):
+        self._checkInitialized()
+        self._core.execute()
 
-        #check if one of 'fais', 'fastcmh' or 'facs'
-        correctName = False
+    def writeSummary(self, path):
+        self._checkInitialized()
+        self._core.write_summary(path)
 
-        #fais
-        if method == 'fais':
-            correctName = True
-            use_intervals = True
-            use_combinations = False
-            use_covariate = False
-            sig = _SignificantIntervalSearchExact()
-            sig.set_alpha(alpha) 
-            sig.set_lmax(max_length)
-            return(sig)
+    def writeProfile(self, path):
+        self._checkInitialized()
+        self._core.write_profile(path)
 
+    def writeSignificantRegions(self, path):
+        if self._mode != 'regionGWAS':
+            raise ValueError('Method writeSignificantRegions only available for region-based GWAS analyses.')
+        self._checkInitialized()
+        self._core.write_pvals_significant_intervals(path)
 
-        #fastcmh
-        if method == 'fastcmh':
-            correctName = True
-            use_intervals = True
-            use_combinations = False
-            use_covariate = True
-            sig = _SignificantIntervalSearchFastCmh()
-            sig.set_alpha(alpha) 
-            sig.set_lmax(max_length)
-            return(sig)
+    def writeSignificantClusterRepresentatives(self, path):
+        if self._mode != 'regionGWAS':
+            raise ValueError('Method writeSignificantClusterRepresentatives only available for region-based GWAS analyses.')
+        self._checkInitialized()
+        self._core.write_filtered_intervals(path)
 
+    def writeSignificantInteractions(self, path):
+        if self._mode != 'higherOrderEpistasis':
+            raise ValueError('Method writeSignificantInteractions only available for higher-order epistasis analyses.')
+        self._checkInitialized()
+        self._core.write_pvals_significant_itemsets(path)
 
-        #facs
-        if method == 'facs':
-            correctName = True
-            use_intervals = False
-            use_combinations = True
-            use_covariate = True
-            sig = _SignificantItemsetSearchFacs()
-            sig.set_alpha(alpha) 
-            sig.set_lmax(max_length)
-            return(sig)
+    def getSummary(self):
+        self._checkInitialized()
+        return self._core.get_summary()
 
-        if correctName == False:
-            message = "'method' parameter needs to be one of " + \
-                      "'fais', 'fastcmh' or 'facs'. Otherwise, " + \
-                      "set the 'use_intervals' or 'use_combinations' " + \
-                      "flags."
-            raise ValueError(message)
+    def getSignificantRegions(self):
+        if self._mode != 'regionGWAS':
+            raise ValueError('Method getSignificantRegions only available for region-based GWAS analyses.')
+        self._checkInitialized()
+        return self._core.get_significant_intervals()
 
-    #end of if (method != '')
+    def getSignificantClusterRepresentatives(self):
+        if self._mode != 'regionGWAS':
+            raise ValueError('Method getSignificantClusterRepresentatives only available for region-based GWAS analyses.')
+        self._checkInitialized()
+        return self._core.get_filtered_intervals()
 
-    #now we look at the case that the name as NOT been set, but the flags
-    #use_intervals or use_combinations have been set.
+    def getSignificantInteractions(self):
+        if self._mode != 'higherOrderEpistasis':
+            raise ValueError('Method getSignificantInteractions only available for higher-order epistasis analyses.')
+        self._checkInitialized()
+        return self._core.get_significant_itemsets()
 
-    #First, check how many 'None's
-    none_intervals = (use_intervals is None)
-    none_combinations = (use_combinations is None)
-    trueCount = none_intervals + none_combinations
-    if trueCount==2:
-        message = "Need to set 'method', or at least one of the " + \
-                  "boolean flags 'use_intervals' and " + \
-                  "'use_combinations'."
-        raise ValueError(message)
+    def __repr__(self):
+        message = "CASMAP object with:\n" + \
+                  " * Mode = {}".format(self._mode) + "\n" + \
+                  " * Target FWER = {}".format(self._alpha) + "\n" + \
+                  " * Maximum combination size = {}".format(self._max_comb_size) + "\n"
+        if self._core is not None:
+            message += " * Input files read\n" + \
+                       " * Covariate = {}".format(self._use_covariates)
+        else:
+            message += " * No input files read\n"
 
-    #NOW check flags are all booleans
-    #and convert 'None' values to 'False' values
-    use_intervals = checkIsBoolean(use_intervals, "use_intervals")
-    use_combinations = checkIsBoolean(use_combinations, "use_combinations")
-    use_covariate = checkIsBoolean(use_covariate, "use_covariate")
-
-
-    # At this point, either use_intervals or use_combinations must be NOT 'None'
-    # 'None' values receive lower priority
-    if none_intervals:
-        use_intervals = not use_combinations
-
-    if none_combinations:
-        use_combinations = not use_intervals
-
-
-    #do fais
-    if (use_intervals | (not use_combinations)) & (not use_covariate):
-        sig = _SignificantIntervalSearchExact()
-        sig.set_alpha(alpha) 
-        sig.set_lmax(max_length)
-        return(sig)
-    
-    #do fastcmh
-    if (use_intervals | (not use_combinations)) & use_covariate:
-        sig = _SignificantIntervalSearchFastCmh()
-        sig.set_alpha(alpha) 
-        sig.set_lmax(max_length)
-        return(sig)
-    
-    #do facs/lamp
-    if use_combinations | (not use_intervals):
-        sig = _SignificantItemsetSearchFacs()
-        sig.set_alpha(alpha) 
-        sig.set_lmax(max_length)
-        return(sig)
-
-    #should never reach this point
-    #if here, return error
-    message = "Error: no correct flags were used."
-    raise ValueError(message)
-
-    #end of createSigPatSearch
-
+        return message

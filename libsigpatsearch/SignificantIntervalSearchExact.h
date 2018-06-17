@@ -63,6 +63,12 @@ private:
      */
     double compute_pval(longint a, longint x) override;
 
+    double compute_score(longint a, longint x) override;
+
+    double compute_odds_ratio(longint a, longint x) override;
+
+    double score_to_pval(double score) override;
+
 public:
     SignificantIntervalSearchExact();
     virtual ~SignificantIntervalSearchExact();

@@ -8,7 +8,6 @@
 #include "SignificantIntervalSearchFais.h"
 
 
-
 /* CONSTANT DEFINES */
 #define NO_VERBOSE 1
 
@@ -47,8 +46,8 @@ void SignificantIntervalSearchFais::execute_constructor_fais() {
     #ifdef DEBUG
     fprintf(stderr, "SignificantIntervalSearchFais::execute_constructor_fais()\n");
     #endif
-    pValsTestableInts = IntervalSetWithFreq();
-    pValsSigInts = IntervalSetWithFreq();
+    pValsTestableInts = IntervalSetWithOddsRatio();
+    pValsSigInts = IntervalSetWithOddsRatio();
 
     sl1=0; sl2=0; su1=0; su2=0;
     flag=0;
@@ -166,7 +165,7 @@ void SignificantIntervalSearchFais::process_first_layer_pvalues()
     unsigned char **X_tr = genotype.getMatrixPtr();
     unsigned char *Y_tr = phenotype.getVectorPtr();
     unsigned char *X_tr_aux;
-    double pval;
+    double score, odds_ratio, pval;
     // Clear the current layer frequency counters
     freq_clear();
     // Process each length 1 interval
@@ -186,10 +185,15 @@ void SignificantIntervalSearchFais::process_first_layer_pvalues()
             for(j=0; j<N; j++) if(X_tr_aux[j])
                 a += Y_tr[j];
             // Compute the p-value
-            pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+            //pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+            score = compute_interval_score(a, tau);
+            pval = score_to_pval(score);  // Convert score into P-value
+            odds_ratio = compute_interval_odds_ratio(a, tau);  // Compute odds ratio
+            n_pvalues_computed++;
             //precompute_pvals(freq_par[tau]);
             // Check if the P-value is significant
-            testAndSaveInterval(delta_opt, pval, tau, l, a);
+            testAndSaveInterval(delta_opt, score, odds_ratio, pval, tau, l, a);
+            //testAndSaveInterval(delta_opt, pval, tau, l, a);
         }
         #endif
         // If either the current interval or the previous one are prunable (i.e. have more than su2 ones)
@@ -211,7 +215,7 @@ void SignificantIntervalSearchFais::process_intervals_pvalues(){
     unsigned char *Y_tr = phenotype.getVectorPtr();
     unsigned char **X_tr = genotype.getMatrixPtr();
     unsigned char **X_par = genotype_par.getMatrixPtr();
-    double pval;
+    double score, odds_ratio, pval;
     // While testable-interval queue is not empty, continue to process intervals
     while(testable_queue_length){
         // Pop a testable interval from the queue
@@ -244,10 +248,15 @@ void SignificantIntervalSearchFais::process_intervals_pvalues(){
             a = 0;
             for(j=0; j<N; j++) if(X_par_aux[j]) a += Y_tr[j];
             // Compute the P-value
-            pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+            //pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+            score = compute_interval_score(a, tau);
+            pval = score_to_pval(score);
+            odds_ratio = compute_interval_odds_ratio(a, tau);  // Compute odds ratio
+            n_pvalues_computed++;
             //precompute_pvals(freq_par[tau]);
             // Check if the P-value is significant
-            testAndSaveInterval(delta_opt, pval, tau, l, a);
+            testAndSaveInterval(delta_opt, score, odds_ratio, pval, tau, l, a);
+            //testAndSaveInterval(delta_opt, pval, tau, l, a);
         }
         // If either the current interval or the previous one are prunable (i.e. have more than su2 ones)
         // then do NOT append the left-child to the testable queue (i.e. prune it)

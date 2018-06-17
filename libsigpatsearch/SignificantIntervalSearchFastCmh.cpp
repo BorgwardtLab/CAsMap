@@ -6,8 +6,9 @@
  */
 
 #include "SignificantIntervalSearchFastCmh.h"
+#include "chi2.h" // Chi2_sf
 
-
+#include <vector>
 
 /* CONSTANT DEFINES */
 #define NO_VERBOSE 1
@@ -58,8 +59,8 @@ void SignificantIntervalSearchFastCmh::execute_constructor_fastcmh() {
     #ifdef DEBUG
     fprintf(stderr, "SignificantIntervalSearchFastCmh::execute_constructor_fastcmh()\n");
     #endif
-    pValsTestableInts = IntervalSet();
-    pValsSigInts = IntervalSet();
+    pValsTestableInts = IntervalSetWithOddsRatio();
+    pValsSigInts = IntervalSetWithOddsRatio();
 }
 void SignificantIntervalSearchFastCmh::execute_destructor_fastcmh(){
     #ifdef DEBUG
@@ -180,9 +181,10 @@ void SignificantIntervalSearchFastCmh::process_first_layer_pvalues(){
     unsigned char *Y_tr = phenotype.getVectorPtr();
     unsigned short k;
     longint tau, j, queue_idx, a;
+    std::vector<longint> at(K);
     unsigned char *X_tr_aux;
     longint *aux_ptr;
-    double pval;
+    double score, odds_ratio, pval;
     // Clear the current layer frequency counters
     freq_clear();
     // Process each length 1 interval
@@ -200,12 +202,24 @@ void SignificantIntervalSearchFastCmh::process_first_layer_pvalues(){
             //here we check if pval_min of test is smaller than threshold
             if(istestable_int(tau)){//Definition of testability in terms of critical values
                 // Compute global cell count considering all tables together
+                //a = 0;
+                //for(j=0; j<N; j++) if(X_tr_aux[j]) a += Y_tr[j];
                 a = 0;
-                for(j=0; j<N; j++) if(X_tr_aux[j]) a += Y_tr[j];
+                std::fill(at.begin(), at.end(), 0);
+                for(k=0; k<K; k++){
+                    for(j=cum_Nt[k]; j<cum_Nt[k+1]; j++) if(X_tr_aux[j]) at[k] += Y_tr[j];
+                    a += at[k];
+                }
+
                 // Compute the p-value
-                pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+                //pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+                score = compute_interval_score(a, tau);
+                pval = score_to_pval(score);
+                odds_ratio = compute_interval_odds_ratio(at, tau);  // Compute odds ratio
+                n_pvalues_computed++;
                 // Check if the P-value is significant
-                testAndSaveInterval(delta_opt, pval, tau, l, a);
+                testAndSaveInterval(delta_opt, score, odds_ratio, pval, tau, l, a);
+                //testAndSaveInterval(delta_opt, pval, tau, l, a);
             }
         #endif
         // If either the current interval or the previous one are prunable (i.e. have more than su2 ones)
@@ -228,9 +242,10 @@ void SignificantIntervalSearchFastCmh::process_intervals_pvalues(){
     unsigned char *Y_tr = phenotype.getVectorPtr();
     unsigned short k;
     longint tau, j, queue_idx, a;
+    std::vector<longint> at(K);
     unsigned char *X_tr_aux, *X_par_aux;
     longint *aux_ptr;
-    double pval;
+    double score, odds_ratio, pval;
     // While testable-interval queue is not empty, continue to process intervals
     while(testable_queue_length){
         // Pop a testable interval from the queue
@@ -263,11 +278,23 @@ void SignificantIntervalSearchFastCmh::process_intervals_pvalues(){
         // check if the corrected significance threshold must be reduced
         if(istestable_int(tau)){//Definition of testability in terms of critical values
             // Compute global cell count considering all tables together
+            //a = 0;
+            //for(j=0; j<N; j++) if(X_par_aux[j]) a += Y_tr[j];
             a = 0;
-            for(j=0; j<N; j++) if(X_par_aux[j]) a += Y_tr[j];
+            std::fill(at.begin(), at.end(), 0);
+            for(k=0; k<K; k++){
+                for(j=cum_Nt[k]; j<cum_Nt[k+1]; j++) if(X_par_aux[j]) at[k] += Y_tr[j];
+                a += at[k];
+            }
+
             // Compute the P-value
-            pval = compute_interval_pval(a, tau); n_pvalues_computed++;
-            testAndSaveInterval(delta_opt, pval, tau, l, a);
+            //pval = compute_interval_pval(a, tau); n_pvalues_computed++;
+            score = compute_interval_score(a, tau);
+            pval = score_to_pval(score);
+            odds_ratio = compute_interval_odds_ratio(at, tau);  // Compute odds ratio
+            n_pvalues_computed++;
+            testAndSaveInterval(delta_opt, score, odds_ratio, pval, tau, l, a);
+            //testAndSaveInterval(delta_opt, pval, tau, l, a);
         }
         // If either the current interval or the previous one are prunable (i.e. have more than su2 ones)
         // then do NOT append the left-child to the testable queue (i.e. prune it)

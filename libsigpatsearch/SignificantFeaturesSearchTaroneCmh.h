@@ -107,6 +107,12 @@ protected:
     /* ---------------------------------------FUNCTIONS TO FIND THE SIGNIFICANT INTERVALS-------------------------------- */
     double compute_pval(longint a, longint* x);
 
+    double compute_score(longint a, longint* x);
+
+    double compute_odds_ratio(longint* at, longint* x);
+
+    double score_to_pval(double score);
+
     unsigned short bucket_idx(double pval);
 
     double compute_minpval(longint *x);

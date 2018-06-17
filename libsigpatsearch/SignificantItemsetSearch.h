@@ -32,12 +32,12 @@ private:
      */
     typedef SignificantFeaturesSearch super;
 
-    ItemsetSet pValsTestableIsets;
-    inline void setPValsTestableIsets(ItemsetSet iset) {
+    ItemsetSetWithOddsRatio pValsTestableIsets;
+    inline void setPValsTestableIsets(ItemsetSetWithOddsRatio iset) {
         pValsTestableIsets = std::move(iset);
     }
-    ItemsetSet pValsSigIsets;
-    inline void setPValsSigIsets(ItemsetSet iset) {
+    ItemsetSetWithOddsRatio pValsSigIsets;
+    inline void setPValsSigIsets(ItemsetSetWithOddsRatio iset) {
         pValsSigIsets = std::move(iset);
     }
 
@@ -59,19 +59,19 @@ protected:
                               const std::vector<longint> &iset,
                               const std::vector<longint> &pexs,
                               /* out */ std::vector<longint> &itemset) = 0;
-    bool testAndSaveItemset(double threshold, double pval,
+    bool testAndSaveItemset(double threshold, double score, double odds_ratio, double pval,
                             const std::vector<longint> &x_t, longint a,
                             const std::vector<longint> &iset,
                             const std::vector<longint> &pexs);
-    inline void saveSignificantItemset(double pval,
+    inline void saveSignificantItemset(double pval, double score, double odds_ratio,
                                        const std::vector<longint> &itemset,
                                        longint a) {
-        pValsSigIsets.addFeature(itemset, a, pval);
+        pValsSigIsets.addFeature(itemset, a, score, odds_ratio, pval);
     }
-    inline void saveTestableItemset(double pval,
+    inline void saveTestableItemset(double pval, double score, double odds_ratio,
                                     const std::vector<longint> &itemset,
                                     longint a) {
-        pValsTestableIsets.addFeature(itemset, a, pval);
+        pValsTestableIsets.addFeature(itemset, a, score, odds_ratio, pval);
     }
 
     // Post-processing of significant features found in the search
@@ -86,7 +86,7 @@ protected:
      *
      * @return Object encapsulating multiple equal-length std::vectors.
      */
-    inline ItemsetSet const& getPValsTestableIsets() const {
+    inline ItemsetSetWithOddsRatio const& getPValsTestableIsets() const {
         return pValsTestableIsets;
     }
     /**
@@ -94,7 +94,7 @@ protected:
      *
      * @return Object encapsulating multiple equal-length std::vectors.
      */
-    inline ItemsetSet const& getPValsSigIsets() const {
+    inline ItemsetSetWithOddsRatio const& getPValsSigIsets() const {
         return pValsSigIsets;
     }
 

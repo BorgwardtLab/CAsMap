@@ -1,30 +1,30 @@
 ---
-title: "sigpatsearch 0.1.0"
+title: "CASMAP 0.1.0"
 author: "Dean Bodenham"
 date: "8 August 2017"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{sigpatsearch_0.1.0}
+  %\VignetteIndexEntry{CASMAP_0.1.0}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 
 ```{r include = FALSE}
-library(sigpatsearch)
+library(CASMAP)
 ```
 
 
 # Introduction
 
-This is an introduction to the `sigpatsearch` package.
+This is an introduction to the `CASMAP` package.
 
 ## Load the package
 
 First, load the package:
 
 ```{r}
-library(sigpatsearch)
+library(CASMAP)
 ```
 
 ## Creating objects
@@ -38,7 +38,7 @@ There are two ways to create objects:
 Here are examples for creating a FAIS object:
 
 ```{r}
-sig_fais1 <- sigpatsearch(method='fais')
+sig_fais1 <- CASMAP(method='fais')
 ```
 
 and when one tries to print the object, this is the output:
@@ -51,11 +51,11 @@ print(sig_fais1)
 Here are some other example for FAIS:
 
 ```{r}
-sig_fais2 <- sigpatsearch(method='FAIS')
-sig_fais3 <- sigpatsearch(method='FaIs')
-sig_fais4 <- sigpatsearch(use_intervals=T) 
-sig_fais5 <- sigpatsearch(use_intervals=T, use_covariate=F) #default use_covariate is False
-sig_fais6 <- sigpatsearch(use_combinations=F)
+sig_fais2 <- CASMAP(method='FAIS')
+sig_fais3 <- CASMAP(method='FaIs')
+sig_fais4 <- CASMAP(use_intervals=T) 
+sig_fais5 <- CASMAP(use_intervals=T, use_covariate=F) #default use_covariate is False
+sig_fais6 <- CASMAP(use_combinations=F)
 ```
 
 
@@ -65,11 +65,11 @@ Here are different ways of creating a FastCMH object:
 
 
 ```{r}
-sig_fastcmh1 <- sigpatsearch(method='fastcmh')
-sig_fastcmh2 <- sigpatsearch(method='FASTCMH')
-sig_fastcmh3 <- sigpatsearch(method='FastCMH')
-sig_fastcmh4 <- sigpatsearch(use_intervals=T, use_covariate=T)
-sig_fastcmh5 <- sigpatsearch(use_combinations=F, use_covariate=T)
+sig_fastcmh1 <- CASMAP(method='fastcmh')
+sig_fastcmh2 <- CASMAP(method='FASTCMH')
+sig_fastcmh3 <- CASMAP(method='FastCMH')
+sig_fastcmh4 <- CASMAP(use_intervals=T, use_covariate=T)
+sig_fastcmh5 <- CASMAP(use_combinations=F, use_covariate=T)
 print(sig_fastcmh5)
 ```
 
@@ -80,13 +80,13 @@ Here are different ways of creating a FACS object:
 
 
 ```{r}
-sig_facs1 <- sigpatsearch(method='facs')
-sig_facs2 <- sigpatsearch(method='FACS')
-sig_facs3 <- sigpatsearch(method='FaCs')
-sig_facs4 <- sigpatsearch(use_intervals=F, use_covariate=T)
-sig_facs5 <- sigpatsearch(use_intervals=F, use_covariate=F)
-sig_facs6 <- sigpatsearch(use_combinations=T, use_covariate=T)
-sig_facs7 <- sigpatsearch(use_combinations=T, use_covariate=F)
+sig_facs1 <- CASMAP(method='facs')
+sig_facs2 <- CASMAP(method='FACS')
+sig_facs3 <- CASMAP(method='FaCs')
+sig_facs4 <- CASMAP(use_intervals=F, use_covariate=T)
+sig_facs5 <- CASMAP(use_intervals=F, use_covariate=F)
+sig_facs6 <- CASMAP(use_combinations=T, use_covariate=T)
+sig_facs7 <- CASMAP(use_combinations=T, use_covariate=F)
 print(sig_facs7)
 ```
 
@@ -96,7 +96,7 @@ To change the significance threshold `alpha` and the maximum interval length is 
 
 
 ```{r}
-sig_fais8 <- sigpatsearch(method='fais')
+sig_fais8 <- CASMAP(method='fais')
 sig_fais8$set_alpha(0.001)
 sig_fais8$set_lmax(10)
 print(sig_fais8)

@@ -102,27 +102,27 @@ void SignificantFeaturesSearchWithCovariates::readCovariatesFile(
 
 void SignificantFeaturesSearchWithCovariates::readFilesWithCovariates(
         const std::string& xfilename, const std::string& yfilename, bool plinkFormat,
-        const std::string& covfilename, bool covPlinkFormat)
+        const std::string& covfilename, bool covPlinkFormat, const std::string& encoding)
 {
     Phenotype phenotype_buf = readLabelsFileToBuffer(yfilename, plinkFormat);
     Phenotype covariates_buf = readCovariatesFileToBuffer(covfilename, covPlinkFormat, phenotype_buf);
-    readDataFile(xfilename, plinkFormat, phenotype_buf);
+    readDataFile(xfilename, plinkFormat, phenotype_buf, encoding);
     // everything went smooth, memoize the buffers
     phenotype = phenotype_buf;
     setCovariates(covariates_buf);
 }
 void SignificantFeaturesSearchWithCovariates::readETHFilesWithCovariates(
         const std::string& xfilename, const std::string& yfilename,
-        const std::string& covfilename, bool covPlinkFormat)
+        const std::string& covfilename, bool covPlinkFormat, const std::string& encoding)
 {
-    readFilesWithCovariates(xfilename, yfilename, false, covfilename, covPlinkFormat);
+    readFilesWithCovariates(xfilename, yfilename, false, covfilename, covPlinkFormat, encoding);
 }
 void SignificantFeaturesSearchWithCovariates::readPlinkFilesWithCovariates(
         const std::string& basefilename,
-        const std::string& covfilename, bool covPlinkFormat)
+        const std::string& covfilename, bool covPlinkFormat, const std::string& encoding )
 {
     readFilesWithCovariates(getPlinkDataFilename(basefilename), getPlinkLabelsFilename(basefilename), true,
-            covfilename, covPlinkFormat);
+            covfilename, covPlinkFormat, encoding);
 }
 
 void SignificantFeaturesSearchWithCovariates::writeETHFilesWithCovariates(

@@ -25,11 +25,13 @@ define compile_cran
 	@$(RM) $(MAKEVARS)-e # dirty fix for incompatibility of sed's -i switch (Mac OS vs. Unix)
 endef
 
-all: package
 
+all: package
 
 version:
 	@echo $(VERSION)
+	@echo $(INSTALL_SRC)
+	@echo $(INSTALL_DEST)
 
 wrapper: $(SOURCES)
 	$(call compile_cran)
@@ -54,6 +56,9 @@ package: $(SOURCES)
 	Rscript -e "devtools::build()"
 
 install: package
+	R CMD install $(INSTALL_SRC) $(INSTALL_DEST)
+
+install_test: 
 	R CMD install $(INSTALL_SRC) $(INSTALL_DEST)
 
 install_cwd:

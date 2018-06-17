@@ -12,7 +12,7 @@
 //      read csv file containing all significant intervals, group these into
 //      overlapping clusters, and return the most significant interval per cluster
 //
-//Dean Bodenham June 2016
+//Laetitia Papaxanthos, Dean Bodenham
 
 #include<iostream>
 #include<string>
@@ -25,13 +25,15 @@
 #include "types.h"
 
 using std::vector;
-using std::size_t;
 using std::string;
 using std::stringstream;
 
+
+const double DEFAULT_SCORE = 0.0;
+const double DEFAULT_ODDS_RATIO = 1.0;
 const double DEFAULT_PVALUE = 1.0;
-const size_t DEFAULT_START = 0;
-const size_t DEFAULT_END = 0;
+const longint DEFAULT_START = 0;
+const longint DEFAULT_END = 0;
 
 namespace SignificantPattern
 {
@@ -39,20 +41,26 @@ namespace SignificantPattern
     //--------------------------------------------------------------------------//
     class Interval{
         public:
-            size_t getStart() const;
-            size_t getEnd() const;
+            longint getStart() const;
+            longint getEnd() const;
+            double getScore() const;
+            double getOddsRatio() const;
             double getPvalue() const;
-            size_t getLength() const;
-            void setStart(size_t);
-            void setEnd(size_t);
-            void setEnd(size_t, size_t);
+            longint getLength() const;
+            void setStart(longint);
+            void setEnd(longint);
+            void setEnd(longint, longint);
+            void setScore(double);
+            void setOddsRatio(double);
             void setPvalue(double);
-            bool overlaps(size_t, size_t) const;
+            bool overlaps(longint, longint) const;
             void printInterval() const;
-            static size_t computeEnd(size_t tau_, size_t l_);
+            static longint computeEnd(longint tau_, longint l_);
         private:
-            size_t start;
-            size_t end;
+            longint start;
+            longint end;
+            double score;
+            double odds_ratio;
             double pvalue;
     };
     //--------------------------------------------------------------------------//
@@ -61,19 +69,26 @@ namespace SignificantPattern
     {
     private:
         vector<Interval> sigInts;
-        vector<Interval> getMinPvalueIntervalPerCluster(vector<size_t>& tau, vector<size_t>& l, vector<double>& pvalue, const vector<int>& label);
-        vector<int> getClusterLabelsForIntervals(const vector<size_t>& tau, const vector<size_t>& l, const vector<Interval>& cluster);
-        vector<Interval> getClusters(vector<size_t>& v_tau, vector<size_t>& v_l);
-        vector<bool> getClusterIndicatorVector(vector<size_t>& v_tau, vector<size_t>& v_l);
-        void makeIntervalTrue(vector<bool>& v, const size_t tau, const size_t l);
+        vector<Interval> getMinPvalueIntervalPerCluster(vector<longint>& tau, vector<longint>& l, vector<double>& score, vector<double>& odds_ratio, vector<double>& pvalue, const vector<int>& label);
+        //LP output:
+        vector<Interval> sigClusters;
+        vector<Interval> getCLusterBoundaries(vector<longint>& tau, vector<longint>& l, const vector<int>& label);
+
+
+        vector<int> getClusterLabelsForIntervals(const vector<longint>& tau, const vector<longint>& l, const vector<Interval>& cluster);
+        vector<Interval> getClusters(vector<longint>& v_tau, vector<longint>& v_l);
+        vector<bool> getClusterIndicatorVector(vector<longint>& v_tau, vector<longint>& v_l);
+        void makeIntervalTrue(vector<bool>& v, const longint tau, const longint l);
     public:
         FilterIntervals ();
         FilterIntervals (const FilterIntervals& other);
         virtual FilterIntervals& operator=(const FilterIntervals& other);
         virtual ~FilterIntervals ();
         void cpp_filterIntervalsFromMemory(vector<longint> ll_tau,
-                                                         vector<longint> ll_l,
-                                                    vector<double> pvalue);
+                                           vector<longint> ll_l,
+                                           vector<double> score,
+                                           vector<double> odds_ratio,
+                                           vector<double> pvalue);
         void writeToFile(const std::string& filename);
         inline vector<Interval>& getSigInts() { return sigInts; }
     };
@@ -90,6 +105,8 @@ namespace SignificantPattern
         virtual ~SignificantIntervals();
         void cpp_intervalsFromMemory(vector<longint> ll_tau,
                                      vector<longint> ll_l,
+                                     vector<double> score,
+                                     vector<double> odds_ratio,
                                      vector<double> pvalue);
         void writeToFile(const std::string& filename);
         inline vector<Interval>& getSigInts() { return sigInts; }

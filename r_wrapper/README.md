@@ -60,8 +60,9 @@ If the file `~/.R/Makevars` does not exist, create it. You may need to create th
 Edit the file `~/.R/Makevars` and add the following contents:
 ```
 CC=gcc-6
-CXX=gcc-6
-CXX1X=gcc-6
+CXX=g++-6
+CXX1X=g++-6
+CXX11=g++-6
 ```
 This allows R to compile the source code of the package using the `gcc-6` compiler. Refer to the environment variable `CC` that was set in the general installation steps.
 

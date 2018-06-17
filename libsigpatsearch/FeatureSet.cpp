@@ -1,6 +1,7 @@
 /*
  * FeatureSet.cpp
  *
+ *
  *  Created on: Sep 8, 2016
  *      Author: mabaker
  */
@@ -10,6 +11,8 @@
 
 #include "FeatureSet.h"
 #include "Exception.h"
+#include <vector>
+#include <iterator>
 
 namespace SignificantPattern
 {
@@ -17,8 +20,10 @@ namespace SignificantPattern
     FeatureSet::FeatureSet () : alphaVector(), pValueVector() {}
     FeatureSet::~FeatureSet () {}
 
-    const std::string FeatureSet::COL_SEP = ",";
-    const std::string FeatureSet::HEADER_PROPS = "p-value" + FeatureSet::COL_SEP + "a";
+    const std::string FeatureSet::COL_SEP = "\t";
+    //const std::string FeatureSet::HEADER_PROPS = "p-value" + FeatureSet::COL_SEP + "a";
+    //const std::string FeatureSet::HEADER_PROPS = "p-value" + FeatureSet::COL_SEP + "score" + FeatureSet::COL_SEP + "OR";
+    const std::string FeatureSet::HEADER_PROPS = "p-value";
 
     void FeatureSet::addFeatureProps(longint alpha, double pValue)
     {
@@ -31,8 +36,14 @@ namespace SignificantPattern
     }
     std::string const FeatureSet::getLineProps(size_t i) const {
         std::stringstream ss;
-        ss << std::scientific << pValueVector[i] << COL_SEP
-           << std::defaultfloat << alphaVector[i];
+        //LP: output
+        //ss << std::scientific << pValueVector[i] << COL_SEP
+          // << std::defaultfloat << alphaVector[i];
+        //ss << std::scientific << pValueVector[i] << COL_SEP
+        //   << std::defaultfloat << "tbd" << COL_SEP
+        //   << std::defaultfloat << "tbd";
+        ss << std::scientific << pValueVector[i];
+
         return ss.str();
     }
 
@@ -70,8 +81,9 @@ namespace SignificantPattern
     ItemsetSet::ItemsetSet () : FeatureSet(), itemsetsVector() {}
     ItemsetSet::~ItemsetSet () {}
 
-    const std::string ItemsetSet::ITEMS_SEP = " ";
-    const std::string ItemsetSet::HEADER_FEATURE = "itemset";
+    const std::string ItemsetSet::ITEMS_SEP = ";"; //LP: output
+    //const std::string ItemsetSet::HEADER_FEATURE = "itemset";
+    const std::string ItemsetSet::HEADER_FEATURE = "index_1;...;index_N";
 
     void ItemsetSet::addFeature(const std::vector<longint> itemset, longint alpha, double pValue)
     {
@@ -93,13 +105,41 @@ namespace SignificantPattern
     }
 
 
+    ItemsetSetWithOddsRatio::ItemsetSetWithOddsRatio() : ItemsetSet(), oddsRatioVector(), scoreVector() {}
+    ItemsetSetWithOddsRatio::~ItemsetSetWithOddsRatio() {}
+
+    const std::string ItemsetSetWithOddsRatio::HEADER_PROPS_WITH_ODDS_RATIO = ItemsetSetWithOddsRatio::HEADER_PROPS + ItemsetSetWithOddsRatio::COL_SEP + "score" + ItemsetSetWithOddsRatio::COL_SEP + "OR";
+
+    void ItemsetSetWithOddsRatio::addFeature(const std::vector<longint> itemset,
+                                              longint alpha, double pValue) {
+        addFeature(itemset, alpha, -1, -1, pValue);
+    }
+    void ItemsetSetWithOddsRatio::addFeature(const std::vector<longint> itemset,
+                                              longint alpha, double score, double oddsRatio,
+                                              double pValue) {
+        super::addFeature(itemset, alpha, pValue);
+        scoreVector.push_back(score);
+        oddsRatioVector.push_back(oddsRatio);
+    }
+
+    std::string const& ItemsetSetWithOddsRatio::getHeaderProps() const {
+        return HEADER_PROPS_WITH_ODDS_RATIO;
+    }
+    std::string const ItemsetSetWithOddsRatio::getLineProps(size_t i) const {
+        std::stringstream ss;
+        ss << super::getLineProps(i) << COL_SEP
+           << std::defaultfloat << scoreVector[i] << COL_SEP
+           << std::defaultfloat << oddsRatioVector[i];
+        return ss.str();
+    }
 
 
 
     IntervalSet::IntervalSet () : FeatureSet(), startVector(), endVector() {}
     IntervalSet::~IntervalSet () {}
 
-    const std::string IntervalSet::HEADER_FEATURE = "start" + IntervalSet::COL_SEP + "end";
+    //const std::string IntervalSet::HEADER_FEATURE = "start" + IntervalSet::COL_SEP + "end";
+    const std::string IntervalSet::HEADER_FEATURE = "index_1;...;index_N";
 
     void IntervalSet::addFeature(longint start, longint end, longint alpha, double pValue)
     {
@@ -122,9 +162,28 @@ namespace SignificantPattern
     std::string const& IntervalSet::getHeaderFeature() const {
         return HEADER_FEATURE;
     }
+
     std::string const IntervalSet::getLineFeature(size_t i) const {
+    	//LP: output
+		//Compute 'index_1;index_2;index_3;...;index_N'
+		std::vector<int> myVec;
+		std::ostringstream oss;
+
+		for(int j=startVector[i]; j<= endVector[i]; j++){
+			myVec.push_back(j);
+		}
+		if (!myVec.empty())
+		  {
+			// Convert all but the last element to avoid a trailing ";"
+			std::copy(myVec.begin(), myVec.end()-1, std::ostream_iterator<int>(oss, ";"));
+
+			// Now add the last element with no delimiter
+			oss << myVec.back();
+		  }
+
         std::stringstream ss;
-        ss << startVector[i] << COL_SEP << endVector[i];
+        ss << oss.str();
+        //ss << startVector[i] << COL_SEP << endVector[i];
         return ss.str();
     }
 
@@ -152,6 +211,34 @@ namespace SignificantPattern
     std::string const IntervalSetWithFreq::getLineProps(size_t i) const {
         std::stringstream ss;
         ss << super::getLineProps(i) << COL_SEP << xVector[i];
+        return ss.str();
+    }
+
+    IntervalSetWithOddsRatio::IntervalSetWithOddsRatio() : IntervalSet(), oddsRatioVector(), scoreVector() {}
+    IntervalSetWithOddsRatio::~IntervalSetWithOddsRatio() {}
+
+    const std::string IntervalSetWithOddsRatio::HEADER_PROPS_WITH_ODDS_RATIO = IntervalSetWithOddsRatio::HEADER_PROPS + IntervalSetWithOddsRatio::COL_SEP + "score" + IntervalSetWithOddsRatio::COL_SEP + "OR";
+
+    void IntervalSetWithOddsRatio::addFeature(longint start, longint end,
+                                         longint alpha, double pValue) {
+        addFeature(start, end, alpha, -1, -1, pValue);
+    }
+    void IntervalSetWithOddsRatio::addFeature(longint start, longint end,
+                                         longint alpha, double score, double oddsRatio,
+                                         double pValue) {
+        super::addFeature(start, end, alpha, pValue);
+        scoreVector.push_back(score);
+        oddsRatioVector.push_back(oddsRatio);
+    }
+
+    std::string const& IntervalSetWithOddsRatio::getHeaderProps() const {
+        return HEADER_PROPS_WITH_ODDS_RATIO;
+    }
+    std::string const IntervalSetWithOddsRatio::getLineProps(size_t i) const {
+        std::stringstream ss;
+        ss << super::getLineProps(i) << COL_SEP
+           << std::defaultfloat << scoreVector[i] << COL_SEP
+           << std::defaultfloat << oddsRatioVector[i];
         return ss.str();
     }
 

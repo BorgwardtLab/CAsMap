@@ -33,7 +33,7 @@ namespace SignificantPattern
         unsigned char **X_tr;
 
         void checkEthDataFile(const std::string& filename, longint N_expected, /*out*/ longint& L);
-        void parseEthDataFile(const std::string& filename, /*out*/ unsigned char *data_buf);
+        void parseEthDataFile(const std::string& filename, /*out*/ unsigned char *data_buf, const std::string& encoding);
         void checkPlinkRawFile(const std::string& filename, const Phenotype& phenotype, /*out*/ longint& L, bool& hasHeader);
         void parsePlinkRawFile(const std::string& filename, bool hasHeader, const Phenotype& phenotype, /*out*/ unsigned char *data_buf);
         void splitRawLine(const std::string& line,
@@ -74,7 +74,7 @@ namespace SignificantPattern
         /// matrix init (mem allocation)
         void initialiseMatrix(longint L, longint N);
         /// read from file
-        void readETHFile(const std::string& filename, longint N);
+        void readETHFile(const std::string& filename, longint N, const std::string& encoding);
         void readPlinkRawFile(const std::string& filename, const Phenotype& phenotype);
         /// write to file
         void writeETHFile(const std::string& filename);

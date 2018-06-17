@@ -2,7 +2,7 @@
  * FilterIntervals.cpp
  *
  *  Created on: Sep 12, 2016
- *      Author: mabaker
+ *
  */
 
 #include "FilterIntervals.h"
@@ -11,7 +11,7 @@
 //      read csv file containing all significant intervals, group these into
 //      overlapping clusters, and return the most significant interval per cluster
 //
-//Dean Bodenham March 2016
+//Laetitia Papaxanthos, Dean Bodenham
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -19,12 +19,16 @@
 #include<vector>
 #include<iomanip>
 #include<numeric>
+#include<iterator>
 #include<algorithm> //sort
+#include<cmath>
 //#include<Rcpp.h>
 
 #include "Exception.h"
 
 using namespace std;
+std::ostringstream oss;
+
 
 namespace SignificantPattern
 {
@@ -44,6 +48,7 @@ namespace SignificantPattern
        if (this != &other) {
            sigInts.clear(); // should be unnecessary
            sigInts = other.sigInts;
+           sigClusters = other.sigClusters;
        }
        return *this;
     }
@@ -52,26 +57,29 @@ namespace SignificantPattern
     {
     }
 
-    size_t Interval::computeEnd(size_t tau_, size_t l_) {
+    longint Interval::computeEnd(longint tau_, longint l_) {
         return (tau_ + l_ - 1);
     }
 
-
-    size_t Interval::getStart() const { return start;}
-    size_t Interval::getEnd() const { return end;}
+    longint Interval::getStart() const { return start;}
+    longint Interval::getEnd() const { return end;}
+    double Interval::getScore() const {return score;}
+    double Interval::getOddsRatio() const {return odds_ratio;}
     double Interval::getPvalue() const {return pvalue;}
-    size_t Interval::getLength() const { return end - start + 1;}
-    void Interval::setStart(size_t m_start){ start = m_start;}
-    void Interval::setEnd(size_t m_end){ end = m_end;}
-    void Interval::setEnd(size_t tau_, size_t l_){ end = computeEnd(tau_, l_);}
+    longint Interval::getLength() const { return end - start + 1;}
+    void Interval::setStart(longint m_start){ start = m_start;}
+    void Interval::setEnd(longint m_end){ end = m_end;}
+    void Interval::setEnd(longint tau_, longint l_){ end = computeEnd(tau_, l_);}
+    void Interval::setScore(double m_score){ score = m_score;}
+    void Interval::setOddsRatio(double m_odds_ratio){ odds_ratio = m_odds_ratio;}
     void Interval::setPvalue(double m_pvalue){ pvalue = m_pvalue;}
 
     //check if current interval overlaps interval [a,b]
-    bool Interval::overlaps(size_t a, size_t b) const{
+    bool Interval::overlaps(longint a, longint b) const{
         bool doesOverlap = false;
         //very simple check: if start <= a <= end, then overlap is true
-        if (  (start <= a)  && (a <= end)  )
-            doesOverlap = true;
+        if  (  (start <= a)  && (a <= end ))
+        	doesOverlap = true;
         return doesOverlap;
 
     }
@@ -104,11 +112,11 @@ namespace SignificantPattern
     //get the largest index of the interval
     //e.g. a=5, tau=3 -> interval [5,7] -> endpoint=7
     //BUT also need to makesure this does not exceed max number of features
-    size_t getMaxIntervalEndpoint(vector<size_t> v_tau, vector<size_t> v_l){
-        size_t maxEndpoint = 0;
-        //size_t start;
-        size_t end;
-        for (size_t index = 0; index != v_tau.size(); ++index){
+    longint getMaxIntervalEndpoint(vector<longint> v_tau, vector<longint> v_l){
+        longint maxEndpoint = 0;
+        //longint start;
+        longint end;
+        for (longint index = 0; index != v_tau.size(); ++index){
             //start = v_tau[index];
             //end = start + v_l[index] - 1;
             end = Interval::computeEnd(v_tau[index], v_l[index]);
@@ -119,17 +127,17 @@ namespace SignificantPattern
 
 
     //change interval [tau, tau+1, ..., tau+l - 1] to true
-    void FilterIntervals::makeIntervalTrue(vector<bool>& v, const size_t tau, const size_t l){
+    void FilterIntervals::makeIntervalTrue(vector<bool>& v, const longint tau, const longint l){
         //this was a problem, not checking that index < v.size()
-        size_t count = 0;
-        const size_t maxIndexTrue = tau + l;
+        longint count = 0;
+        const longint maxIndexTrue = tau + l;
 
         //as soon as iterator reaches end OR enough values set to true, will stop loop. Need to use non-constant iterator here, because we change the value in the vector
-        const size_t interval_start = tau;
-        const size_t interval_end = Interval::computeEnd((size_t)tau, (size_t)l);
+        const longint interval_start = tau;
+        const longint interval_end = Interval::computeEnd((longint)tau, (longint)l);
 
-        for(vector<bool>::iterator it = v.begin() + interval_start;
-                    it != v.begin() + interval_end && count < maxIndexTrue; ++it){
+        for(vector<bool>::iterator it = v.begin() + interval_start - 1;
+                    it != v.begin() + interval_end  && count < maxIndexTrue; ++it){
             //remember - C++ counts from 0, but we have corrected for this when
             //constructing the vector
             *it = true;
@@ -139,9 +147,13 @@ namespace SignificantPattern
 
 
     //get vector which indicates the cluster
-    vector<bool> FilterIntervals::getClusterIndicatorVector(vector<size_t>& v_tau, vector<size_t>& v_l){
+    vector<bool> FilterIntervals::getClusterIndicatorVector(vector<longint>& v_tau, vector<longint>& v_l){
+
+
+
+
         //get maxEndpoint, so can create vector of false's of that size
-        size_t n = getMaxIntervalEndpoint(v_tau, v_l);
+        longint n = getMaxIntervalEndpoint(v_tau, v_l);
         //not going to mess around with 0th index... will keep "true" indices
         n++;
 
@@ -149,27 +161,28 @@ namespace SignificantPattern
         vector<bool> clusterIndicator(n, false);
 
         //create two iterators, and move over both iterators
-        vector<size_t>::const_iterator it_tau = v_tau.begin();
-        vector<size_t>::const_iterator it_l = v_l.begin();
+        vector<longint>::const_iterator it_tau = v_tau.begin();
+        vector<longint>::const_iterator it_l = v_l.begin();
 
         //just get rid of zeroth index
         //This was an error
         for (; it_tau != v_tau.end() and it_l != v_l.end(); ++it_tau, ++it_l){
             makeIntervalTrue(clusterIndicator, *it_tau, *it_l);
         }
+
         return clusterIndicator;
 
     }
 
 
     //run through binary array, and label start/end of clusters
-    vector<Interval> FilterIntervals::getClusters(vector<size_t>& v_tau, vector<size_t>& v_l){
+    vector<Interval> FilterIntervals::getClusters(vector<longint>& v_tau, vector<longint>& v_l){
 
         vector<Interval> cluster;
         vector<bool> clusterIndicator = getClusterIndicatorVector(v_tau, v_l);
         Interval thisCluster;
         bool inCluster = false;
-        size_t index = 0;
+        longint index = 0;
         for (vector<bool>::const_iterator it = clusterIndicator.begin(); it != clusterIndicator.end(); ++it, ++index){
 
             //starts off false, as soon as switches to true...
@@ -217,16 +230,16 @@ namespace SignificantPattern
 
     //for(vector<bool>::iterator it = v.begin() + tau; it != v.end() && count < maxIndexTrue; ++it){
     //we use consts
-    vector<int> FilterIntervals::getClusterLabelsForIntervals(const vector<size_t>& tau, const vector<size_t>& l, const vector<Interval>& cluster){
+    vector<int> FilterIntervals::getClusterLabelsForIntervals(const vector<longint>& tau, const vector<longint>& l, const vector<Interval>& cluster){
         //get tau and l
         //the label vector will be returned
         vector<int> label(tau.size());
 
         //these ints are the temp label variables
         int thisIntervalLabel;
-        size_t thisIntervalEnd;
+        longint thisIntervalEnd;
 
-        //create a vector of size as the same as clusters
+        //create a vector of the same size as the clusters
         vector<int> clusterLabels(cluster.size());
         //fill it with 0, 1, ..., cluster.size()
         for (unsigned int i=0; i < clusterLabels.size(); ++i){
@@ -235,15 +248,15 @@ namespace SignificantPattern
 
         //run through all intervals/tau's, iterating over both tau and l
         //although l is not needed...
-        vector<size_t>::const_iterator it_tau = tau.begin();
-        vector<size_t>::const_iterator it_l = l.begin();
+        vector<longint>::const_iterator it_tau = tau.begin();
+        vector<longint>::const_iterator it_l = l.begin();
 
-        for(size_t intervalIndex = 0; it_tau != tau.end() && it_l != l.end(); ++it_tau, ++it_l, ++intervalIndex){
+        for(longint intervalIndex = 0; it_tau != tau.end() && it_l != l.end(); ++it_tau, ++it_l, ++intervalIndex){
             //in case no cluster assigned - which should not happen - interval will get label "0"
             //setting default value to 0, although could be -1...but worried about any error would kill the process
     //         thisIntervalLabel = -1;
             thisIntervalLabel = 0;
-            thisIntervalEnd = Interval::computeEnd((size_t)*it_tau, (size_t)*it_l);
+            thisIntervalEnd = Interval::computeEnd((longint)*it_tau, (longint)*it_l);
 
             //now check which cluster it belongs to:
             //this for-loop is iterating over clusters, which are intervals.
@@ -254,7 +267,7 @@ namespace SignificantPattern
             for (vector<Interval>::const_iterator it_cluster = cluster.begin();
                 it_cluster != cluster.end() && it_thisClusterLabel != clusterLabels.end();
                 ++it_cluster, ++it_thisClusterLabel){
-                if (  (*it_cluster).overlaps((size_t)*it_tau, (size_t)thisIntervalEnd)  ){
+                if (  (*it_cluster).overlaps((longint)*it_tau, (longint)thisIntervalEnd)  ){
                     //this interval label is this cluster
                     thisIntervalLabel = *it_thisClusterLabel;
                     //push_back
@@ -274,7 +287,7 @@ namespace SignificantPattern
     //i) find number of clusters
     //ii) run through label, for each cluster,
     //iii) when label==thisLabel, check p.value, and save interval if smaller pvalue
-    vector<Interval> FilterIntervals::getMinPvalueIntervalPerCluster(vector<size_t>& tau, vector<size_t>& l, vector<double>& pvalue, const vector<int>& label){
+    vector<Interval> FilterIntervals::getMinPvalueIntervalPerCluster(vector<longint>& tau, vector<longint>& l, vector<double>& score, vector<double>& odds_ratio, vector<double>& pvalue, const vector<int>& label){
 
         //need to quickly get the max and min cluster values
         //use 0 and 2 as max and min, because these should definitely change
@@ -296,19 +309,24 @@ namespace SignificantPattern
         for (vector<Interval>::iterator it_sigInts = sigInts.begin(); it_sigInts != sigInts.end(); ++it_sigInts){
             (*it_sigInts).setStart(DEFAULT_START);
             (*it_sigInts).setEnd(DEFAULT_END);
+            (*it_sigInts).setScore(DEFAULT_SCORE);
+            (*it_sigInts).setOddsRatio(DEFAULT_ODDS_RATIO);
             (*it_sigInts).setPvalue(DEFAULT_PVALUE);
         }
 
         //iterate over tau, l, pvalue and label all at once
+        vector<double>::const_iterator it_score = score.begin();
+        vector<double>::const_iterator it_odds_ratio = odds_ratio.begin();
         vector<double>::const_iterator it_pvalue = pvalue.begin();
-        vector<size_t>::const_iterator it_tau = tau.begin();
-        vector<size_t>::const_iterator it_l = l.begin();
+        vector<longint>::const_iterator it_tau = tau.begin();
+        vector<longint>::const_iterator it_l = l.begin();
         vector<int>::const_iterator it_label = label.begin();
         double currentMinPvalueForCluster;
-        size_t currentMinPvalueForClusterTau;
-        size_t currentMinPvalueForClusterL;
-        for (; it_pvalue != pvalue.end() && it_tau != tau.end() && it_l != l.end() && it_label != label.end();
-                ++it_pvalue, ++it_tau, ++it_l, ++it_label){
+        longint currentMinPvalueForClusterTau;
+        longint currentMinPvalueForClusterL;
+
+        for (; it_score != score.end() && it_odds_ratio != odds_ratio.end() && it_pvalue != pvalue.end() && it_tau != tau.end() && it_l != l.end() && it_label != label.end();
+               ++it_score, ++it_odds_ratio, ++it_pvalue, ++it_tau, ++it_l, ++it_label){
 
             //see what the current min pvalue is for this cluster
             currentMinPvalueForCluster = sigInts[*it_label].getPvalue();
@@ -319,23 +337,21 @@ namespace SignificantPattern
                 //if pvalue for this interval is smaller than the min pvalue for this cluster, update the interval
                 sigInts[*it_label].setStart(*it_tau);
                 sigInts[*it_label].setEnd(*it_tau, *it_l);
+                sigInts[*it_label].setScore(*it_score);
+                sigInts[*it_label].setOddsRatio(*it_odds_ratio);
                 sigInts[*it_label].setPvalue(*it_pvalue);
             }
 
-            //ADDED ADDITIONAL CASE: what if p-values are equal?
+            //what if p-values are equal?
+            //If the p-values are equal, we keep the SMALLEST interval.
+            //It follows the objective of the clustering which is to remove the redundancy.
+            //It is consistent with the FastCMH publication.
             //Then we keep interval with smaller tau (if interval lengths the SAME)
-            //This decision is made in order to ensure consistent results
-            //If the p-values are equal, we keep the LARGEST interval
-            //This is motivated by an example using sample data.
-            //The true  interval is [100, 103], but
-            //[100, 100], [100, 101], [101, 102], [100, 103], etc
-            //all have the same p-value
-            //So, we keep the interval with the LARGEST length
-            //
-            //It is possible that [100, 101], for example, will have a smaller
-            //p-value that [100, 103], the "true" interval, but then [100, 101]
-            //will be returned, because it has a smaller p-value
-            //This argument is just used when p-values are EQUAL
+            //This decision is made in order to ensure consistent results.
+
+            //An alternative is to keep the LARGEST interval.
+            //To do so, change the sign in the line commented by " sign < for SMALLEST interval".
+
             if (*it_pvalue == currentMinPvalueForCluster){
                 //First decision: if interval length is the SAME
                 //              AND tau is smaller - REPLACE
@@ -343,13 +359,17 @@ namespace SignificantPattern
                     if (*it_tau < currentMinPvalueForClusterTau){
                         sigInts[*it_label].setStart(*it_tau);
                         sigInts[*it_label].setEnd(*it_tau, *it_l);
+                        sigInts[*it_label].setScore(*it_score);
+                        sigInts[*it_label].setOddsRatio(*it_odds_ratio);
                         sigInts[*it_label].setPvalue(*it_pvalue);
                     }
                 } else {
                     //Second decision: if interval length is larger, REPLACE
-                    if (*it_l > currentMinPvalueForClusterL){
+                    if (*it_l < currentMinPvalueForClusterL){ //sign < for SMALLEST interval
                         sigInts[*it_label].setStart(*it_tau);
                         sigInts[*it_label].setEnd(*it_tau, *it_l);
+                        sigInts[*it_label].setScore(*it_score);
+                        sigInts[*it_label].setOddsRatio(*it_odds_ratio);
                         sigInts[*it_label].setPvalue(*it_pvalue);
                     }
                 }
@@ -357,8 +377,57 @@ namespace SignificantPattern
 
         }//end of for
 
+
+
         return sigInts;
     }
+
+    //--------------------------------------------------------------------------//
+    //Get number of regions per cluster and leftmost and rightmost SNPs
+    vector<Interval> FilterIntervals::getCLusterBoundaries(vector<longint>& tau, vector<longint>& l, const vector<int>& label){
+
+        //need to quickly get the max and min cluster values
+        int maxCluster = 0;
+        int minCluster = 2;
+        for (vector<int>::const_iterator it = label.begin(); it != label.end(); ++it){
+            if (*it > maxCluster)
+                maxCluster = *it;
+            if (*it < minCluster)
+                minCluster = *it;
+        }
+        int numClusters = maxCluster - minCluster +1;
+
+        vector<Interval> sigClusters(numClusters);
+        for (vector<Interval>::iterator it_sigClusters = sigClusters.begin(); it_sigClusters != sigClusters.end(); ++it_sigClusters){
+            (*it_sigClusters).setStart(-1);
+            (*it_sigClusters).setEnd(-1);
+            (*it_sigClusters).setPvalue(0);
+        }
+
+
+        vector<int>::const_iterator it_label = label.begin();
+        vector<longint>::const_iterator it_tau = tau.begin();
+        vector<longint>::const_iterator it_l = l.begin();
+        int currentStartCluster;
+        int currentEndCluster;
+        int currentNumCluster;
+    for (; it_label != label.end() ; ++it_tau, ++it_l, ++it_label){
+    	currentStartCluster = sigClusters[*it_label].getStart();
+    	currentEndCluster = sigClusters[*it_label].getEnd();
+    	currentNumCluster = sigClusters[*it_label].getPvalue();
+    	if (currentStartCluster > *it_tau or currentStartCluster == -1){
+    		sigClusters[*it_label].setStart(*it_tau);
+    	}
+    	if (currentEndCluster < *it_tau + *it_l - 1){
+    		sigClusters[*it_label].setEnd(*it_tau, *it_l);
+    	}
+    	sigClusters[*it_label].setPvalue(currentNumCluster+1);
+    }
+
+    	return sigClusters;
+    }
+
+
 
 
     //--------------------------------------------------------------------------//
@@ -382,14 +451,15 @@ namespace SignificantPattern
     //--------------------------------------------------------------------------//
     //MAIN FUNCTION
     void FilterIntervals::cpp_filterIntervalsFromMemory(vector<longint> ll_tau,
-                                                  vector<longint> ll_l,
-                                                  vector<double> pvalue){
+                                                        vector<longint> ll_l,
+                                                        vector<double> score,
+                                                        vector<double> odds_ratio,
+                                                        vector<double> pvalue){
 
         if (pvalue.size() > 0){
             //create data frame
-            //need to case longint to size_t; not necessary for double, but do it anyway
-            vector<size_t> tau(ll_tau.begin(), ll_tau.end());
-            vector<size_t> l(ll_l.begin(), ll_l.end());
+            vector<longint> tau(ll_tau.begin(), ll_tau.end());
+            vector<longint> l(ll_l.begin(), ll_l.end());
 
             //get vector of clusters (cluster labels)
             vector<Interval> cluster = getClusters(tau, l);
@@ -398,7 +468,10 @@ namespace SignificantPattern
             vector<int> label = getClusterLabelsForIntervals(tau, l, cluster);
 
             //get minimum p-values
-            sigInts = getMinPvalueIntervalPerCluster(tau, l, pvalue, label);
+            sigInts = getMinPvalueIntervalPerCluster(tau, l, score, odds_ratio, pvalue, label);
+
+            //get the boundaries
+            sigClusters = getCLusterBoundaries(tau, l, label);
 
             //sort the significant intervals
             sortIntervals(sigInts);
@@ -419,9 +492,27 @@ namespace SignificantPattern
         {
                 throw Exception("Failed opening " + filename + " for writing");
         }
-        for (size_t i=0; i<sigInts.size(); ++i)
-            file << sigInts[i].getStart() << " " << sigInts[i].getEnd() << " " << sigInts[i].getPvalue() << " " << sigInts[i].getLength() << endl;
-        file.close();
+
+        file << "P-value" << "\t" << "score" << "\t" << "OR" << "\t" << "index_1;...;index_N" << "\t" <<"#n regions" << "\t" <<"index L SNP" << "\t" <<"index R SNP" << endl;
+		for (longint i=0; i<sigInts.size(); ++i){
+			//Compute 'index_1;index_2;index_3;...;index_N'
+			vector<int> myVec;
+			std::ostringstream oss;
+
+			for(int j=sigInts[i].getStart(); j<= sigInts[i].getEnd(); j++){
+				myVec.push_back(j);
+			}
+			if (!myVec.empty())
+			  {
+				// Convert all but the last element to avoid a trailing ";"
+				std::copy(myVec.begin(), myVec.end()-1, std::ostream_iterator<int>(oss, ";"));
+
+				// Now add the last element with no delimiter
+				oss << myVec.back();
+			  }
+			file << sigInts[i].getPvalue() << "\t" << sigInts[i].getScore() << "\t" << sigInts[i].getOddsRatio() << "\t" << oss.str() << "\t" << sigClusters[i].getPvalue() << "\t" << sigClusters[i].getStart() << "\t" << sigClusters[i].getEnd() << endl;
+		}
+		file.close();
 
 
 
@@ -453,22 +544,25 @@ namespace SignificantPattern
 
     void SignificantIntervals::cpp_intervalsFromMemory(vector<longint> ll_tau,
                                                        vector<longint> ll_l,
+                                                       vector<double> score,
+                                                       vector<double> odds_ratio,
                                                        vector<double> pvalue){
 
         if (pvalue.size() > 0){
             //create data frame
-            //need to case longint to size_t; not necessary for double, but do it anyway
-            vector<size_t> tau(ll_tau.begin(), ll_tau.end());
-            vector<size_t> l(ll_l.begin(), ll_l.end());
-            size_t n = ll_tau.size();
+            vector<longint> tau(ll_tau.begin(), ll_tau.end());
+            vector<longint> l(ll_l.begin(), ll_l.end());
+            longint n = ll_tau.size();
             if (n != ll_l.size() || n != pvalue.size())
-                throw Exception("given vectors ll_tau, ll_l and pvalue don'h have same size");
+                throw Exception("given vectors ll_tau, ll_l and pvalue don't have same size");
 
             sigInts = vector<Interval>(n);
-            for (size_t i=0; i<n; ++i)
+            for (longint i=0; i<n; ++i)
             {
                 sigInts.at(i).setStart(ll_tau.at(i));
                 sigInts.at(i).setEnd(ll_tau.at(i), ll_l.at(i));
+                sigInts.at(i).setScore(score.at(i));
+                sigInts.at(i).setOddsRatio(odds_ratio.at(i));
                 sigInts.at(i).setPvalue(pvalue.at(i));
             }
         }
@@ -488,14 +582,11 @@ namespace SignificantPattern
         {
                 throw Exception("Failed opening " + filename + " for writing");
         }
-        for (size_t i=0; i<sigInts.size(); ++i)
-            file << sigInts[i].getStart() << " " << sigInts[i].getEnd() << " " << sigInts[i].getPvalue() << " " << sigInts[i].getLength() << endl;
-        file.close();
 
-
-
-    }
-
+        file << "P-value" << "\t" << "score" << "\t" << "OR" << "\t" << "index_1;index_2;index_3;...;index_N" << endl;
+        for (longint i=0; i<sigInts.size(); ++i){
+            file << sigInts[i].getStart() << " " << sigInts[i].getEnd() << " " << sigInts[i].getPvalue() << " " << sigInts[i].getLength() << endl;}
+        file.close();}
 
 
 } /* namespace SignificantPattern */

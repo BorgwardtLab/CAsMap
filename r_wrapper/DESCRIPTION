@@ -1,4 +1,4 @@
-Package: sigpatsearch
+Package: CASMAP
 Type: Package
 Title: Significant Pattern Search for Genome Analysis
 Version: 0.3

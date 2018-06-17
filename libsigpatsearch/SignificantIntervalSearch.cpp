@@ -117,25 +117,28 @@ void SignificantIntervalSearch::process_significant_features() {
     std::vector<longint> tauVector;
     getPValsSigInts().getLAndTauVectors(lVector, tauVector);
     std::vector<double> pValVector = getPValsSigInts().getPValueVector();
-    intervals.cpp_intervalsFromMemory(tauVector, lVector, pValVector);
+    std::vector<double> oddsRatioVector = getPValsSigInts().getOddsRatioVector();
+    std::vector<double> scoreVector = getPValsSigInts().getScoreVector();
+
+    intervals.cpp_intervalsFromMemory(tauVector, lVector, scoreVector, oddsRatioVector, pValVector);
     // Filter significant intervals
-    filter.cpp_filterIntervalsFromMemory(tauVector, lVector, pValVector);
+    filter.cpp_filterIntervalsFromMemory(tauVector, lVector, scoreVector, oddsRatioVector, pValVector);
 }
 
-bool SignificantIntervalSearch::testAndSaveInterval(double threshold, double pval, longint tau, longint l, longint a)
-{
-    if(outputForTestableInts)
+    bool SignificantIntervalSearch::testAndSaveInterval(double threshold, double score, double odds_ratio, double pval, longint tau, longint l, longint a)
     {
-        saveTestableInterval(pval, tau, l, a);
+        if(outputForTestableInts)
+        {
+            saveTestableInterval(pval, score, odds_ratio, tau, l, a);
+        }
+        bool isSignificant = (pval <= threshold);
+        if(isSignificant)
+        {
+            saveSignificantInterval(pval, score, odds_ratio, tau, l, a);
+            n_significant_featuresets++;
+        }
+        return isSignificant;
     }
-    bool isSignificant = (pval <= threshold);
-    if(isSignificant)
-    {
-        saveSignificantInterval(pval, tau, l, a);
-        n_significant_featuresets++;
-    }
-    return isSignificant;
-}
 
 void SignificantIntervalSearch::compute_corrected_significance_threshold(){
     // Give feedback to user

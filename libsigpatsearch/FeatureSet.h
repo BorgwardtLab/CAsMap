@@ -98,6 +98,46 @@ namespace SignificantPattern
     };
 
     /**
+     * Intervals (sets of start and end pairs) of binary sequence as features,
+     * with their score and odds ratio.
+     */
+    class ItemsetSetWithOddsRatio : public ItemsetSet
+    {
+    private:
+        /**
+         * super class pattern for code independence of changes in inheritance
+         */
+        typedef ItemsetSet super;
+
+        /**
+         * odds ratio of intervals
+         */
+        std::vector<double> oddsRatioVector;
+
+        /**
+         * scores of intervals
+         */
+        std::vector<double> scoreVector;
+
+    protected:
+        static const std::string HEADER_PROPS_WITH_ODDS_RATIO;
+
+        virtual std::string const& getHeaderProps() const override;
+        virtual std::string const getLineProps(size_t i) const override;
+
+    public:
+        ItemsetSetWithOddsRatio();
+        virtual ~ItemsetSetWithOddsRatio();
+
+        inline std::vector<double> const &getOddsRatioVector() const { return oddsRatioVector; }
+        inline std::vector<double> const &getScoreVector() const { return scoreVector; }
+        virtual void addFeature(const std::vector<longint> itemset, longint alpha,
+                                double pValue) override;
+        void addFeature(const std::vector<longint> itemset, longint alpha, double score,
+                        double oddsRatio, double pValue);
+    };
+
+    /**
      * Intervals (sets of start and end pairs) of binary sequence as features.
      */
     class IntervalSet :  public FeatureSet
@@ -167,6 +207,47 @@ namespace SignificantPattern
         void addFeature(longint start, longint end, longint alpha, longint x,
                         double pValue);
     };
+
+    /**
+     * Intervals (sets of start and end pairs) of binary sequence as features,
+     * with their score and odds ratio.
+     */
+    class IntervalSetWithOddsRatio : public IntervalSet
+    {
+    private:
+        /**
+         * super class pattern for code independence of changes in inheritance
+         */
+        typedef IntervalSet super;
+
+        /**
+         * odds ratio of intervals
+         */
+        std::vector<double> oddsRatioVector;
+
+        /**
+         * scores of intervals
+         */
+        std::vector<double> scoreVector;
+
+    protected:
+        static const std::string HEADER_PROPS_WITH_ODDS_RATIO;
+
+        virtual std::string const& getHeaderProps() const override;
+        virtual std::string const getLineProps(size_t i) const override;
+
+    public:
+        IntervalSetWithOddsRatio();
+        virtual ~IntervalSetWithOddsRatio();
+
+        inline std::vector<double> const &getOddsRatioVector() const { return oddsRatioVector; }
+        inline std::vector<double> const &getScoreVector() const { return scoreVector; }
+        virtual void addFeature(longint start, longint end, longint alpha,
+                                double pValue) override;
+        void addFeature(longint start, longint end, longint alpha, double score,
+                        double oddsRatio, double pValue);
+    };
+
 } /* namespace SignificantPattern */
 
 #endif /* SRC_FEATURESET_H_ */

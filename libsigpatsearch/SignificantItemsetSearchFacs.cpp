@@ -8,6 +8,7 @@
 #include "SignificantItemsetSearchFacs.h"
 
 #include "algorithm" // min_element
+#include <numeric>
 // #include "ostream" // cout
 
 namespace SignificantPattern
@@ -133,8 +134,9 @@ void SignificantItemsetSearchFacs::buildItemset(const std::vector<longint> &x_t,
     //     std::cout << item_label_map[iset[iset.size() - 1]] << std::endl;
 
     itemset.clear();
-    itemset.reserve(x_t.size()+iset.size()+pexs.size());
-    itemset.insert(itemset.end(), x_t.begin(), x_t.end());
+    //itemset.reserve(x_t.size()+iset.size()+pexs.size());
+    //itemset.insert(itemset.end(), x_t.begin(), x_t.end());
+    itemset.reserve(iset.size()+pexs.size());
     for (auto item : iset) itemset.push_back(item_label_map[item]);
     for (auto pex : pexs) itemset.push_back(item_label_map[pex]);
 }
@@ -187,11 +189,13 @@ longint SignificantItemsetSearchFacs::depth(
     size_t r_out;
     // Variables to compute itemset pvalue (only used if_compute_pvals==true)
     longint a;
-    double pval;
+    double score, odds_ratio, pval;
 
     unsigned char *labels = getPhenotype().getVectorPtr();
     unsigned char *cats = getCovariates().getVectorPtr();
     unsigned short n_cat = getCovariates().getNumClasses();
+
+    std::vector<longint> at(n_cat);
 
     // Insert all transaction lists which must be used during closure check
     for (kk = (db_size - 1); kk > 0; --kk)
@@ -335,13 +339,21 @@ longint SignificantItemsetSearchFacs::depth(
             // threshold is known
             if (if_compute_pvals and istestable(minpvals[k])) {
                 // Compute cell-count
-                a = 0;
+                //a = 0;
+                //for (auto trans_idx : db.transactions[k])
+                //    if (labels[trans_idx]) a++;
+                std::fill(at.begin(), at.end(), 0);
                 for (auto trans_idx : db.transactions[k])
-                    if (labels[trans_idx]) a++;
-                pval = compute_pval(a, db.supports[k].data());
+                    if (labels[trans_idx]) at[cats[trans_idx]]++;
+                a = std::accumulate(at.begin(), at.end(), 0);
+
+                score = compute_score(a, db.supports[k].data());
+                odds_ratio = compute_odds_ratio(at.data(), db.supports[k].data());
+                pval = score_to_pval(score);
+                //pval = compute_pval(a, db.supports[k].data());
                 // TODO: This step is greedy. In pathological cases, some
                 // significant itemsets could be lost...
-                testAndSaveItemset(tentative_sig_ths.back(), pval,
+                testAndSaveItemset(tentative_sig_ths.back(), score, odds_ratio, pval,
                                    db.supports[k], a, iset, pexs);
             }
         }

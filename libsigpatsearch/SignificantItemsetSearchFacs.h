@@ -10,6 +10,7 @@
 
 #include "SignificantItemsetSearch.h"
 #include "SignificantFeaturesSearchTaroneCmh.h"
+#include "chi2.h"
 
 #include <vector>
 
@@ -165,6 +166,10 @@ protected:
      * from super.
      */
     virtual void process_significant_features() override;
+
+    inline double score_to_pval(double score){
+        return Chi2_sf(score, 1);
+    };
 
   public:
     SignificantItemsetSearchFacs();

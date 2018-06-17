@@ -188,6 +188,28 @@ protected:
     virtual double compute_interval_pval(longint a, longint tau) = 0;
 
     /**
+     * Compute test statistic for a testable interval `tau`, given current cell count
+     * `a` for that interval.
+     *
+     * @param a Cell count intended as a number of observation in positive class
+     *          in the layer above
+     * @param tau testable interval from #testable_queue
+     * @return test statistic
+     */
+    virtual double compute_interval_score(longint a, longint tau) = 0;
+
+    /**
+     * Compute odds ratio for a testable interval `tau`, given current cell count
+     * `a` for that interval.
+     *
+     * @param a Cell count intended as a number of observation in positive class
+     *          in the layer above
+     * @param tau testable interval from #testable_queue
+     * @return The odds ratio for the contingency table(s)
+     */
+    virtual double compute_interval_odds_ratio(longint a, longint tau) = 0;
+
+    /**
      * Test if an interval is testable under the current significance threshold.
      *
      * @param tau interval from #testable_queue
@@ -208,30 +230,36 @@ protected:
      *
      * @param threshold Significance threshold
      * @param pval P-value
+     * @param score Test statistic
+     * @param odds_ratio Odds ratio for the contingency table(s)
      * @param tau Starting position of the interval
      * @param l Length of the interval
      * @param a Cell count
      * @return
      */
-    virtual bool testAndSaveInterval(double threshold, double pval, longint tau, longint l, longint a);
+    virtual bool testAndSaveInterval(double threshold, double score, double odds_ratio, double pval, longint tau, longint l, longint a);
     /**
      * Save in memory a significant interval found during search.
      *
      * @param pval P-value
+     * @param score Test statistic
+     * @param odds_ratio Odds ratio for the contingency table(s)
      * @param tau Starting position of the interval
      * @param l Length of the interval
      * @param a Cell count
      */
-    virtual void saveSignificantInterval(double pval, longint tau, longint l, longint a) = 0;
+    virtual void saveSignificantInterval(double pval, double score, double odds_ratio, longint tau, longint l, longint a) = 0;
     /**
      * Save in memory an interval that was tested during search.
      *
      * @param pval P-value
+     * @param score Test statistic
+     * @param odds_ratio Odds ratio for the contingency table(s)
      * @param tau Starting position of the interval
      * @param l Length of the interval
      * @param a Cell count
      */
-    virtual void saveTestableInterval(double pval, longint tau, longint l, longint a) = 0;
+    virtual void saveTestableInterval(double pval, double score, double odds_ratio, longint tau, longint l, longint a) = 0;
     ///@}
 
 public:
@@ -263,13 +291,13 @@ public:
      *
      * @return Object encapsulating multiple equal-length vectors.
      */
-    virtual IntervalSet const& getPValsTestableInts() const = 0;
+    virtual IntervalSetWithOddsRatio const& getPValsTestableInts() const = 0;
     /**
      * Get all in-memory significant intervals (with their p-values etc).
      *
      * @return Object encapsulating multiple equal-length vectors.
      */
-    virtual IntervalSet const& getPValsSigInts() const = 0;
+    virtual IntervalSetWithOddsRatio const& getPValsSigInts() const = 0;
 
     inline virtual SummaryInt const& getSummary() const override { return summary; }
 };
