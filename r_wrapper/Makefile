@@ -25,17 +25,13 @@ define compile_cran
 	@$(RM) $(MAKEVARS)-e # dirty fix for incompatibility of sed's -i switch (Mac OS vs. Unix)
 endef
 
-
 all: package
 
 version:
 	@echo $(VERSION)
-	@echo $(INSTALL_SRC)
-	@echo $(INSTALL_DEST)
 
-wrapper: $(SOURCES)
+wrapper:
 	$(call compile_cran)
-
 
 clean_src:
 	$(RM) src/*.o src/*.so
@@ -51,25 +47,17 @@ clean_pkg:
 
 clean: clean_src clean_doc clean_check clean_pkg
 
-
-package: $(SOURCES)
+package:
 	Rscript -e "devtools::build()"
 
 install: package
-	R CMD install $(INSTALL_SRC) $(INSTALL_DEST)
-
-install_test: 
-	R CMD install $(INSTALL_SRC) $(INSTALL_DEST)
+	R CMD INSTALL $(INSTALL_SRC) $(INSTALL_DEST)
 
 install_cwd:
-	R CMD install . $(INSTALL_DEST)
+	R CMD INSTALL . $(INSTALL_DEST)
 
 uninstall:
 	-R CMD REMOVE sigpatsearch
-
-
-test:
-	Rscript -e "devtools::test()"
 
 check: package
 	R CMD check --as-cran ../sigpatsearch_$(VERSION).tar.gz

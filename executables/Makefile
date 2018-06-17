@@ -14,12 +14,6 @@ significant_interval_search_exact: significant_interval_search_exact.o $(LIBS)
 significant_interval_search_chi: significant_interval_search_chi.o $(LIBS)
 	$(CPP) -o $@ $^
 
-significant_interval_search_wy_exact: significant_interval_search_wy_exact.o $(LIBS)
-	$(CPP) -o $@ $^
-
-significant_interval_search_wy_chi: significant_interval_search_wy_chi.o $(LIBS)
-	$(CPP) -o $@ $^
-
 significant_interval_search_fastcmh: significant_interval_search_fastcmh.o $(LIBS)
 	$(CPP) -o $@ $^
 

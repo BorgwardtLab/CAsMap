@@ -1,11 +1,11 @@
-Package: CASMAP
+Package: sigpatsearch
 Type: Package
-Title: Significant Pattern Search for Genome Analysis
+Title: CASMAP: Detection of statistically significant combinations of SNPs in association mapping
 Version: 0.3
-Date: 2017-05-08
-Author: Matthew Baker, Dean Bodenham, Felipe Llinares Lopez, Mikolaj Rybinski, Uwe Schmitt
+Date: 2018-06-16
+Author: Matthew Baker, Dean Bodenham, Felipe Llinares Lopez, Laetitia Papaxanthos, Damian Roqueiro, Mikolaj Rybinski, Uwe Schmitt
 Maintainer: Mikolaj Rybinski <mikolaj.rybinski@id.ethz.ch>
-Description: A method based on significant pattern mining that is used to detect intervals in binary genotype data which are significantly associated with a particular phenotype.
+Description: A significant pattern mining-based toolbox for region-based genome-wide association studies and higher-order epistasis analyses.
 Depends:
     R (>= 3.0.2)
 Imports:
@@ -14,7 +14,7 @@ Imports:
 LinkingTo:
     Rcpp
 License: GPL (>= 2)
-URL: https://sissource.ethz.ch/sispub/significant_interval_search_rewrite
+URL: https://github.com/BorgwardtLab/CAsMap
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
 Suggests: testthat

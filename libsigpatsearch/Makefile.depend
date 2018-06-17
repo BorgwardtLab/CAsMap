@@ -1,47 +1,15 @@
 # DO NOT DELETE
 
-SignificantItemsetSearchFacs.o: SignificantItemsetSearchFacs.h
-SignificantItemsetSearchFacs.o: SignificantItemsetSearch.h
-SignificantItemsetSearchFacs.o: SignificantFeaturesSearch.h Genotype.h
-SignificantItemsetSearchFacs.o: ArrayFile.h types.h Phenotype.h Profiler.h
-SignificantItemsetSearchFacs.o: mem_rss.h CumulativeTimeMeasurement.h
-SignificantItemsetSearchFacs.o: Summary.h Exception.h FeatureSet.h
-SignificantItemsetSearchFacs.o: TransactionsData.h
-SignificantItemsetSearchFacs.o: SignificantFeaturesSearchTaroneCmh.h
-SignificantItemsetSearchFacs.o: SignificantFeaturesSearchWithCovariates.h
-SignificantItemsetSearchFacs.o: chi2.h gamma.h
-double_comp.o: double_comp.h
-Genotype.o: Genotype.h ArrayFile.h types.h Phenotype.h Exception.h
-SignificantIntervalSearch.o: SignificantIntervalSearch.h
-SignificantIntervalSearch.o: SignificantFeaturesSearch.h Genotype.h
-SignificantIntervalSearch.o: ArrayFile.h types.h Phenotype.h Profiler.h
-SignificantIntervalSearch.o: mem_rss.h CumulativeTimeMeasurement.h Summary.h
-SignificantIntervalSearch.o: FeatureSet.h FilterIntervals.h
-gamma.o: gamma.h
-SignificantFeaturesSearch.o: SignificantFeaturesSearch.h Genotype.h
-SignificantFeaturesSearch.o: ArrayFile.h types.h Phenotype.h Profiler.h
-SignificantFeaturesSearch.o: mem_rss.h CumulativeTimeMeasurement.h Summary.h
-SignificantFeaturesSearch.o: Exception.h
-SignificantIntervalSearchChi.o: SignificantIntervalSearchChi.h
-SignificantIntervalSearchChi.o: SignificantIntervalSearchFais.h
-SignificantIntervalSearchChi.o: SignificantIntervalSearch.h
-SignificantIntervalSearchChi.o: SignificantFeaturesSearch.h Genotype.h
-SignificantIntervalSearchChi.o: ArrayFile.h types.h Phenotype.h Profiler.h
-SignificantIntervalSearchChi.o: mem_rss.h CumulativeTimeMeasurement.h
-SignificantIntervalSearchChi.o: Summary.h FeatureSet.h FilterIntervals.h
-SignificantIntervalSearchChi.o: chi2.h gamma.h pval.h
-SignificantIntervalSearchExact.o: SignificantIntervalSearchExact.h
-SignificantIntervalSearchExact.o: SignificantIntervalSearchFais.h
-SignificantIntervalSearchExact.o: SignificantIntervalSearch.h
-SignificantIntervalSearchExact.o: SignificantFeaturesSearch.h Genotype.h
-SignificantIntervalSearchExact.o: ArrayFile.h types.h Phenotype.h Profiler.h
-SignificantIntervalSearchExact.o: mem_rss.h CumulativeTimeMeasurement.h
-SignificantIntervalSearchExact.o: Summary.h FeatureSet.h FilterIntervals.h
-SignificantIntervalSearchExact.o: chi2.h gamma.h
-SignificantIntervalSearchExact.o: pval.h
-FeatureSet.o: FeatureSet.h types.h Exception.h
-pval.o: pval.h types.h
-pval.o: chi2.h gamma.h double_comp.h
+Profiler.o: Profiler.h mem_rss.h CumulativeTimeMeasurement.h Exception.h
+SignificantFeaturesSearchTaroneCmh.o: SignificantFeaturesSearchTaroneCmh.h
+SignificantFeaturesSearchTaroneCmh.o: SignificantFeaturesSearchWithCovariates.h
+SignificantFeaturesSearchTaroneCmh.o: SignificantFeaturesSearch.h Genotype.h
+SignificantFeaturesSearchTaroneCmh.o: ArrayFile.h types.h Phenotype.h
+SignificantFeaturesSearchTaroneCmh.o: Profiler.h mem_rss.h
+SignificantFeaturesSearchTaroneCmh.o: CumulativeTimeMeasurement.h Summary.h
+SignificantFeaturesSearchTaroneCmh.o: FeatureSet.h Exception.h
+SignificantFeaturesSearchTaroneCmh.o: chi2.h
+SignificantFeaturesSearchTaroneCmh.o: gamma.h pval.h
 SignificantIntervalSearchFais.o: SignificantIntervalSearchFais.h
 SignificantIntervalSearchFais.o: SignificantIntervalSearch.h
 SignificantIntervalSearchFais.o: SignificantFeaturesSearch.h Genotype.h
@@ -58,33 +26,65 @@ SignificantIntervalSearchFastCmh.o: FeatureSet.h FilterIntervals.h
 SignificantIntervalSearchFastCmh.o: SignificantFeaturesSearchTaroneCmh.h
 SignificantIntervalSearchFastCmh.o: SignificantFeaturesSearchWithCovariates.h
 SignificantIntervalSearchFastCmh.o: Exception.h chi2.h gamma.h
-Profiler.o: Profiler.h mem_rss.h CumulativeTimeMeasurement.h Exception.h
-TransactionsData.o: TransactionsData.h Genotype.h ArrayFile.h types.h
-TransactionsData.o: Phenotype.h
-SignificantFeaturesSearchTaroneCmh.o: SignificantFeaturesSearchTaroneCmh.h
-SignificantFeaturesSearchTaroneCmh.o: SignificantFeaturesSearchWithCovariates.h
-SignificantFeaturesSearchTaroneCmh.o: SignificantFeaturesSearch.h Genotype.h
-SignificantFeaturesSearchTaroneCmh.o: ArrayFile.h types.h Phenotype.h
-SignificantFeaturesSearchTaroneCmh.o: Profiler.h mem_rss.h
-SignificantFeaturesSearchTaroneCmh.o: CumulativeTimeMeasurement.h Summary.h
-SignificantFeaturesSearchTaroneCmh.o: FeatureSet.h Exception.h
-SignificantFeaturesSearchTaroneCmh.o: chi2.h
-SignificantFeaturesSearchTaroneCmh.o: gamma.h pval.h
-Summary.o: Summary.h types.h Exception.h
-PValues.o: PValues.h Exception.h
+pval.o: pval.h types.h
+pval.o: chi2.h gamma.h double_comp.h
+FeatureSet.o: FeatureSet.h types.h Exception.h
 SignificantItemsetSearch.o: SignificantItemsetSearch.h
 SignificantItemsetSearch.o: SignificantFeaturesSearch.h Genotype.h
 SignificantItemsetSearch.o: ArrayFile.h types.h Phenotype.h Profiler.h
 SignificantItemsetSearch.o: mem_rss.h CumulativeTimeMeasurement.h Summary.h
 SignificantItemsetSearch.o: Exception.h FeatureSet.h TransactionsData.h
-ArrayFile.o: ArrayFile.h types.h Exception.h
-CumulativeTimeMeasurement.o: CumulativeTimeMeasurement.h
-Phenotype.o: Phenotype.h ArrayFile.h types.h Exception.h
-Exception.o: Exception.h
-FilterIntervals.o: FilterIntervals.h types.h Exception.h
 SignificantFeaturesSearchWithCovariates.o: SignificantFeaturesSearchWithCovariates.h
 SignificantFeaturesSearchWithCovariates.o: SignificantFeaturesSearch.h
 SignificantFeaturesSearchWithCovariates.o: Genotype.h ArrayFile.h types.h
 SignificantFeaturesSearchWithCovariates.o: Phenotype.h Profiler.h mem_rss.h
 SignificantFeaturesSearchWithCovariates.o: CumulativeTimeMeasurement.h
 SignificantFeaturesSearchWithCovariates.o: Summary.h FeatureSet.h Exception.h
+Exception.o: Exception.h
+ArrayFile.o: ArrayFile.h types.h Exception.h
+Genotype.o: Genotype.h ArrayFile.h types.h Phenotype.h Exception.h
+Phenotype.o: Phenotype.h ArrayFile.h types.h Exception.h
+gamma.o: gamma.h
+CumulativeTimeMeasurement.o: CumulativeTimeMeasurement.h
+Summary.o: Summary.h types.h Exception.h
+FilterIntervals.o: FilterIntervals.h types.h Exception.h
+SignificantIntervalSearchExact.o: SignificantIntervalSearchExact.h
+SignificantIntervalSearchExact.o: SignificantIntervalSearchFais.h
+SignificantIntervalSearchExact.o: SignificantIntervalSearch.h
+SignificantIntervalSearchExact.o: SignificantFeaturesSearch.h Genotype.h
+SignificantIntervalSearchExact.o: ArrayFile.h types.h Phenotype.h Profiler.h
+SignificantIntervalSearchExact.o: mem_rss.h CumulativeTimeMeasurement.h
+SignificantIntervalSearchExact.o: Summary.h FeatureSet.h FilterIntervals.h
+SignificantIntervalSearchExact.o: chi2.h gamma.h
+SignificantIntervalSearchExact.o: pval.h
+SignificantIntervalSearch.o: SignificantIntervalSearch.h
+SignificantIntervalSearch.o: SignificantFeaturesSearch.h Genotype.h
+SignificantIntervalSearch.o: ArrayFile.h types.h Phenotype.h Profiler.h
+SignificantIntervalSearch.o: mem_rss.h CumulativeTimeMeasurement.h Summary.h
+SignificantIntervalSearch.o: FeatureSet.h FilterIntervals.h
+SignificantIntervalSearchChi.o: SignificantIntervalSearchChi.h
+SignificantIntervalSearchChi.o: SignificantIntervalSearchFais.h
+SignificantIntervalSearchChi.o: SignificantIntervalSearch.h
+SignificantIntervalSearchChi.o: SignificantFeaturesSearch.h Genotype.h
+SignificantIntervalSearchChi.o: ArrayFile.h types.h Phenotype.h Profiler.h
+SignificantIntervalSearchChi.o: mem_rss.h CumulativeTimeMeasurement.h
+SignificantIntervalSearchChi.o: Summary.h FeatureSet.h FilterIntervals.h
+SignificantIntervalSearchChi.o: chi2.h gamma.h pval.h
+PValues.o: PValues.h Exception.h
+TransactionsData.o: TransactionsData.h Genotype.h ArrayFile.h types.h
+TransactionsData.o: Phenotype.h
+double_comp.o: double_comp.h
+SignificantItemsetSearchFacs.o: SignificantItemsetSearchFacs.h
+SignificantItemsetSearchFacs.o: SignificantItemsetSearch.h
+SignificantItemsetSearchFacs.o: SignificantFeaturesSearch.h Genotype.h
+SignificantItemsetSearchFacs.o: ArrayFile.h types.h Phenotype.h Profiler.h
+SignificantItemsetSearchFacs.o: mem_rss.h CumulativeTimeMeasurement.h
+SignificantItemsetSearchFacs.o: Summary.h Exception.h FeatureSet.h
+SignificantItemsetSearchFacs.o: TransactionsData.h
+SignificantItemsetSearchFacs.o: SignificantFeaturesSearchTaroneCmh.h
+SignificantItemsetSearchFacs.o: SignificantFeaturesSearchWithCovariates.h
+SignificantItemsetSearchFacs.o: chi2.h gamma.h
+SignificantFeaturesSearch.o: SignificantFeaturesSearch.h Genotype.h
+SignificantFeaturesSearch.o: ArrayFile.h types.h Phenotype.h Profiler.h
+SignificantFeaturesSearch.o: mem_rss.h CumulativeTimeMeasurement.h Summary.h
+SignificantFeaturesSearch.o: Exception.h

@@ -19,9 +19,14 @@ using namespace std;
 void usage()
 {
     fprintf(stderr, "ERROR: INCORRECT SYNTAX!\n");
+    fprintf(stderr, "\nTO USE DOMINANT ENCODING\n");
     fprintf(stderr, "\tUSAGE: ./program_name -eth X_file Y_file cov_file alpha L_max base_filename [out_file_pvals]\n");
     fprintf(stderr, "\tOR\n");
     fprintf(stderr,"\tUSAGE: ./program_name -plink basefilename cov_file alpha L_max base_filename [out_file_pvals]\n");
+    fprintf(stderr, "\nTO USE RECESSIVE ENCODING\n");
+    fprintf(stderr, "\tUSAGE: ./program_name -eth_recessive cov_file X_file Y_file alpha L_max base_filename [out_file_pvals]\n");
+    fprintf(stderr, "\tOR\n");
+    fprintf(stderr,"\tUSAGE: ./program_name -plink_recessive cov_file basefilename alpha L_max base_filename [out_file_pvals]\n");
     exit(1);
 }
 
@@ -30,6 +35,7 @@ int main(int argc, char *argv[])
 
     string xfilename, yfilename, covfilename, plinkbase, basefilename, pvalfilename;
     string filetype;
+    string encoding;
     double alpha;
     longint L_max;
 
@@ -38,14 +44,25 @@ int main(int argc, char *argv[])
 
     int arg = 1;
     filetype = argv[arg++];
-    if (filetype == "-plink")
+    if (filetype == "-plink" or filetype == "-plink_dominant")
     {
         plinkbase = argv[arg++];
+        encoding = "dominant";
     }
-    else if (filetype == "-eth")
+    else if (filetype == "-plink_recesssive"){
+        plinkbase = argv[arg++];
+        encoding = "recessive";
+    }
+    else if (filetype == "-eth" or filetype == "-eth_dominant")
     {
         xfilename = argv[arg++];
         yfilename = argv[arg++];
+        encoding = "dominant";
+    }
+    else if (filetype == "-eth_recessive"){
+        xfilename = argv[arg++];
+        yfilename = argv[arg++];
+        encoding = "recessive";
     }
     else usage();
     covfilename = argv[arg++];
@@ -69,9 +86,9 @@ int main(int argc, char *argv[])
 //            search.readETHFilesWithCovariates(xfilename, yfilename, covfilename);
         //comment out covariates read to test a default, single covariate
         if (filetype == "-plink")
-            search.readPlinkFiles(plinkbase);
+            search.readPlinkFiles(plinkbase, encoding);
         else
-            search.readETHFiles(xfilename, yfilename);
+            search.readETHFiles(xfilename, yfilename, encoding);
         #ifdef DEBUG
         fprintf(stderr, "\nsignificant_itemset_search_facs: read covariates '%s'\n", covfilename.c_str());
         #endif
