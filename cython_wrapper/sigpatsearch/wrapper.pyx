@@ -727,7 +727,6 @@ cdef class _SignificantItemsetSearchFacs(_SignificantItemsetSearchWithCovariates
         self.inst.readPlinkFiles(base_file_path, encoding)
 
     def _readETHFilesWithCovariates(self, x_file, y_file, cov_file, encoding):
-        print('caca')
         self.inst.readETHFilesWithCovariates(x_file, y_file, cov_file, False, encoding)
 
     def _readPlinkFilesWithCovariates(self, base_file_path, cov_file, encoding):
