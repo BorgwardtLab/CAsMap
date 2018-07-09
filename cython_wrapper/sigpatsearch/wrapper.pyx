@@ -936,12 +936,18 @@ class CASMAP(object):
             if self._use_covariates:
                 self._core.read_plink_files(plink_file_root, covariate_file, encoding)
             else:
-                self._core.read_plink_files(plink_file_root, encoding)
+                if self._mode == 'higherOrderEpistasis':
+                    self._core.read_plink_files(plink_file_root, None, encoding)
+                else:
+                    self._core.read_plink_files(plink_file_root, encoding)
         elif binary_format:
             if self._use_covariates:
                 self._core.read_eth_files(genotype_file, phenotype_file, covariate_file, encoding)
             else:
-                self._core.read_eth_files(genotype_file, phenotype_file, encoding)
+                if self._mode == 'higherOrderEpistasis':
+                    self._core.read_eth_files(genotype_file, phenotype_file, None, encoding)
+                else:
+                    self._core.read_eth_files(genotype_file, phenotype_file, encoding)
         else:  # this branch should not be reachable due to the check above...
             raise ValueError('Either plink_file_root or genotype_file and phenotype_file must be specified as arguments.')
 
