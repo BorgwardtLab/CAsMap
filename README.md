@@ -192,14 +192,14 @@ The repository includes [examples](examples) that illustrate how to use CASMAP t
 
 The folder [examples/data](examples/data) provides a real-world dataset from the plant model organism *A. thaliana*, downloaded from the [easyGWAS](https://easygwas.ethz.ch/) online resource.
 
-+ [examples/data/region_based/avrB](examples/data/region_based/avrB) contains: 1) [X.dat](examples/data/region_based/avrB/X.dat), the genotypes of 87 samples measured at 214,032 homozygous SNPs; 2) [Y.dat](examples/data/region_based/avrB/Y.dat), the binary phenotype *avrB* for each of the 87 samples, 3) [C.dat](examples/data/region_based/avrB/C.dat), a categorical covariate to account for population structure; and 4) [plink.map](examples/data/region_based/avrB/plink.map), a list with the locations of all SNPs in the genome of *A. thaliana*.
-+ [examples/data/higher_order_epistasis/avrB](examples/data/higher_order_epistasis/avrB) is analogous, but file [X.dat](examples/data/higher_order_epistasis/avrB/X.dat) in this folder consists of a subset of 650 SNPs in Chromosome 1.
++ [examples/data/region_based/avrB](examples/data/region_based/avrB) contains: 1) `X.dat`, the genotypes of 87 samples measured at 214,032 homozygous SNPs; 2) Y.dat, the binary phenotype *avrB* for each of the 87 samples, 3) `C.dat`, a categorical covariate to account for population structure; and 4) `plink.map`, a list with the locations of all SNPs in the genome of *A. thaliana*.
++ [examples/data/higher_order_epistasis/avrB](examples/data/higher_order_epistasis/avrB) is analogous, but file `X.dat` in this folder consists of a subset of 650 SNPs in Chromosome 1.
 
 The folder [examples/code](examples/code) contains Python/R Jupyter notebooks which show how CASMAP can be used to analyze these datasets.
 
-+  [examples/code/run_region_based.ipynb](examples/code/run_region_based.ipynb) (Python) and [examples/code/run_region_based.Rmd](examples/code/run_region_based.Rmd) (R) describe the region-based association study example.
-+ [examples/code/run_higher_order_epistasis.ipynb](examples/code/run_higher_order_epistasis.ipynb) (Python) and [examples/code/run_higher_order_epistasis.Rmd](examples/code/run_higher_order_epistasis.Rmd) (R) describe the higher-order epistasis search example.
++  `run_region_based.ipynb` (Python) and `run_region_based.Rmd` (R) describe the region-based association study example.
++ `run_higher_order_epistasis.ipynb` (Python) and `run_higher_order_epistasis.Rmd` (R) describe the higher-order epistasis search example.
 
 The notebooks are heavily commented, aiming to provide a comprehensive, guided explanation of how to use CASMAP. For additional details about these examples, we refer the user to the Supplementary Material of the Application Note.
 
-Additional [examples](https://www.ethz.ch/content/dam/ethz/special-interest/bsse/borgwardt-lab/Projects/ISMB18-tutorial/casmap_tutorial.zip), as well as [slides](https://www.ethz.ch/content/dam/ethz/special-interest/bsse/borgwardt-lab/Projects/ISMB18-tutorial/module1.pdf) describing the theory behind the methods included in CASMAP, can be found as part of the material of the following [tutorial](https://www.bsse.ethz.ch/mlcb/education/tutorial-ismb18.html), which took place in [ISMB 2018](https://www.iscb.org/ismb2018).
+Additional [examples](https://www.ethz.ch/content/dam/ethz/special-interest/bsse/borgwardt-lab/Projects/ISMB18-tutorial/casmap_tutorial.zip), as well as [slides](https://www.ethz.ch/content/dam/ethz/special-interest/bsse/borgwardt-lab/Projects/ISMB18-tutorial/module1.pdf) describing the theory behind the methods included in CASMAP, can be found as part of the material of the following [tutorial](https://www.bsse.ethz.ch/mlcb/education/tutorial-ismb18.html), which took place in ISMB 2018.
