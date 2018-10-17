@@ -4,9 +4,9 @@
 A repository with the source code of the CASMAP package (Application Note submission).
 
 **Contents:**
-+ [Downloading the repository](#Downloading the repository)
-+ [Installation and compilation](#Installation and compilation)
-+ [Examples](#Examples)
++ [Downloading the repository](#downloading-the-repository)
++ [Installation and compilation](#installation-and-compilation)
++ [Examples](#examples)
 
 ## Downloading the repository
 
@@ -193,7 +193,7 @@ The repository includes [examples](examples) that illustrate how to use CASMAP t
 The folder [examples/data](examples/data) provides a real-world dataset from the plant model organism *A. thaliana*, downloaded from the [easyGWAS](https://easygwas.ethz.ch/) online resource.
 
 + [examples/data/region_based/avrB](examples/data/region_based/avrB) contains: 1) [X.dat](examples/data/region_based/avrB/X.dat), the genotypes of 87 samples measured at 214,032 homozygous SNPs; 2) [Y.dat](examples/data/region_based/avrB/Y.dat), the binary phenotype *avrB* for each of the 87 samples, 3) [C.dat](examples/data/region_based/avrB/C.dat), a categorical covariate to account for population structure; and 4) [plink.map](examples/data/region_based/avrB/plink.map), a list with the locations of all SNPs in the genome of *A. thaliana*.
-+ [examples/data/higher_order_epistasis/avrB](examples/data/higher_order_epistasis/avrB) is analogous, but file [X.dat]([X.dat](examples/data/higher_order_epistasis/avrB/X.dat) in this folder consists of a subset of 650 SNPs in Chromosome 1.
++ [examples/data/higher_order_epistasis/avrB](examples/data/higher_order_epistasis/avrB) is analogous, but file [X.dat](examples/data/higher_order_epistasis/avrB/X.dat) in this folder consists of a subset of 650 SNPs in Chromosome 1.
 
 The folder [examples/code](examples/code) contains Python/R Jupyter notebooks which show how CASMAP can be used to analyze these datasets.
 
