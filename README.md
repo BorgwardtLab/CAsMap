@@ -7,7 +7,7 @@ A repository with the source code of the CASMAP package (Application Note submis
 + [Downloading the repository](#downloading-the-repository)
 + [Installation and compilation](#installation-and-compilation)
 + [Examples](#examples)
-+ [Installing the R package](#installing-the-r-package)
++ [Installing the R package from CRAN](#installing-the-r-package-from-cran)
 
 
 ## Downloading the repository
@@ -207,7 +207,7 @@ The notebooks are heavily commented, aiming to provide a comprehensive, guided e
 Additional [examples](https://www.ethz.ch/content/dam/ethz/special-interest/bsse/borgwardt-lab/Projects/ISMB18-tutorial/casmap_tutorial.zip), as well as [slides](https://www.ethz.ch/content/dam/ethz/special-interest/bsse/borgwardt-lab/Projects/ISMB18-tutorial/module1.pdf) describing the theory behind the methods included in CASMAP, can be found as part of the material of the following [tutorial](https://www.bsse.ethz.ch/mlcb/education/tutorial-ismb18.html), which took place in ISMB 2018.
 
 
-## Installing the R package
+## Installing the R package from CRAN
 
 
 CASMAP is also [available as an R package](https://cran.r-project.org/web/packages/CASMAP/index.html)
