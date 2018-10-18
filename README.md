@@ -216,3 +216,4 @@ CASMAP is also [available as an R package](https://cran.r-project.org/web/packag
 ```
 install.packages("CASMAP")
 ```
+
